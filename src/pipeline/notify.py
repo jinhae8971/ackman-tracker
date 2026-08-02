@@ -18,12 +18,12 @@ import sys
 from datetime import datetime, timezone
 
 try:
-    from src.common.schema import ENTITY_NAME
+    from src.common.schema import ENTITY_DISPLAY, ENTITY_NAME
 except ImportError:  # 직접 실행
     sys.path.insert(
         0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
     )
-    from src.common.schema import ENTITY_NAME
+    from src.common.schema import ENTITY_DISPLAY, ENTITY_NAME
 
 STRONG_CONVICTIONS = ("STRONG_NEW", "STRONG_ADD", "STRONG_TRIM", "FULL_EXIT")
 MAX_EVENT_ROWS = 30
@@ -256,7 +256,7 @@ def strong_issue_title(events: list[dict]) -> str:
         return ""
     dates = sorted({str(e.get("report_date") or "") for e in strong})
     tag = dates[-1] or "unknown"
-    return f"[STRONG] {tag} 고확신 변화 {len(strong)}건"
+    return f"[STRONG][{ENTITY_DISPLAY}] {tag} 고확신 변화 {len(strong)}건"
 
 
 def render_strong_issue(events: list[dict], metrics=None) -> str:
@@ -289,7 +289,7 @@ def render_strong_issue(events: list[dict], metrics=None) -> str:
 
 def failure_issue_title(workflow: str | None = None) -> str:
     wf = workflow or os.environ.get("GITHUB_WORKFLOW") or "pipeline"
-    return f"[FAILURE] {wf} 워크플로우 실패"
+    return f"[FAILURE][{ENTITY_DISPLAY}] {wf} 워크플로우 실패"
 
 
 def render_failure_issue(
@@ -331,7 +331,7 @@ def render_failure_issue(
 
 
 def filings_issue_title(count: int, tag: str) -> str:
-    return f"[공시 감지] {tag} 신규 파일링 {count}건"
+    return f"[공시 감지][{ENTITY_DISPLAY}] {tag} 신규 파일링 {count}건"
 
 
 def render_filings_issue(filings: list[dict]) -> str:

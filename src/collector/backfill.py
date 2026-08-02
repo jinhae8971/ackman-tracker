@@ -29,12 +29,57 @@ log = logging.getLogger("collector.backfill")
 
 FORMS_13F = ["13F-HR", "13F-HR/A"]
 
-# PROJECT.md '검증 기준선 (Golden Data)' — 해당 분기가 결과에 있으면 자동 대조한다.
-GOLDEN = {
-    "2026-03-31": (11, 13_714_299_861),
-    "2024-12-31": (11, 12_661_093_451),
-    "2022-09-30": (6, 7_877_045_000),
-}
+ENTITY = schema.ENTITY
+
+# 검증 기준선 (Golden Data) — 엔티티가 들고 있고, 해당 분기가 결과에 있으면 자동 대조.
+GOLDEN = ENTITY.golden
+
+
+# ---------------------------------------------------------------- 수집 정책
+
+def apply_entity_policy(rows: list[Holding], report_date: str
+                        ) -> tuple[list[Holding], dict]:
+    """엔티티 정책(옵션 제외 / 상위 N)을 적용하고 커버리지를 계산한다.
+
+    Citadel 같은 마켓메이커는 분기당 6,700종목 · 7.8MB 를 보고한다. 전량을
+    Git 에 적재하면 리포지토리가 감당하지 못하고, OpenFIGI 매핑 비용도
+    폭증한다. 그래서 보통주 상위 N 만 보존하되 — 잘라냈다는 사실 자체를
+    coverage.jsonl 로 남겨 대시보드가 '전체의 몇 %를 보고 있는지' 명시하게 한다.
+
+    중요: weight_pct 는 **자르기 전 전체 포트폴리오** 기준으로 이미 계산되어
+    있으며 여기서 재계산하지 않는다. 상위 200종목만으로 비중을 다시 매기면
+    합이 100% 가 되어 마치 집중 포트폴리오인 것처럼 보이는 왜곡이 생긴다.
+    """
+    full_n = len(rows)
+    full_value = sum(h.value_usd for h in rows)
+    opt_rows = [h for h in rows if h.put_call]
+
+    kept = rows
+    if ENTITY.exclude_options:
+        kept = [h for h in kept if not h.put_call]
+    if ENTITY.max_positions and len(kept) > ENTITY.max_positions:
+        kept = sorted(kept, key=lambda h: -h.value_usd)[:ENTITY.max_positions]
+
+    kept_value = sum(h.value_usd for h in kept)
+    coverage = {
+        "report_date": report_date,
+        "entity": ENTITY.key,
+        "truncated": ENTITY.truncated and len(kept) != full_n,
+        "full_positions": full_n,
+        "full_value_usd": full_value,
+        "kept_positions": len(kept),
+        "kept_value_usd": kept_value,
+        "coverage_pct": round(kept_value / full_value * 100, 4) if full_value else 0.0,
+        "option_positions": len(opt_rows),
+        "option_value_usd": sum(h.value_usd for h in opt_rows),
+        "excluded_options": bool(ENTITY.exclude_options),
+        "max_positions": ENTITY.max_positions,
+    }
+    if coverage["truncated"]:
+        log.info("  %s 정책 적용: %d종목 -> %d종목 (가치 커버리지 %.1f%%)",
+                 report_date, full_n, len(kept), coverage["coverage_pct"])
+    kept.sort(key=lambda h: (-h.value_usd, h.cusip, h.title_of_class))
+    return kept, coverage
 
 
 # ---------------------------------------------------------------- 선택 로직
@@ -105,8 +150,14 @@ def run(limit: Optional[int] = None, force: bool = False,
         by_quarter[filing.report_date].append((filing, holdings))
 
     resolved: dict[str, list[Holding]] = {}
+    coverage_rows: list[dict] = []
     for report_date in sorted(by_quarter):
-        resolved[report_date] = resolve_quarter(by_quarter[report_date])
+        rows = resolve_quarter(by_quarter[report_date])
+        # 정책 적용은 CUSIP -> 티커 매핑 '앞'이어야 한다. 뒤로 미루면 버릴
+        # 6,500종목까지 OpenFIGI 에 물어보게 된다.
+        kept, coverage = apply_entity_policy(rows, report_date)
+        resolved[report_date] = kept
+        coverage_rows.append(coverage)
 
     # --- CUSIP -> 티커 ---------------------------------------------------
     cusips = sorted({h.cusip for rows in resolved.values() for h in rows})
@@ -138,8 +189,14 @@ def run(limit: Optional[int] = None, force: bool = False,
     n_f = schema.write_jsonl(Paths.FILINGS, list(filing_rows.values()),
                              sort_key=lambda r: (r["filing_date"], r["accession"]))
 
+    kept_cov = [r for r in schema.read_jsonl(Paths.COVERAGE)
+                if r.get("report_date") not in resolved]
+    schema.write_jsonl(Paths.COVERAGE, kept_cov + coverage_rows,
+                       sort_key=lambda r: r["report_date"])
+
     return {
         "quarters": resolved,
+        "coverage": coverage_rows,
         "filings_written": n_f,
         "holdings_written": n_h,
         "failures": failures,
@@ -175,6 +232,11 @@ def _report(result: dict) -> int:
         print(f"[{'PASS' if ok else 'FAIL'}] golden {report_date}: "
               f"{got_n}종목 ${got_total:,} (기대 {want_n}종목 ${want_total:,})")
 
+    truncated = [c for c in (result.get("coverage") or []) if c.get("truncated")]
+    if truncated:
+        worst = min(c["coverage_pct"] for c in truncated)
+        print(f"정책 절삭 {len(truncated)}개 분기 — 최저 가치 커버리지 {worst:.1f}%")
+
     mapping = result.get("mapping") or {}
     unresolved = [c for c, e in mapping.items() if not e.get("ticker")]
     print(f"\nCUSIP 매핑: {len(mapping) - len(unresolved)}/{len(mapping)} 해석"
@@ -197,11 +259,11 @@ def _report(result: dict) -> int:
 def main(argv: Optional[list[str]] = None) -> int:
     parser = argparse.ArgumentParser(
         prog="python -m src.collector.backfill",
-        description="Pershing Square 13F 를 EDGAR 에서 수집해 정규화 JSONL 을 만든다.",
+        description=f"{ENTITY.display} 13F 를 EDGAR 에서 수집해 정규화 JSONL 을 만든다.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="예) python -m src.collector.backfill --limit 8")
     parser.add_argument("--limit", type=int, default=None,
-                        help="최근 N건의 13F 만 처리 (생략 시 전량). "
+                        help="최근 N건의 13F 만 처리 (생략 시 엔티티 기본값). "
                              "같은 분기의 원본/정정은 자동으로 함께 포함된다.")
     parser.add_argument("--force", action="store_true",
                         help="data/raw 캐시를 무시하고 EDGAR 에서 다시 내려받는다.")
@@ -217,7 +279,9 @@ def main(argv: Optional[list[str]] = None) -> int:
         level=logging.DEBUG if args.verbose else logging.INFO,
         format="%(levelname)-7s %(message)s", stream=sys.stderr)
 
-    result = run(limit=args.limit, force=args.force,
+    log.info("엔티티: %s (%s, CIK %s)", ENTITY.display, ENTITY.manager, ENTITY.cik)
+    limit = args.limit if args.limit is not None else ENTITY.default_backfill
+    result = run(limit=limit, force=args.force,
                  forms=[f.strip() for f in args.forms.split(",") if f.strip()],
                  map_tickers=not args.no_map)
     status = _report(result)

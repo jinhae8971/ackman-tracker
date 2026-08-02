@@ -3,8 +3,9 @@
     python -m src.pipeline.run --mode {incremental|backfill|events-only}
 
 이 모듈은 **로직을 갖지 않는다.** collector / analytics 의 CLI 진입점을 호출해
-조립하고, 결과를 무결성 게이트로 검증하고, 상태(`data/state/last_seen.json`)를
+조립하고, 결과를 무결성 게이트로 검증하고, 상태(`data/state/{entity}.json`)를
 갱신한다. 파싱·diff·지표 계산은 전부 다른 모듈의 책임이다.
+추적 대상은 `--entity {pershing|berkshire|citadel}` 로 고른다.
 
 설계 원칙
 ---------
@@ -29,11 +30,13 @@ import sys
 from datetime import datetime, timedelta, timezone
 
 try:
+    from src.common import entities, schema
     from src.common.schema import Paths, load_json, read_jsonl, save_json
 except ImportError:  # 직접 실행
     sys.path.insert(
         0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
     )
+    from src.common import entities, schema
     from src.common.schema import Paths, load_json, read_jsonl, save_json
 
 from src.pipeline import notify
@@ -324,12 +327,41 @@ def build_parser() -> argparse.ArgumentParser:
                         "0 이면 창을 적용하지 않는다.")
     p.add_argument("--alert-file", default=None,
                    help="Issue 본문을 기록할 파일 경로")
+    p.add_argument("--entity", default=None,
+                   help=f"추적 대상 엔티티 ({', '.join(entities.ORDER)}). "
+                        f"기본 {entities.DEFAULT_KEY}.")
     p.add_argument("--dry-run", action="store_true",
                    help="상태 파일과 외부 명령 실행 없이 계획만 출력")
     return p
 
 
+def _rebind_entity(argv) -> None:
+    """`--entity` 가 현재 활성 엔티티와 다르면 환경변수를 세우고 재실행한다.
+
+    schema.Paths 는 임포트 시점에 확정되므로 import 이후에 환경변수를 바꿔도
+    경로가 따라오지 않는다. 인자를 40여 개 함수에 관통시키는 대신 프로세스를
+    한 번 갈아끼우는 쪽이 훨씬 적은 표면적으로 같은 보장을 준다. 하위 단계는
+    서브프로세스라 환경변수를 그대로 물려받는다.
+    """
+    argv = list(sys.argv[1:] if argv is None else argv)
+    want = None
+    for i, a in enumerate(argv):
+        if a == "--entity" and i + 1 < len(argv):
+            want = argv[i + 1]
+        elif a.startswith("--entity="):
+            want = a.split("=", 1)[1]
+    if not want:
+        return
+    want = entities.get(want).key           # 오타는 여기서 즉시 실패
+    if want == schema.ENTITY_KEY:
+        return
+    os.environ[entities.ENV_VAR] = want
+    os.execv(sys.executable,
+             [sys.executable, "-m", "src.pipeline.run"] + argv)
+
+
 def main(argv=None) -> int:
+    _rebind_entity(argv)
     args = build_parser().parse_args(argv)
 
     forms = tuple(
@@ -338,7 +370,8 @@ def main(argv=None) -> int:
     )
 
     log("=" * 72)
-    log(f"Ackman Tracker 파이프라인 — mode={args.mode} "
+    log(f"13F Tracker 파이프라인 — entity={schema.ENTITY_KEY} "
+        f"({schema.ENTITY_DISPLAY}) mode={args.mode} "
         f"forms={list(forms)} detect_only={args.detect_only} dry_run={args.dry_run}")
     log(f"repo root: {Paths.ROOT}")
     log(f"UTC      : {now_iso()}")

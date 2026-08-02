@@ -10,6 +10,8 @@
 """
 from __future__ import annotations
 
+from dataclasses import replace
+
 import logging
 import re
 import xml.etree.ElementTree as ET
@@ -302,23 +304,54 @@ def recompute_weights(holdings: list[Holding]) -> list[Holding]:
     return holdings
 
 
+def aggregate_rows(holdings: list[Holding]) -> list[Holding]:
+    """같은 파일링 안의 동일 포지션 행을 합산한다.
+
+    13F 는 한 종목을 여러 행으로 쪼개 보고할 수 있다. Berkshire 는 매니저
+    (버핏/콤스/웨슐러)와 자회사 단위로 나뉘어 29종목이 90행으로 들어오고,
+    운용재량(SOLE/DEFINED/OTHER)이 다르면 같은 종목도 별도 행이 된다.
+    행을 덮어쓰면 포트폴리오의 3분의 2가 조용히 사라진다 — 반드시 합산해야
+    한다. 키는 (cusip, title_of_class, put_call) 로, 보통주와 PUT/CALL 은
+    끝까지 분리한다.
+    """
+    merged: dict[tuple[str, str, str], Holding] = {}
+    for h in holdings:
+        prev = merged.get(h.key)
+        if prev is None:
+            merged[h.key] = replace(h)
+            continue
+        prev.value_usd += h.value_usd
+        prev.shares += h.shares
+        # 재량 구분이 섞이면 대표값을 OTHER 로 낮춘다 (보수적 표기).
+        if prev.discretion != h.discretion:
+            prev.discretion = "MIXED"
+    return list(merged.values())
+
+
 def resolve_quarter(filings: list[tuple[Filing, list[Holding]]]) -> list[Holding]:
     """한 report_date 의 원본+정정을 유효 포지션 집합으로 해석 (§4.3).
 
     filing_date 오름차순으로 훑으면서
       RESTATEMENT  -> 누적 초기화 후 전체 대체
       NEW HOLDINGS -> 기존 유지 + 신규 추가(동일 키는 갱신)
-    병합 키는 Holding.key = (cusip, title_of_class) — Alphabet Cl A/Cl C 분리.
+
+    파일링 '내부'의 중복 행은 aggregate_rows 로 합산하고, 파일링 '사이'는
+    나중 것으로 대체한다. 정정 파일링이 그 종목의 최종 상태를 다시
+    보고하는 것이므로 대체가 맞고, 합산하면 이중계상이 된다.
     """
     ordered = sorted(filings, key=lambda pair: (pair[0].filing_date,
                                                 pair[0].accession))
-    merged: dict[tuple[str, str], Holding] = {}
+    merged: dict[tuple[str, str, str], Holding] = {}
     for filing, holdings in ordered:
         if filing.amendment_type == RESTATEMENT:
             log.info("RESTATEMENT %s -> 이전 누적 %d건 폐기",
                      filing.accession, len(merged))
             merged = {}
-        for holding in holdings:
+        rows = aggregate_rows(holdings)
+        if len(rows) != len(holdings):
+            log.info("  %s 중복 행 합산: %d행 -> %d포지션",
+                     filing.accession, len(holdings), len(rows))
+        for holding in rows:
             merged[holding.key] = holding
 
     result = list(merged.values())

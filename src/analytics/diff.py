@@ -54,8 +54,14 @@ SPLIT_MIN_REVERSE_FACTOR = 4  # 역분할은 1:4 이상만 인정 — 아래 주
 # ---------------------------------------------------------------- 내부 헬퍼
 
 def position_key(h: dict) -> tuple:
-    """포지션 동일성 키. schema.Holding.key 와 동일한 정의."""
-    return (str(h.get("cusip") or ""), str(h.get("title_of_class") or ""))
+    """포지션 동일성 키. schema.Holding.key 와 동일한 정의.
+
+    put_call 을 포함해야 같은 종목의 보통주와 PUT/CALL 이 서로 다른 포지션으로
+    남는다. 빼면 옵션 보유가 보통주 포지션을 덮어써 매수/매도 방향이 뒤집힌다.
+    """
+    return (str(h.get("cusip") or ""),
+            str(h.get("title_of_class") or ""),
+            str(h.get("put_call") or ""))
 
 
 def _int(v, default: int = 0) -> int:
@@ -74,10 +80,11 @@ def _float(v, default: float = 0.0) -> float:
 
 
 def _index(holdings: list, label: str = "") -> dict:
-    """(cusip, title_of_class) -> holding. 중복 키는 경고 후 마지막 행 채택.
+    """position_key -> holding. 중복 키는 경고 후 마지막 행 채택.
 
-    put/call 행은 계약상 키에 포함되지 않으므로 동일 CUSIP+클래스의 롱/옵션이
-    공존하면 여기서 충돌한다. 조용히 삼키지 않고 경고를 남긴다.
+    수집 단계(parse_13f.aggregate_rows)에서 이미 합산했으므로 정상 데이터라면
+    중복은 나오지 않는다. 그래도 남는다면 상류 계약이 깨진 것이므로 조용히
+    삼키지 않고 경고를 남긴다.
     """
     out = {}
     for h in holdings:

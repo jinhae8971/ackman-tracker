@@ -11,13 +11,22 @@ from typing import Literal, Optional
 import json
 import os
 
+from . import entities
+
 # ---------------------------------------------------------------- 상수
 
-CIK = "0001336528"
-CIK_SHORT = "1336528"
-ENTITY_NAME = "Pershing Square Capital Management, L.P."
-ARCHIVE_BASE = f"https://www.sec.gov/Archives/edgar/data/{CIK_SHORT}"
-SUBMISSIONS_URL = f"https://data.sec.gov/submissions/CIK{CIK}.json"
+# 활성 엔티티는 프로세스 시작 시 `TRACKER_ENTITY` 로 한 번만 결정된다.
+# 이 모듈을 임포트한 모든 코드는 자동으로 같은 엔티티를 바라본다.
+ENTITY = entities.active()
+
+CIK = ENTITY.cik
+CIK_SHORT = ENTITY.cik_short
+ENTITY_KEY = ENTITY.key
+ENTITY_NAME = ENTITY.name
+ENTITY_DISPLAY = ENTITY.display
+ARCHIVE_BASE = ENTITY.archive_base
+SUBMISSIONS_URL = ENTITY.submissions_url
+GOLDEN = ENTITY.golden
 OPENFIGI_URL = "https://api.openfigi.com/v3/mapping"
 
 # SEC 요구사항: User-Agent 없으면 403. 초당 10요청 제한 -> 자체 3req/s.
@@ -63,9 +72,15 @@ class Holding:
     schema_version: Optional[str] = None   # X0202 등. 단위 정규화 감사용
 
     @property
-    def key(self) -> tuple[str, str]:
-        """포지션 동일성 키. Alphabet 처럼 복수 클래스 분리를 위해 클래스 포함."""
-        return (self.cusip, self.title_of_class)
+    def key(self) -> tuple[str, str, str]:
+        """포지션 동일성 키.
+
+        Alphabet 처럼 복수 클래스를 분리하려면 title_of_class 가 필요하고,
+        Citadel 처럼 같은 종목의 보통주·PUT·CALL 을 동시에 보고하는 운용사를
+        다루려면 put_call 이 필요하다. 셋 중 하나라도 빠지면 서로 다른
+        포지션이 하나로 뭉개진다.
+        """
+        return (self.cusip, self.title_of_class, self.put_call or "")
 
 
 @dataclass
@@ -168,24 +183,57 @@ def save_json(path: str, obj) -> None:
 # ---------------------------------------------------------------- 경로
 
 class Paths:
-    """모든 모듈이 사용하는 경로. 루트는 리포지토리 루트 기준."""
+    """모든 모듈이 사용하는 경로. 루트는 리포지토리 루트 기준.
+
+    엔티티별 산출물은 `data/normalized/{key}/`, `data/raw/{key}/`,
+    `data/state/{key}.json` 으로 분리한다. CUSIP -> 티커 매핑만은
+    엔티티와 무관한 사실이므로 `data/reference/` 아래에서 공유한다.
+    """
     ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
     DATA = os.path.join(ROOT, "data")
-    RAW = os.path.join(DATA, "raw")
-    NORMALIZED = os.path.join(DATA, "normalized")
+    RAW_ROOT = os.path.join(DATA, "raw")
+    NORMALIZED_ROOT = os.path.join(DATA, "normalized")
     REFERENCE = os.path.join(DATA, "reference")
     STATE = os.path.join(DATA, "state")
+    DASHBOARD = os.path.join(ROOT, "dashboard")
+    DASHBOARD_DATA_DIR = os.path.join(DASHBOARD, "data")
 
+    # --- 엔티티 무관 (공유) ---
+    CUSIP_MAP = os.path.join(REFERENCE, "cusip_map.json")
+    DASHBOARD_INDEX = os.path.join(DASHBOARD_DATA_DIR, "index.json")
+    DASHBOARD_COMPARE = os.path.join(DASHBOARD_DATA_DIR, "compare.json")
+    DASHBOARD_HTML = os.path.join(DASHBOARD, "index.html")
+
+    # --- 활성 엔티티 ---
+    RAW = os.path.join(RAW_ROOT, ENTITY_KEY)
+    NORMALIZED = os.path.join(NORMALIZED_ROOT, ENTITY_KEY)
     HOLDINGS = os.path.join(NORMALIZED, "holdings.jsonl")
     FILINGS = os.path.join(NORMALIZED, "filings.jsonl")
     EVENTS = os.path.join(NORMALIZED, "events.jsonl")
     METRICS = os.path.join(NORMALIZED, "metrics.jsonl")
+    COVERAGE = os.path.join(NORMALIZED, "coverage.jsonl")
+    LAST_SEEN = os.path.join(STATE, f"{ENTITY_KEY}.json")
+    DASHBOARD_DATA = os.path.join(DASHBOARD_DATA_DIR, f"{ENTITY_KEY}.json")
 
-    CUSIP_MAP = os.path.join(REFERENCE, "cusip_map.json")
-    LAST_SEEN = os.path.join(STATE, "last_seen.json")
-
-    DASHBOARD_DATA = os.path.join(ROOT, "dashboard", "dashboard_data.json")
-    DASHBOARD_HTML = os.path.join(ROOT, "dashboard", "index.html")
+    @classmethod
+    def for_entity(cls, key: str) -> dict:
+        """다른 엔티티의 경로 묶음. 대시보드 빌더처럼 한 프로세스에서
+        여러 엔티티를 읽어야 할 때만 쓴다."""
+        entity = entities.get(key)
+        normalized = os.path.join(cls.NORMALIZED_ROOT, entity.key)
+        return {
+            "entity": entity,
+            "raw": os.path.join(cls.RAW_ROOT, entity.key),
+            "normalized": normalized,
+            "holdings": os.path.join(normalized, "holdings.jsonl"),
+            "filings": os.path.join(normalized, "filings.jsonl"),
+            "events": os.path.join(normalized, "events.jsonl"),
+            "metrics": os.path.join(normalized, "metrics.jsonl"),
+            "coverage": os.path.join(normalized, "coverage.jsonl"),
+            "last_seen": os.path.join(cls.STATE, f"{entity.key}.json"),
+            "dashboard_data": os.path.join(cls.DASHBOARD_DATA_DIR,
+                                           f"{entity.key}.json"),
+        }
 
 
 # ---------------------------------------------------------------- 유틸
