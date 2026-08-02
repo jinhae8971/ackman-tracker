@@ -112,6 +112,7 @@ jobs:
       # 커밋보다 먼저 알린다. 상태(`alerted`)가 먼저 커밋되면 알림 실패 시
       # 다음 실행에서 그 공시를 다시 감지하지 못해 알림이 유실된다.
       - name: 신규 공시 Issue 생성
+        id: alert
         if: always() && steps.pipeline.outcome != 'skipped'
         env:
           GH_TOKEN: ${{ github.token }}
@@ -139,7 +140,11 @@ jobs:
       # fetch-13f 와 같은 상태 파일들을 쓰므로 rebase 충돌이 발생한다.
       # 합집합 병합으로 해소한다(scripts/push_data.sh 주석 참고).
       - name: 상태 변경분 커밋
-        if: always() && steps.pipeline.outcome != 'skipped'
+        # 알림 스텝이 실패했다면 커밋하지 않는다. 커밋이 상태를 전진시키면
+        # 다음 실행은 '신규 없음'으로 조기 종료해 그 알림이 영구 유실된다
+        # (실제로 run 30730465286 에서 Berkshire STRONG 17건이 이렇게 사라졌다).
+        # 커밋을 건너뛰면 다음 실행이 같은 공시를 다시 감지해 재알림한다.
+        if: always() && steps.pipeline.outcome != 'skipped' && steps.alert.outcome != 'failure'
         run: |
           scripts/push_data.sh \
             "state(poll): 신규 공시 알림 기록 (run ${GITHUB_RUN_ID})" data/state

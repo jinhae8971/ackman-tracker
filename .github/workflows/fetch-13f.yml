@@ -118,6 +118,7 @@ jobs:
       # 알림을 커밋보다 먼저 보낸다. 커밋이 끝나면 다음 실행에서 "신규 없음"으로
       # 조기 종료하므로, 커밋 후에 알림이 실패하면 그 알림은 영원히 유실된다.
       - name: STRONG 이벤트 Issue 생성
+        id: alert
         if: always() && steps.pipeline.outcome != 'skipped'
         env:
           GH_TOKEN: ${{ github.token }}
@@ -144,7 +145,11 @@ jobs:
 
       - name: 데이터 변경분 커밋
         id: commit
-        if: always() && steps.pipeline.outcome != 'skipped'
+        # 알림 스텝이 실패했다면 커밋하지 않는다. 커밋이 상태를 전진시키면
+        # 다음 실행은 '신규 없음'으로 조기 종료해 그 알림이 영구 유실된다
+        # (실제로 run 30730465286 에서 Berkshire STRONG 17건이 이렇게 사라졌다).
+        # 커밋을 건너뛰면 다음 실행이 같은 공시를 다시 감지해 재알림한다.
+        if: always() && steps.pipeline.outcome != 'skipped' && steps.alert.outcome != 'failure'
         run: |
           scripts/push_data.sh \
             "data(13f): 파이프라인 자동 갱신 (run ${GITHUB_RUN_ID})" data
