@@ -534,13 +534,3 @@ if __name__ == "__main__":
     raise SystemExit(main())
 
 # end of build.py
-              f"${cur['total_value_usd']:,}")
-        for w in warnings:
-            print(f"[build][WARN] {w}", file=sys.stderr)
-    return 0
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())
-
-# end of build.py
