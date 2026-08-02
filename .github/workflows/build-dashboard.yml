@@ -1,0 +1,122 @@
+# 대시보드 빌드 → GitHub Pages 배포.
+#
+# 정규화 데이터가 실제로 바뀌었을 때만 트리거된다(paths 필터). 크론이 아니라
+# push 트리거를 쓰는 이유는, 데이터가 바뀌지 않았는데 재배포하는 것이 무의미하고
+# fetch-13f 가 변경 없을 때 빈 커밋을 만들지 않기 때문이다.
+name: build-dashboard
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "data/normalized/**"
+      - "dashboard/**"
+      - ".github/workflows/build-dashboard.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write   # 공통 기본값
+  pages: write      # Pages 배포 (이 워크플로우에만 부여)
+  id-token: write   # OIDC — deploy-pages 가 요구
+
+concurrency:
+  group: ackman-tracker-pages
+  cancel-in-progress: true
+
+env:
+  PYTHONUNBUFFERED: "1"
+  PYTHONPATH: ${{ github.workspace }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      ready: ${{ steps.build.outputs.ready }}
+    steps:
+      - name: 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Python 설치
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 대시보드 빌드
+        id: build
+        run: |
+          set -euo pipefail
+          if [ ! -f dashboard/build.py ]; then
+            echo "::warning::dashboard/build.py 가 아직 없습니다 — 배포를 건너뜁니다."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          python dashboard/build.py
+          if [ ! -f dashboard/index.html ]; then
+            echo "::error::dashboard/index.html 이 없습니다 — 배포할 산출물이 없습니다."
+            exit 1
+          fi
+          # 배포 산출물만 _site 로 추린다. dashboard/ 를 통째로 올리면 build.py,
+          # sample_data.py, sample/ 까지 공개 호스팅되므로 명시적으로 화이트리스트한다.
+          rm -rf _site && mkdir -p _site
+          cp dashboard/index.html dashboard/dashboard_data.json _site/
+          touch _site/.nojekyll
+          echo "ready=true" >> "$GITHUB_OUTPUT"
+
+      - name: Pages 설정
+        if: steps.build.outputs.ready == 'true'
+        uses: actions/configure-pages@v5
+
+      - name: 아티팩트 업로드
+        if: steps.build.outputs.ready == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    if: needs.build.outputs.ready == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: GitHub Pages 배포
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  notify-failure:
+    needs: [build, deploy]
+    # deploy 는 build 결과에 따라 skipped 일 수 있다. skipped 를 실패로 오인하지
+    # 않도록 각 job 의 result 를 명시적으로 확인한다.
+    if: ${{ always() && (needs.build.result == 'failure' || needs.deploy.result == 'failure') }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: 실패 Issue 생성
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          T: "[FAILURE] build-dashboard 워크플로우 실패"
+        run: |
+          set -euo pipefail
+          BODY="${RUNNER_TEMP}/failure.md"
+          {
+            echo "대시보드 빌드 또는 Pages 배포가 실패했습니다."
+            echo
+            echo "- 실행 링크: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+            echo "- 커밋: \`${GITHUB_SHA}\`"
+            echo
+            echo "데이터 파이프라인에는 영향이 없습니다(관심사 분리)."
+            echo "Pages 가 처음이라면 저장소 Settings > Pages > Source 를 'GitHub Actions' 로 설정했는지 확인하세요."
+          } > "$BODY"
+          NUM=$(gh issue list --state open --limit 200 --json number,title \
+                  --jq '.[] | select(.title == env.T) | .number' | head -n1)
+          if [ -n "$NUM" ]; then
+            gh issue comment "$NUM" --body-file "$BODY"
+          else
+            gh issue create --title "$T" --body-file "$BODY"
+          fi

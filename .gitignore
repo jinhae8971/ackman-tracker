@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+
+# 원자적 기록 중간 파일
+*.tmp
+
+# 에이전트 작업 중 남은 임시 산출물 (삭제 불가 환경 대응 — 추적만 제외)
+_probe.txt
+_dbg.py
+_summary_probe.tmp
+.bv2.py
+.synccheck
+_analytics_verify/
+
+# 원본 공시 캐시는 용량이 커서 커밋하지 않는다 (재수집 가능)
+data/raw/

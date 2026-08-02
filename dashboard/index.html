@@ -1,0 +1,961 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ackman Tracker — Pershing Square 13F 포지션 추적</title>
+<!--
+  단일 파일 대시보드. 빌드 체인 없음.
+  외부 의존성은 Chart.js 하나뿐이며 CDN 으로 로드한다.
+  데이터는 build.py 가 사전 집계한 dashboard_data.json 하나를 fetch 한다.
+  ★ 브라우저 스토리지 API 를 일절 사용하지 않는다. 모든 상태는 아래 `state` 메모리 변수.
+-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --line:#2a2f3a;
+    --fg:#e6e8ee; --mut:#9aa3b2; --dim:#6b7280;
+    --up:#22c55e; --down:#ef4444; --add:#38bdf8; --trim:#f59e0b;
+    --accent:#818cf8; --warn:#fbbf24; --prov:#a78bfa;
+    --radius:10px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--fg);
+    font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",-apple-system,
+                BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-size:14px; line-height:1.5; padding-bottom:96px;
+  }
+  a{color:var(--accent); text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 16px}
+
+  /* ---------- 상단 고정: 데이터 신선도 (표시 원칙 1) ---------- */
+  header.topbar{position:sticky;top:0;z-index:50;background:#0b0d11;
+    border-bottom:1px solid var(--line)}
+  .brand{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;padding-top:12px}
+  .brand h1{font-size:17px;margin:0;letter-spacing:-.2px}
+  .brand .ent{color:var(--mut);font-size:12px}
+  #freshness{display:flex;gap:8px;flex-wrap:wrap;align-items:center;
+    padding:8px 0 10px;font-size:12.5px}
+  .fresh-chip{background:var(--panel2);border:1px solid var(--line);
+    border-radius:999px;padding:3px 10px;color:var(--mut);white-space:nowrap}
+  .fresh-chip b{color:var(--fg);font-weight:600}
+  .fresh-chip.alarm{border-color:#7c2d12;background:#2a1408;color:#fdba74}
+  .fresh-chip.prov{border-color:#4c1d95;background:#1e1436;color:#c4b5fd}
+
+  nav.tabs{display:flex;gap:4px;overflow-x:auto;padding-bottom:0}
+  nav.tabs button{background:transparent;border:0;border-bottom:2px solid transparent;
+    color:var(--mut);padding:9px 14px;font-size:13.5px;cursor:pointer;white-space:nowrap;
+    font-family:inherit}
+  nav.tabs button:hover{color:var(--fg)}
+  nav.tabs button.on{color:var(--fg);border-bottom-color:var(--accent);font-weight:600}
+
+  /* ---------- 화면별 as-of 라인 (표시 원칙 1, 화면마다 반복) ---------- */
+  .asof{font-size:12px;color:var(--mut);background:var(--panel);
+    border:1px solid var(--line);border-left:3px solid var(--accent);
+    border-radius:6px;padding:7px 11px;margin:14px 0 12px}
+  .asof b{color:var(--fg)}
+  .asof .sep{color:var(--dim);margin:0 7px}
+
+  section.view{display:none}
+  section.view.on{display:block}
+  h2.vt{font-size:15px;margin:14px 0 4px}
+  p.vd{color:var(--mut);font-size:12.5px;margin:0 0 12px}
+
+  /* ---------- KPI ---------- */
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:12px 0}
+  .kpi{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px}
+  .kpi .k{font-size:11.5px;color:var(--mut);letter-spacing:.3px}
+  .kpi .v{font-size:22px;font-weight:700;margin-top:4px;letter-spacing:-.5px}
+  .kpi .s{font-size:11.5px;color:var(--dim);margin-top:3px}
+
+  /* ---------- 표 ---------- */
+  .tablewrap{background:var(--panel);border:1px solid var(--line);
+    border-radius:var(--radius);overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+  th{background:var(--panel2);color:var(--mut);font-weight:600;font-size:11.5px;
+    position:sticky;top:0;cursor:pointer;user-select:none}
+  th.l,td.l{text-align:left}
+  tbody tr:hover{background:#1b1f28}
+  tbody tr:last-child td{border-bottom:0}
+  .tick{display:inline-block;background:#232838;color:#c7d2fe;border-radius:4px;
+    padding:1px 6px;font-size:11px;font-weight:600;font-family:ui-monospace,Menlo,Consolas,monospace}
+  .num{font-variant-numeric:tabular-nums;font-family:ui-monospace,Menlo,Consolas,monospace}
+  .pos{color:var(--up)} .neg{color:var(--down)} .flat{color:var(--dim)}
+  .bar{position:relative}
+  .bar span.f{position:absolute;left:0;top:0;bottom:0;background:rgba(129,140,248,.16);z-index:0}
+  .bar em{position:relative;z-index:1;font-style:normal}
+
+  .badge{display:inline-block;border-radius:4px;padding:1px 6px;font-size:10.5px;
+    font-weight:700;letter-spacing:.2px;vertical-align:middle}
+  .b-NEW{background:#052e1a;color:#4ade80;border:1px solid #14532d}
+  .b-EXIT{background:#3a0d0d;color:#fca5a5;border:1px solid #7f1d1d}
+  .b-ADD{background:#082f49;color:#7dd3fc;border:1px solid #075985}
+  .b-TRIM{background:#3a2506;color:#fcd34d;border:1px solid #78350f}
+  .b-HOLD{background:#20242e;color:#9aa3b2;border:1px solid #2a2f3a}
+  .b-prov{background:#1e1436;color:#c4b5fd;border:1px solid #5b21b6}
+  .b-conf{background:#122a1e;color:#86efac;border:1px solid #14532d}
+  .b-strong{background:#2a1a3d;color:#ddd6fe;border:1px solid #6d28d9}
+  .b-amend{background:#2b2110;color:#fbbf24;border:1px solid #78350f}
+
+  /* ---------- 이벤트 피드 ---------- */
+  .filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}
+  .filters select,.filters input{background:var(--panel2);color:var(--fg);
+    border:1px solid var(--line);border-radius:6px;padding:5px 8px;font-size:12.5px;
+    font-family:inherit}
+  .filters label{font-size:12.5px;color:var(--mut);display:flex;align-items:center;gap:5px}
+  .pinhdr{font-size:12px;color:var(--warn);margin:14px 0 6px;letter-spacing:.3px;font-weight:700}
+  .feed{display:flex;flex-direction:column;gap:7px}
+  .ev{display:grid;grid-template-columns:88px 1fr auto;gap:12px;align-items:center;
+    background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--line);
+    border-radius:8px;padding:9px 12px}
+  .ev.pinned{border-color:#3f3a5a;background:#181626}
+  .ev .when{font-size:11px;color:var(--mut);line-height:1.35}
+  .ev .when b{display:block;color:var(--fg);font-size:12px}
+  .ev .body .nm{font-size:13.5px;font-weight:600}
+  .ev .body .dt{font-size:11.5px;color:var(--mut);margin-top:2px}
+  .ev .right{text-align:right;font-size:12px}
+  .ev .right .d{font-weight:700;font-variant-numeric:tabular-nums}
+  .ev .right a{font-size:11px}
+
+  /* ---------- 차트 ---------- */
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:12px 14px;margin:12px 0}
+  .chartbox{position:relative;height:420px}
+  .chartbox.sm{height:260px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .chip{background:var(--panel2);border:1px solid var(--line);color:var(--mut);
+    border-radius:999px;padding:3px 10px;font-size:11.5px;cursor:pointer;font-family:inherit}
+  .chip:hover{color:var(--fg)}
+  .chip.on{border-color:var(--accent);color:var(--fg);background:#232441}
+  .chip i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px}
+  .drill{border-top:1px solid var(--line);margin-top:14px;padding-top:12px}
+  .tl{list-style:none;padding:0;margin:8px 0 0;max-height:280px;overflow:auto}
+  .tl li{display:grid;grid-template-columns:92px 96px 1fr auto;gap:10px;align-items:center;
+    padding:6px 4px;border-bottom:1px solid var(--line);font-size:12px}
+  .tl li:last-child{border-bottom:0}
+  .tl .d{color:var(--mut);font-variant-numeric:tabular-nums}
+  .tl .n{color:var(--mut)}
+
+  .note{font-size:12px;color:var(--mut);background:#141821;border:1px solid var(--line);
+    border-radius:8px;padding:9px 12px;margin:10px 0}
+  .banner{font-size:12.5px;border-radius:8px;padding:9px 12px;margin:12px 0;
+    background:#2a1408;border:1px solid #7c2d12;color:#fdba74}
+  .empty{color:var(--dim);text-align:center;padding:36px 10px;font-size:13px}
+
+  /* ---------- 하단 고정 면책 (표시 원칙 4) ---------- */
+  footer#disclaimer{position:fixed;left:0;right:0;bottom:0;z-index:60;
+    background:#0b0d11;border-top:1px solid var(--line);padding:8px 0}
+  footer#disclaimer .wrap{display:flex;gap:10px;align-items:flex-start}
+  footer#disclaimer p{margin:0;font-size:11.5px;color:var(--mut);line-height:1.45}
+  footer#disclaimer .tag{flex:none;font-size:10.5px;font-weight:700;color:#fca5a5;
+    background:#2a0f0f;border:1px solid #7f1d1d;border-radius:4px;padding:2px 7px;margin-top:1px}
+  @media(max-width:720px){
+    .ev{grid-template-columns:1fr;gap:6px}
+    .ev .right{text-align:left}
+    .tl li{grid-template-columns:1fr;gap:2px}
+    body{padding-bottom:132px}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand">
+      <h1>Ackman Tracker</h1>
+      <span class="ent" id="entname">Pershing Square Capital Management, L.P. · CIK 0001336528</span>
+    </div>
+    <!-- 표시 원칙 1: report_date / filing_date / 경과일수를 전 화면에서 상시 노출 -->
+    <div id="freshness"></div>
+    <nav class="tabs" id="tabs">
+      <button data-view="portfolio" class="on">1 · 현재 포트폴리오</button>
+      <button data-view="events">2 · 변화 감지 피드</button>
+      <button data-view="series">3 · 포지션 시계열</button>
+      <button data-view="concentration">4 · 집중도·회전율</button>
+      <button data-view="filings">5 · 공시 원문 인덱스</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div id="loadbox" class="empty">데이터를 불러오는 중…</div>
+  <div id="banners"></div>
+
+  <!-- ============ 화면 1 : 현재 포트폴리오 ============ -->
+  <section class="view on" id="view-portfolio">
+    <div class="asof" data-asof></div>
+    <h2 class="vt">현재 포트폴리오</h2>
+    <p class="vd">최신 13F 기준 보유 종목. 비중 내림차순. 모든 행에서 EDGAR 원문까지 1클릭.</p>
+    <div class="kpis" id="kpis"></div>
+    <div class="tablewrap">
+      <table id="pf">
+        <thead><tr>
+          <th class="l" data-sort="issuer_name">종목</th>
+          <th class="l" data-sort="ticker">티커</th>
+          <th data-sort="weight_pct">비중</th>
+          <th data-sort="value_usd">평가액</th>
+          <th data-sort="shares">주식 수</th>
+          <th data-sort="share_delta_pct">전분기 대비</th>
+          <th data-sort="weight_delta_bp">비중 변화</th>
+          <th data-sort="first_seen">최초 진입</th>
+          <th data-sort="quarters_held">보유 분기</th>
+          <th class="l">원문</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="note" id="pfnote"></div>
+  </section>
+
+  <!-- ============ 화면 2 : 변화 감지 피드 ============ -->
+  <section class="view" id="view-events">
+    <div class="asof" data-asof></div>
+    <h2 class="vt">변화 감지 피드</h2>
+    <p class="vd">공시 시간 역순. 신규는 초록, 청산은 빨강, 증량·감량은 비중 변화(bp) 크기에 따라 채도로 강도 표현.
+       <span class="badge b-prov">13D 잠정</span> 배지는 13F 확정 전 조기 이벤트입니다.</p>
+    <div class="filters">
+      <select id="evQuarter"></select>
+      <select id="evType">
+        <option value="ALL">전체 유형</option>
+        <option value="NEW">NEW (신규)</option>
+        <option value="ADD">ADD (증량)</option>
+        <option value="TRIM">TRIM (감량)</option>
+        <option value="EXIT">EXIT (청산)</option>
+        <option value="HOLD">HOLD (변동 없음)</option>
+      </select>
+      <select id="evSource">
+        <option value="ALL">전체 출처</option>
+        <option value="13F">13F 확정</option>
+        <option value="PROV">13D 잠정만</option>
+      </select>
+      <label><input type="checkbox" id="evHold"> HOLD 포함</label>
+      <label><input type="checkbox" id="evStrong"> STRONG/EXIT 만</label>
+    </div>
+    <div id="pinned"></div>
+    <div class="pinhdr" id="restHdr">전체 이벤트</div>
+    <div class="feed" id="feed"></div>
+  </section>
+
+  <!-- ============ 화면 3 : 포지션 시계열 ============ -->
+  <section class="view" id="view-series">
+    <div class="asof" data-asof></div>
+    <h2 class="vt">포지션 시계열</h2>
+    <p class="vd">종목별 비중 추이 (스택 영역, Y축 합계 100%). 차트 영역 또는 아래 칩을 클릭하면
+       해당 종목의 주식 수·평가액 추이와 관련 공시 타임라인이 열립니다.</p>
+    <div class="card">
+      <div class="filters" id="seriesCtl">
+        <label>표시 종목
+          <select id="sTop">
+            <option value="8">Top 8</option>
+            <option value="12" selected>Top 12</option>
+            <option value="20">Top 20</option>
+            <option value="0">전체</option>
+          </select></label>
+        <label>기간
+          <select id="sWin">
+            <option value="12">최근 12분기</option>
+            <option value="20">최근 20분기</option>
+            <option value="0" selected>전체 기간</option>
+          </select></label>
+        <span id="sInfo"></span>
+      </div>
+      <div class="chartbox"><canvas id="cStack"></canvas></div>
+      <div class="chips" id="secChips"></div>
+    </div>
+    <div class="card drill" id="drill" style="display:none">
+      <div id="drillHead"></div>
+      <div class="chartbox sm"><canvas id="cDrill"></canvas></div>
+      <h3 style="font-size:13px;margin:16px 0 0">관련 공시 타임라인</h3>
+      <ul class="tl" id="drillTl"></ul>
+      <div class="note" id="drillNote"></div>
+    </div>
+  </section>
+
+  <!-- ============ 화면 4 : 집중도·회전율 ============ -->
+  <section class="view" id="view-concentration">
+    <div class="asof" data-asof></div>
+    <h2 class="vt">집중도 · 회전율</h2>
+    <p class="vd">HHI(=Σ(비중/100)²), Top-N 누적 비중, 포지션 수, 회전율의 분기 추이.
+       애크먼은 저회전 집중형이므로 회전율 급등은 그 자체로 이례 신호입니다.</p>
+    <div class="card"><div class="chartbox"><canvas id="cConc"></canvas></div></div>
+    <div class="tablewrap">
+      <table id="mtab">
+        <thead><tr>
+          <th class="l">분기</th><th class="l">기준일</th><th class="l">제출일</th><th>지연</th>
+          <th>총액</th><th>포지션</th><th>HHI</th>
+          <th>Top-1</th><th>Top-3</th><th>Top-5</th><th>회전율</th>
+          <th>N/E/A/T</th><th class="l">원문</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 화면 5 : 공시 원문 인덱스 ============ -->
+  <section class="view" id="view-filings">
+    <div class="asof" data-asof></div>
+    <h2 class="vt">공시 원문 인덱스</h2>
+    <p class="vd">폼 타입·날짜로 필터링하고 EDGAR 원문 디렉터리로 직접 이동합니다.
+       URL 패턴: <span class="num" id="urlpat"></span></p>
+    <div class="filters">
+      <select id="fForm"></select>
+      <label>부터 <input type="date" id="fFrom"></label>
+      <label>까지 <input type="date" id="fTo"></label>
+      <input type="search" id="fQ" placeholder="accession / 비고 검색" size="26">
+      <button class="chip" id="fReset">필터 초기화</button>
+      <span id="fCount" style="font-size:12px;color:var(--mut)"></span>
+    </div>
+    <div class="tablewrap">
+      <table id="ftab">
+        <thead><tr>
+          <th class="l">제출일</th><th class="l">폼 타입</th><th class="l">기준일</th>
+          <th class="l">Accession</th><th>항목수</th><th>보고 총액</th>
+          <th class="l">비고</th><th class="l">EDGAR 원문</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<!-- 표시 원칙 4 : 하단 고정 면책 -->
+<footer id="disclaimer">
+  <div class="wrap">
+    <span class="tag">고지</span>
+    <p id="disctext">13F는 미국 상장 롱 포지션만 포함하며 스왑·공매도·비상장 자산은 나타나지 않습니다.
+      본 자료는 정보 제공 목적이며 투자 자문이 아닙니다.</p>
+  </div>
+</footer>
+
+<script>
+"use strict";
+/* =========================================================================
+   상태는 전부 이 메모리 객체 하나에만 둔다.
+   브라우저 스토리지 API(웹 스토리지 계열·인덱스드 DB·쿠키)는 일절 사용하지 않는다. (표시 원칙 5)
+   ========================================================================= */
+const state = {
+  data: null,
+  view: "portfolio",
+  sort: { col: "weight_pct", dir: "desc" },
+  ev: { quarter: "ALL", type: "ALL", source: "ALL", hold: false, strongOnly: false },
+  selectedKey: null,
+  seriesUI: { top: 12, window: 0 },      // top: 개별 표시 종목 수(0=전체), window: 표시 분기 수(0=전체)
+  filings: { form: "ALL", from: "", to: "", q: "" },
+  charts: { stack: null, drill: null, conc: null }
+};
+
+/* ------------------------------ 포맷터 ------------------------------ */
+// 금액: $13.71B 축약 + title 로 전체 자릿수 병행 (완료 조건 6)
+function abbrUSD(v){
+  if(v === null || v === undefined || isNaN(v)) return "—";
+  const s = v < 0 ? "-" : "", a = Math.abs(v);
+  if(a >= 1e9) return s + "$" + (a/1e9).toFixed(2) + "B";
+  if(a >= 1e6) return s + "$" + (a/1e6).toFixed(1) + "M";
+  if(a >= 1e3) return s + "$" + (a/1e3).toFixed(1) + "K";
+  return s + "$" + a.toFixed(0);
+}
+function fullUSD(v){
+  if(v === null || v === undefined || isNaN(v)) return "데이터 없음";
+  return "$" + Math.round(v).toLocaleString("en-US");
+}
+function usdCell(v, cls){
+  return '<td class="num ' + (cls||"") + '" title="' + esc(fullUSD(v)) + '">' + esc(abbrUSD(v)) + '</td>';
+}
+function pct1(v){ return (v===null||v===undefined||isNaN(v)) ? "—" : Number(v).toFixed(1) + "%"; }   // 비중 소수점 1자리
+function pctSigned(v){ if(v===null||v===undefined||isNaN(v)) return "—";
+  return (v>0?"+":"") + Number(v).toFixed(1) + "%"; }
+function bpSigned(v){ if(v===null||v===undefined||isNaN(v)) return "—";
+  return (v>0?"+":"") + Math.round(v) + "bp"; }
+function num(v){ return (v===null||v===undefined||isNaN(v)) ? "—" : Number(v).toLocaleString("en-US"); }
+function esc(s){ return String(s===null||s===undefined ? "" : s)
+  .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function signCls(v){ return (v===null||v===undefined) ? "flat" : (v>0?"pos":(v<0?"neg":"flat")); }
+function daysSince(iso){
+  if(!iso) return null;
+  const d = new Date(iso + "T00:00:00Z");
+  if(isNaN(d)) return null;
+  return Math.floor((Date.now() - d.getTime()) / 86400000);
+}
+
+/* ------------------------------ 팔레트 ------------------------------ */
+const PALETTE = ["#6366f1","#22c55e","#f59e0b","#38bdf8","#ec4899","#a3e635","#f97316",
+                 "#14b8a6","#8b5cf6","#ef4444","#0ea5e9","#eab308","#84cc16","#f472b6",
+                 "#2dd4bf","#c084fc","#fb7185","#60a5fa"];
+function colorOf(i){ return PALETTE[i % PALETTE.length]; }
+// 증량/감량 강도: |비중 변화 bp| 를 0~1 로 눌러 채도(알파)로 표현
+function intensity(bp){
+  const a = Math.abs(Number(bp)||0);
+  return Math.min(1, 0.22 + a / 400 * 0.78);
+}
+function eventTint(e){
+  const t = e.event_type;
+  if(t === "NEW")  return "rgba(34,197,94,"  + intensity(Math.max(e.weight_after*100, 200)) + ")";
+  if(t === "EXIT") return "rgba(239,68,68,"  + intensity(Math.max(Math.abs(e.weight_delta_bp), 200)) + ")";
+  if(t === "ADD")  return "rgba(56,189,248," + intensity(e.weight_delta_bp) + ")";
+  if(t === "TRIM") return "rgba(245,158,11," + intensity(e.weight_delta_bp) + ")";
+  return "rgba(107,114,128,.5)";
+}
+
+/* ------------------------------ 부트 ------------------------------ */
+async function boot(){
+  let d;
+  try{
+    const r = await fetch("dashboard_data.json", { cache: "no-store" });
+    if(!r.ok) throw new Error("HTTP " + r.status);
+    d = await r.json();
+  }catch(err){
+    document.getElementById("loadbox").innerHTML =
+      '<div class="banner">dashboard_data.json 을 불러오지 못했습니다 (' + esc(err.message) + ').<br>' +
+      '<code>python3 dashboard/build.py</code> 로 생성한 뒤, ' +
+      '<code>python3 -m http.server</code> 같은 로컬 서버로 열어주세요 ' +
+      '(file:// 직접 열기는 브라우저 보안 정책상 fetch 가 차단됩니다).</div>';
+    return;
+  }
+  state.data = d;
+  document.getElementById("loadbox").style.display = "none";
+  render();
+}
+
+function render(){
+  const d = state.data;
+  document.getElementById("entname").textContent =
+    d.meta.entity.name + " · CIK " + d.meta.entity.cik;
+  document.getElementById("disctext").textContent = d.disclaimer;
+  document.getElementById("urlpat").textContent = d.meta.edgar_url_pattern;
+  renderFreshness();
+  renderBanners();
+  renderPortfolio();
+  initEventFilters();
+  renderEvents();
+  renderSeries();
+  renderConcentration();
+  initFilingFilters();
+  renderFilings();
+}
+
+/* ---------- 표시 원칙 1 : 신선도 바 + 화면별 as-of 라인 ---------- */
+function renderFreshness(){
+  const c = state.data.current;
+  const prov = state.data.provisional_events || [];
+  const dReport = daysSince(c.report_date), dFile = daysSince(c.filing_date);
+  const chips = [];
+  chips.push('<span class="fresh-chip">데이터 기준일(report_date) <b>' + esc(c.report_date) +
+             '</b> · ' + esc(c.label) + '</span>');
+  chips.push('<span class="fresh-chip">공시 제출일(filing_date) <b>' + esc(c.filing_date) + '</b></span>');
+  chips.push('<span class="fresh-chip">제출 지연 <b>' + esc(c.lag_days) + '일</b></span>');
+  chips.push('<span class="fresh-chip alarm">기준일로부터 <b>' + dReport +
+             '일 경과</b> · 제출일로부터 <b>' + dFile + '일 경과</b></span>');
+  if(prov.length){
+    chips.push('<span class="fresh-chip prov">13D 기반 잠정 이벤트 <b>' + prov.length + '건</b> (13F 미확정)</span>');
+  }
+  chips.push('<span class="fresh-chip"><a href="' + esc(c.edgar_url) + '" target="_blank" rel="noopener">EDGAR 원문 ↗</a></span>');
+  document.getElementById("freshness").innerHTML = chips.join("");
+
+  const line = '데이터 기준일 <b>' + esc(c.report_date) + '</b> (' + esc(c.label) + ')' +
+    '<span class="sep">|</span>제출일 <b>' + esc(c.filing_date) + '</b>' +
+    '<span class="sep">|</span>제출 지연 <b>' + esc(c.lag_days) + '일</b>' +
+    '<span class="sep">|</span>현재로부터 <b>' + dReport + '일 경과</b> (제출 후 ' + dFile + '일)' +
+    '<span class="sep">|</span><a href="' + esc(c.edgar_url) + '" target="_blank" rel="noopener">이 분기 EDGAR 원문 ↗</a>';
+  document.querySelectorAll(".asof").forEach(el => { el.innerHTML = line; });
+}
+
+function renderBanners(){
+  const m = state.data.meta, out = [];
+  if(m.is_sample){
+    out.push('<div class="banner"><b>합성(샘플) 데이터로 렌더링 중입니다.</b> ' +
+      'data/normalized/ 에 실데이터가 채워지면 build.py 가 자동으로 그쪽을 사용합니다. ' +
+      '아래 수치는 계약 검증용 더미이며 실제 공시 수치가 아닙니다 ' +
+      '(단, 2026Q1·2024Q4 총액/포지션 수는 실측 기준선과 일치시켜 두었습니다).</div>');
+  }
+  (m.warnings||[]).forEach(w => out.push('<div class="banner">' + esc(w) + '</div>'));
+  document.getElementById("banners").innerHTML = out.join("");
+}
+
+/* ================= 화면 1 : 현재 포트폴리오 ================= */
+function renderPortfolio(){
+  const c = state.data.current;
+  document.getElementById("kpis").innerHTML = [
+    kpi("총 포트폴리오 가치", abbrUSD(c.total_value_usd), fullUSD(c.total_value_usd), fullUSD(c.total_value_usd)),
+    kpi("포지션 수", String(c.position_count), "신규 " + (c.new_count||0) + " · 청산 " + (c.exit_count||0) +
+        " · 증량 " + (c.add_count||0) + " · 감량 " + (c.trim_count||0)),
+    kpi("HHI (집중도)", c.hhi === null || c.hhi === undefined ? "—" : Number(c.hhi).toFixed(3),
+        "Σ(비중/100)² · 1에 가까울수록 집중"),
+    kpi("Top-5 집중도", pct1(c.top5_pct), "Top-1 " + pct1(c.top1_pct) + " · Top-3 " + pct1(c.top3_pct)),
+    kpi("회전율", c.turnover_pct === null || c.turnover_pct === undefined ? "—" : pct1(c.turnover_pct),
+        "Σ|평가액 변화| / 평균 포트폴리오 가치")
+  ].join("");
+
+  const rows = c.positions.slice();
+  const col = state.sort.col, dir = state.sort.dir === "asc" ? 1 : -1;
+  rows.sort((a,b) => {
+    let x = a[col], y = b[col];
+    if(x === null || x === undefined) x = -Infinity;
+    if(y === null || y === undefined) y = -Infinity;
+    if(typeof x === "string" || typeof y === "string")
+      return String(x).localeCompare(String(y)) * dir;
+    return (x - y) * dir;
+  });
+
+  const maxW = Math.max.apply(null, rows.map(r => r.weight_pct || 0)) || 1;
+  const tb = document.querySelector("#pf tbody");
+  tb.innerHTML = rows.map(p => {
+    const w = p.weight_pct || 0;
+    const amend = p.amendment_type
+      ? ' <span class="badge b-amend" title="정정 파일링(' + esc(p.amendment_type) + ')로 병합된 행">정정 병합</span>' : "";
+    return "<tr>" +
+      '<td class="l">' + esc(p.issuer_name) +
+        ' <span style="color:var(--dim);font-size:11px">' + esc(p.title_of_class) + "</span>" + amend + "</td>" +
+      '<td class="l">' + (p.ticker ? '<span class="tick">' + esc(p.ticker) + "</span>"
+                                   : '<span class="flat" title="CUSIP 매핑 미해결">' + esc(p.cusip) + "</span>") + "</td>" +
+      '<td class="num bar" title="' + w.toFixed(4) + '%"><span class="f" style="width:' +
+        (w / maxW * 100).toFixed(1) + '%"></span><em>' + pct1(w) + "</em></td>" +
+      usdCell(p.value_usd) +
+      '<td class="num" title="' + esc(num(p.shares)) + ' 주">' + esc(num(p.shares)) + "</td>" +
+      '<td class="num ' + signCls(p.share_delta_pct) + '" title="' +
+        esc(num(p.prev_shares) + " → " + num(p.shares) + " 주") + '">' +
+        '<span class="badge b-' + esc(p.event_type) + '">' + esc(p.event_type) + "</span> " +
+        pctSigned(p.share_delta_pct) + "</td>" +
+      '<td class="num ' + signCls(p.weight_delta_bp) + '" title="' +
+        esc(pct1(p.prev_weight_pct) + " → " + pct1(p.weight_pct)) + '">' + bpSigned(p.weight_delta_bp) + "</td>" +
+      '<td class="l">' + esc(p.first_seen_label || "—") +
+        ' <span style="color:var(--dim);font-size:11px">' + esc(p.first_seen || "") + "</span></td>" +
+      '<td class="num">' + esc(p.quarters_held) + "</td>" +
+      '<td class="l"><a href="' + esc(p.edgar_url) + '" target="_blank" rel="noopener" title="' +
+        esc(p.accession + " / " + p.form_type) + '">' + esc(p.form_type || "13F-HR") + " ↗</a></td>" +
+    "</tr>";
+  }).join("");
+
+  document.getElementById("pfnote").innerHTML =
+    "표의 모든 행은 EDGAR 원문 디렉터리로 1클릭 이동합니다 (원문까지 2클릭 이내 · 표시 원칙 3). " +
+    "평가액 셀에 마우스를 올리면 전체 자릿수가 표시됩니다. " +
+    "전분기(" + esc(prevLabel()) + ") 대비 변화이며, 13F 확정 수치입니다. " +
+    "<span class=\"badge b-conf\">13F 확정</span> · " +
+    "<span class=\"badge b-prov\">13D 잠정</span> 은 화면 2에서 별도 표시됩니다.";
+}
+function prevLabel(){
+  const q = state.data.quarters;
+  return q.length > 1 ? q[q.length-2].label : "—";
+}
+function kpi(k, v, s, title){
+  return '<div class="kpi"' + (title ? ' title="' + esc(title) + '"' : "") + ">" +
+    '<div class="k">' + esc(k) + '</div><div class="v">' + esc(v) + "</div>" +
+    '<div class="s">' + esc(s || "") + "</div></div>";
+}
+
+/* ================= 화면 2 : 변화 감지 피드 ================= */
+function initEventFilters(){
+  const sel = document.getElementById("evQuarter");
+  const qs = state.data.quarters.slice().reverse();
+  const provQ = [...new Set((state.data.provisional_events||[]).map(e => e.report_date))]
+    .filter(rd => !qs.some(q => q.report_date === rd));
+  sel.innerHTML = '<option value="ALL">전체 분기</option>' +
+    provQ.map(rd => '<option value="' + esc(rd) + '">' + esc(rd) + ' (13D 잠정)</option>').join("") +
+    qs.map(q => '<option value="' + esc(q.report_date) + '">' + esc(q.label) + " · " + esc(q.report_date) + "</option>").join("");
+  sel.onchange = () => { state.ev.quarter = sel.value; renderEvents(); };
+  document.getElementById("evType").onchange = e => { state.ev.type = e.target.value; renderEvents(); };
+  document.getElementById("evSource").onchange = e => { state.ev.source = e.target.value; renderEvents(); };
+  document.getElementById("evHold").onchange = e => { state.ev.hold = e.target.checked; renderEvents(); };
+  document.getElementById("evStrong").onchange = e => { state.ev.strongOnly = e.target.checked; renderEvents(); };
+}
+
+function renderEvents(){
+  const f = state.ev;
+  let list = (state.data.events || []).filter(e => {
+    if(f.quarter !== "ALL" && e.report_date !== f.quarter) return false;
+    if(f.type !== "ALL" && e.event_type !== f.type) return false;
+    if(f.source === "13F" && e.provisional) return false;
+    if(f.source === "PROV" && !e.provisional) return false;
+    if(!f.hold && f.type !== "HOLD" && e.event_type === "HOLD") return false;
+    if(f.strongOnly && !e.is_strong) return false;
+    return true;
+  });
+
+  // STRONG_* / FULL_EXIT 는 상단 고정
+  const pinned = list.filter(e => e.is_strong);
+  const rest   = list.filter(e => !e.is_strong);
+
+  const pin = document.getElementById("pinned");
+  pin.innerHTML = pinned.length
+    ? '<div class="pinhdr">■ 고확신 이벤트 (STRONG_* / FULL_EXIT) — 상단 고정 · ' + pinned.length + '건</div>' +
+      '<div class="feed">' + pinned.map(e => evCard(e, true)).join("") + "</div>"
+    : "";
+  document.getElementById("restHdr").textContent = "그 외 이벤트 · " + rest.length + "건";
+  document.getElementById("feed").innerHTML = rest.length
+    ? rest.map(e => evCard(e, false)).join("")
+    : '<div class="empty">조건에 맞는 이벤트가 없습니다.</div>';
+}
+
+function evCard(e, pinned){
+  const dSince = daysSince(e.filing_date);
+  const badges =
+    '<span class="badge b-' + esc(e.event_type) + '">' + esc(e.event_type) + "</span> " +
+    (e.is_strong ? '<span class="badge b-strong">' + esc(e.conviction) + "</span> " : "") +
+    (e.provisional
+       ? '<span class="badge b-prov" title="13D 기반 조기 이벤트 — 13F로 아직 확정되지 않은 잠정 수치">13D 잠정</span>'
+       : '<span class="badge b-conf" title="13F 확정 수치">13F 확정</span>');
+  return '<div class="ev' + (pinned ? " pinned" : "") + '" style="border-left-color:' + eventTint(e) + '">' +
+    '<div class="when"><b>' + esc(e.label || e.report_date) + "</b>기준 " + esc(e.report_date) +
+      "<br>제출 " + esc(e.filing_date) + "<br>" + (dSince===null?"":dSince + "일 경과") + "</div>" +
+    '<div class="body"><div class="nm">' + esc(e.issuer_name) +
+      (e.ticker ? ' <span class="tick">' + esc(e.ticker) + "</span>" : "") + " " + badges + "</div>" +
+      '<div class="dt">주식 수 <span class="num">' + esc(num(e.prev_shares)) + " → " + esc(num(e.curr_shares)) +
+      "</span> (" + pctSigned(e.share_delta_pct) + ") <span class=\"sep\">·</span> 평가액 " +
+      '<span class="num" title="' + esc(fullUSD(e.prev_value_usd) + " → " + fullUSD(e.curr_value_usd)) + '">' +
+      esc(abbrUSD(e.prev_value_usd)) + " → " + esc(abbrUSD(e.curr_value_usd)) + "</span>" +
+      " <span class=\"sep\">·</span> 비중 " + pct1(e.weight_before) + " → " + pct1(e.weight_after) + "</div></div>" +
+    '<div class="right"><div class="d ' + signCls(e.weight_delta_bp) + '">' + bpSigned(e.weight_delta_bp) + "</div>" +
+      '<div class="num ' + signCls(e.value_delta_usd) + '" title="' + esc(fullUSD(e.value_delta_usd)) + '">' +
+      esc(abbrUSD(e.value_delta_usd)) + "</div>" +
+      '<a href="' + esc(e.edgar_url) + '" target="_blank" rel="noopener">' + esc(e.source) + " 원문 ↗</a></div>" +
+  "</div>";
+}
+
+/* ================= 화면 3 : 포지션 시계열 ================= */
+// 실데이터는 52분기 × 44종목 규모라 전량 스택하면 범례가 무의미해진다.
+// 표시 구간 내 최대 비중 기준 상위 N개만 개별 표시하고 나머지는 "기타"로 합산한다.
+// (드릴다운은 아래 칩을 통해 전 종목에 대해 항상 가능하다.)
+function seriesWindow(){
+  const n = state.data.series.labels.length;
+  const w = state.seriesUI.window > 0 ? Math.min(state.seriesUI.window, n) : n;
+  return { s: n - w, e: n, n: n };
+}
+
+function renderSeries(){
+  const S = state.data.series;
+  const win = seriesWindow();
+  const labels = S.labels.slice(win.s, win.e);
+  const cut = (a) => a.slice(win.s, win.e);
+
+  // 구간 내 한 번이라도 보유한 종목만 대상
+  const live = S.securities.filter(m => cut(m.present).some(Boolean));
+  const ranked = live.slice().sort((a, b) =>
+    Math.max.apply(null, cut(b.weights)) - Math.max.apply(null, cut(a.weights)));
+  const topN = state.seriesUI.top > 0 ? state.seriesUI.top : ranked.length;
+  const shown = ranked.slice(0, topN);
+  const other = ranked.slice(topN);
+
+  const ds = shown.map((m, i) => ({
+    label: (m.ticker || m.cusip) + (m.title_of_class && /CL |CAP/.test(m.title_of_class)
+              ? " (" + m.title_of_class + ")" : ""),
+    data: cut(m.weights),
+    _key: m.key,
+    _meta: { present: cut(m.present), values: cut(m.values), shares: cut(m.shares) },
+    borderColor: colorOf(i),
+    backgroundColor: colorOf(i) + "55",
+    borderWidth: 1.2, pointRadius: 0, pointHitRadius: 8,
+    fill: i === 0 ? "origin" : "-1",
+    tension: 0.25
+  }));
+
+  if(other.length){
+    const w = labels.map((_, j) => other.reduce((a, m) => a + (cut(m.weights)[j] || 0), 0));
+    const v = labels.map((_, j) => other.reduce((a, m) => a + (cut(m.values)[j] || 0), 0));
+    ds.push({
+      label: "기타 " + other.length + "종목",
+      data: w, _key: null,
+      _meta: { present: w.map(x => x > 0), values: v, shares: w.map(() => null) },
+      borderColor: "#6b7280", backgroundColor: "rgba(107,114,128,.35)",
+      borderWidth: 1, pointRadius: 0, fill: ds.length === 0 ? "origin" : "-1", tension: 0.25
+    });
+  }
+
+  document.getElementById("sInfo").textContent =
+    labels.length + "개 분기 · 보유 이력 " + live.length + "종목 중 " + shown.length +
+    "종목 개별 표시" + (other.length ? " (나머지 " + other.length + "종목은 '기타'로 합산)" : "");
+
+  if(state.charts.stack) state.charts.stack.destroy();
+  state.charts.stack = new Chart(document.getElementById("cStack"), {
+    type: "line",
+    data: { labels: labels, datasets: ds },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: "index", intersect: false },
+      scales: {
+        y: { stacked: true, min: 0, max: 100, ticks: { color: "#9aa3b2", callback: v => v + "%" },
+             grid: { color: "#232833" }, title: { display: true, text: "포트폴리오 비중 (%)", color: "#9aa3b2" } },
+        x: { ticks: { color: "#9aa3b2" }, grid: { color: "#1c2029" } }
+      },
+      plugins: {
+        legend: { position: "bottom", labels: { color: "#9aa3b2", boxWidth: 10, font: { size: 10 } },
+                  onClick: (evt, item) => { const k = ds[item.datasetIndex]._key;
+                                            if(k) selectSecurity(k); } },
+        tooltip: {
+          // 해당 분기에 보유하지 않은 종목은 툴팁에서 제외
+          filter: item => !!(item.dataset._meta && item.dataset._meta.present[item.dataIndex]),
+          callbacks: {
+            label: ctx => {
+              const m = ctx.dataset._meta, i = ctx.dataIndex;
+              return ctx.dataset.label + ": " + Number(ctx.raw).toFixed(1) + "%  " +
+                     abbrUSD(m.values[i]) + " (" + num(m.shares[i]) + "주)";
+            },
+            footer: items => items.length ? "합계 " +
+              items.reduce((a,b) => a + (Number(b.raw)||0), 0).toFixed(1) + "%" : ""
+          }
+        }
+      },
+      onClick: (evt, els, chart) => {
+        const native = (evt && evt.native) ? evt.native : evt;
+        let hit = [];
+        try { hit = chart.getElementsAtEventForMode(native, "nearest", { intersect: false }, true); }
+        catch(_){ hit = els || []; }
+        if(hit.length && ds[hit[0].datasetIndex]._key) selectSecurity(ds[hit[0].datasetIndex]._key);
+      }
+    }
+  });
+
+  // 칩은 전 종목(현재 보유 우선)에 대해 렌더 — 차트에서 '기타'로 묶인 종목도 드릴다운 가능
+  const chipSrc = ranked;
+  document.getElementById("secChips").innerHTML = chipSrc.map((m) => {
+    const i = shown.indexOf(m);
+    const col = i >= 0 ? colorOf(i) : "#6b7280";
+    return '<button class="chip' + (m.key === state.selectedKey ? " on" : "") +
+      '" data-key="' + esc(m.key) + '" title="' + esc(m.name + " · " + m.cusip) + '">' +
+      '<i style="background:' + col + '"></i>' + esc(m.ticker || m.cusip) +
+      ' <span style="color:var(--dim)">' + (m.is_current ? pct1(m.latest_weight) : "청산") + "</span></button>";
+  }).join("");
+  document.querySelectorAll("#secChips .chip").forEach(b =>
+    b.onclick = () => selectSecurity(b.getAttribute("data-key")));
+
+  if(state.selectedKey) selectSecurity(state.selectedKey);
+}
+
+function selectSecurity(key){
+  state.selectedKey = key;
+  document.querySelectorAll("#secChips .chip").forEach(b =>
+    b.classList.toggle("on", b.getAttribute("data-key") === key));
+  const s = state.data.series;
+  const m = s.securities.find(x => x.key === key);
+  const box = document.getElementById("drill");
+  if(!m){ box.style.display = "none"; return; }
+  box.style.display = "block";
+
+  const win = seriesWindow();
+  const labels = s.labels.slice(win.s, win.e);
+  const dShares = m.shares.slice(win.s, win.e);
+  const dValues = m.values.slice(win.s, win.e);
+  let last = m.values.length - 1;
+  while(last > 0 && (m.values[last] === null || m.values[last] === undefined)) last--;
+  document.getElementById("drillHead").innerHTML =
+    '<h3 style="font-size:14px;margin:0 0 4px">' + esc(m.name) +
+    (m.ticker ? ' <span class="tick">' + esc(m.ticker) + "</span>" : "") +
+    ' <span style="color:var(--dim);font-size:12px">' + esc(m.title_of_class) + " · CUSIP " + esc(m.cusip) + "</span></h3>" +
+    '<div style="font-size:12px;color:var(--mut)">최초 진입 <b>' + esc(m.first_seen_label) + "</b> (" + esc(m.first_seen) + ")" +
+    " · 최종 관측 <b>" + esc(m.last_seen_label) + "</b> (" + esc(m.last_seen) + ")" +
+    " · 보유 분기 <b>" + esc(m.quarters_held) + "</b>" +
+    " · 최근 비중 <b>" + pct1(m.is_current ? m.latest_weight : m.weights[last]) + "</b>" +
+    " · 최근 평가액 <b title=\"" + esc(fullUSD(m.values[last])) + "\">" + esc(abbrUSD(m.values[last])) + "</b>" +
+    (m.is_current ? ' · <span class="badge b-conf">현재 보유</span>'
+                  : ' · <span class="badge b-EXIT">현재 미보유</span>') + "</div>";
+
+  if(state.charts.drill) state.charts.drill.destroy();
+  state.charts.drill = new Chart(document.getElementById("cDrill"), {
+    data: {
+      labels: labels,
+      datasets: [
+        { type: "bar", label: "주식 수", data: dShares, yAxisID: "y",
+          backgroundColor: "rgba(99,102,241,.45)", borderColor: "#6366f1", borderWidth: 1 },
+        { type: "line", label: "평가액 (USD)", data: dValues, yAxisID: "y1",
+          borderColor: "#22c55e", backgroundColor: "rgba(34,197,94,.12)",
+          borderWidth: 2, pointRadius: 3, tension: .25, fill: true }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: "index", intersect: false },
+      scales: {
+        y:  { position: "left",  ticks: { color: "#9aa3b2", callback: v => num(v) },
+              grid: { color: "#232833" }, title: { display: true, text: "주식 수", color: "#9aa3b2" } },
+        y1: { position: "right", ticks: { color: "#9aa3b2", callback: v => abbrUSD(v) },
+              grid: { drawOnChartArea: false }, title: { display: true, text: "평가액", color: "#9aa3b2" } },
+        x:  { ticks: { color: "#9aa3b2" }, grid: { color: "#1c2029" } }
+      },
+      plugins: {
+        legend: { labels: { color: "#9aa3b2", boxWidth: 10 } },
+        tooltip: { callbacks: { label: ctx => ctx.dataset.yAxisID === "y1"
+          ? "평가액: " + abbrUSD(ctx.raw) + "  (" + fullUSD(ctx.raw) + ")"
+          : "주식 수: " + num(ctx.raw) + "주" } }
+      }
+    }
+  });
+
+  document.getElementById("drillTl").innerHTML = (m.timeline || []).map(t =>
+    "<li><span class=\"d\">" + esc(t.date) + "</span>" +
+    '<span><span class="badge b-HOLD">' + esc(t.form_type) + "</span></span>" +
+    '<span class="n">' + esc(t.note || "") + "</span>" +
+    '<a href="' + esc(t.url) + '" target="_blank" rel="noopener">' + esc(t.accession) + " ↗</a></li>").join("")
+    || '<li class="n">관련 공시 기록이 없습니다.</li>';
+
+  const has13d = (m.timeline || []).some(t => String(t.form_type||"").indexOf("13F") !== 0);
+  document.getElementById("drillNote").innerHTML = has13d
+    ? "13F 외 공시(13D/A · Form 4 · DFAN14A)는 filings.jsonl 의 선택 확장 필드 " +
+      "<span class=\"num\">subject_cusip</span> 으로 이 종목에 연결되었습니다."
+    : "이 타임라인은 해당 종목을 보유한 분기의 13F 파일링만 담고 있습니다. " +
+      "13D/A · Form 4 · DFAN14A 를 종목 단위로 연결하려면 Collector 가 filings.jsonl 에 " +
+      "선택 확장 필드 <span class=\"num\">subject_cusip</span> 을 채워야 합니다 " +
+      "(현재 계약의 Filing 레코드에는 발행사 식별자가 없습니다). " +
+      "전체 공시 목록은 화면 5에서 확인할 수 있습니다.";
+}
+
+/* ================= 화면 4 : 집중도·회전율 ================= */
+function renderConcentration(){
+  const M = state.data.metrics || [];
+  const labels = M.map(m => {
+    const q = (state.data.quarters||[]).find(x => x.report_date === m.report_date);
+    return q ? q.label : m.report_date;
+  });
+  const mk = (label, key, color, axis, dash) => ({
+    label, data: M.map(m => m[key] === null || m[key] === undefined ? null : m[key]),
+    borderColor: color, backgroundColor: color + "22", yAxisID: axis,
+    borderWidth: 2, pointRadius: 3, tension: .25, spanGaps: true,
+    borderDash: dash ? [5,4] : undefined
+  });
+
+  if(state.charts.conc) state.charts.conc.destroy();
+  state.charts.conc = new Chart(document.getElementById("cConc"), {
+    type: "line",
+    data: { labels, datasets: [
+      mk("Top-1 집중도 (%)", "top1_pct", "#38bdf8", "y"),
+      mk("Top-3 집중도 (%)", "top3_pct", "#818cf8", "y"),
+      mk("Top-5 집중도 (%)", "top5_pct", "#a78bfa", "y"),
+      mk("회전율 (%)",       "turnover_pct", "#f59e0b", "y", true),
+      mk("HHI",              "hhi", "#22c55e", "y1"),
+      mk("포지션 수",         "position_count", "#ef4444", "y2")
+    ]},
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: "index", intersect: false },
+      scales: {
+        y:  { position: "left", min: 0, ticks: { color: "#9aa3b2", callback: v => v + "%" },
+              grid: { color: "#232833" }, title: { display: true, text: "비중 / 회전율 (%)", color: "#9aa3b2" } },
+        y1: { position: "right", min: 0, ticks: { color: "#22c55e" },
+              grid: { drawOnChartArea: false }, title: { display: true, text: "HHI", color: "#22c55e" } },
+        y2: { position: "right", min: 0, offset: true, ticks: { color: "#ef4444", stepSize: 2 },
+              grid: { drawOnChartArea: false }, title: { display: true, text: "포지션 수", color: "#ef4444" } },
+        x:  { ticks: { color: "#9aa3b2" }, grid: { color: "#1c2029" } }
+      },
+      plugins: { legend: { labels: { color: "#9aa3b2", boxWidth: 10 } } }
+    }
+  });
+
+  document.querySelector("#mtab tbody").innerHTML = M.slice().reverse().map(m => {
+    const q = (state.data.quarters||[]).find(x => x.report_date === m.report_date);
+    const acc = accessionForQuarter(m.report_date);
+    return "<tr>" +
+      '<td class="l">' + esc(q ? q.label : m.report_date) + "</td>" +
+      '<td class="l num">' + esc(m.report_date) + "</td>" +
+      '<td class="l num">' + esc(m.filing_date) + "</td>" +
+      '<td class="num" title="filing_date - report_date">' + esc(m.lag_days) + "일</td>" +
+      usdCell(m.total_value_usd) +
+      '<td class="num">' + esc(m.position_count) + "</td>" +
+      '<td class="num">' + (m.hhi===null||m.hhi===undefined ? "—" : Number(m.hhi).toFixed(3)) + "</td>" +
+      '<td class="num">' + pct1(m.top1_pct) + "</td>" +
+      '<td class="num">' + pct1(m.top3_pct) + "</td>" +
+      '<td class="num">' + pct1(m.top5_pct) + "</td>" +
+      '<td class="num">' + (m.turnover_pct===null||m.turnover_pct===undefined ? "—" : pct1(m.turnover_pct)) + "</td>" +
+      '<td class="num" title="신규/청산/증량/감량">' + [m.new_count,m.exit_count,m.add_count,m.trim_count]
+        .map(v => v===undefined||v===null ? "-" : v).join(" / ") + "</td>" +
+      '<td class="l">' + (acc ? '<a href="' + esc(edgarUrl(acc)) + '" target="_blank" rel="noopener">' +
+        esc(acc) + " ↗</a>" : "—") + "</td>" +
+    "</tr>";
+  }).join("");
+}
+function accessionForQuarter(rd){
+  const f = (state.data.filings||[]).filter(x => x.report_date === rd &&
+    String(x.form_type||"").indexOf("13F") === 0);
+  return f.length ? f[f.length-1].accession : null;
+}
+function edgarUrl(acc){
+  return state.data.meta.edgar_archive_base + "/" + String(acc).replace(/-/g, "") + "/";
+}
+
+/* ================= 화면 5 : 공시 원문 인덱스 ================= */
+function initFilingFilters(){
+  const forms = [...new Set((state.data.filings||[]).map(f => f.form_type))].sort();
+  document.getElementById("fForm").innerHTML =
+    '<option value="ALL">전체 폼 타입 (' + (state.data.filings||[]).length + ')</option>' +
+    forms.map(f => '<option value="' + esc(f) + '">' + esc(f) + "</option>").join("");
+  const on = (id, key) => {
+    const el = document.getElementById(id);
+    el.oninput = el.onchange = () => { state.filings[key] = el.value; renderFilings(); };
+  };
+  on("fForm","form"); on("fFrom","from"); on("fTo","to"); on("fQ","q");
+  document.getElementById("fReset").onclick = () => {
+    state.filings = { form:"ALL", from:"", to:"", q:"" };
+    ["fForm","fFrom","fTo","fQ"].forEach((id,i) =>
+      document.getElementById(id).value = i === 0 ? "ALL" : "");
+    renderFilings();
+  };
+}
+
+function renderFilings(){
+  const f = state.filings;
+  const q = f.q.trim().toLowerCase();
+  const rows = (state.data.filings||[]).filter(x => {
+    if(f.form !== "ALL" && x.form_type !== f.form) return false;
+    if(f.from && (x.filing_date||"") < f.from) return false;
+    if(f.to   && (x.filing_date||"") > f.to)   return false;
+    if(q){
+      const hay = [x.accession, x.items, x.form_type, x.report_date, x.amendment_type]
+        .join(" ").toLowerCase();
+      if(hay.indexOf(q) === -1) return false;
+    }
+    return true;
+  });
+  document.getElementById("fCount").textContent = rows.length + "건 표시";
+  document.querySelector("#ftab tbody").innerHTML = rows.length ? rows.map(x => {
+    const d = daysSince(x.filing_date);
+    return "<tr>" +
+      '<td class="l num" title="' + (d===null?"":d + "일 경과") + '">' + esc(x.filing_date) +
+        ' <span style="color:var(--dim);font-size:11px">' + (d===null?"":d + "일") + "</span></td>" +
+      '<td class="l"><span class="badge ' + (String(x.form_type||"").indexOf("13F")===0 ? "b-conf" : "b-prov") +
+        '">' + esc(x.form_type) + "</span>" +
+        (x.amendment_type ? ' <span class="badge b-amend">' + esc(x.amendment_type) + "</span>" : "") + "</td>" +
+      '<td class="l num">' + esc(x.report_date || "—") +
+        (x.label ? ' <span style="color:var(--dim);font-size:11px">' + esc(x.label) + "</span>" : "") + "</td>" +
+      '<td class="l num">' + esc(x.accession) + "</td>" +
+      '<td class="num">' + (x.entry_total===null||x.entry_total===undefined ? "—" : esc(x.entry_total)) + "</td>" +
+      (x.value_total_raw === null || x.value_total_raw === undefined
+        ? '<td class="num">—</td>' : usdCell(x.value_total_raw)) +
+      '<td class="l" style="white-space:normal;color:var(--mut)">' + esc(x.items || "") + "</td>" +
+      '<td class="l"><a href="' + esc(x.dir_url || x.url) + '" target="_blank" rel="noopener">원문 디렉터리 ↗</a>' +
+        (x.doc_url && x.doc_url !== (x.dir_url || x.url)
+          ? ' · <a href="' + esc(x.doc_url) + '" target="_blank" rel="noopener">문서 ↗</a>' : "") + "</td>" +
+    "</tr>";
+  }).join("") : '<tr><td class="l" colspan="8"><div class="empty">조건에 맞는 공시가 없습니다.</div></td></tr>';
+}
+
+/* ------------------------------ 이벤트 바인딩 ------------------------------ */
+document.getElementById("tabs").addEventListener("click", e => {
+  const b = e.target.closest("button[data-view]");
+  if(!b) return;
+  state.view = b.getAttribute("data-view");
+  document.querySelectorAll("#tabs button").forEach(x => x.classList.toggle("on", x === b));
+  document.querySelectorAll("section.view").forEach(s =>
+    s.classList.toggle("on", s.id === "view-" + state.view));
+  // 숨겨진 캔버스는 크기 계산이 어긋나므로 표시 후 리사이즈
+  Object.values(state.charts).forEach(c => { if(c) c.resize(); });
+});
+
+document.getElementById("sTop").onchange = e => {
+  state.seriesUI.top = parseInt(e.target.value, 10) || 0; renderSeries();
+};
+document.getElementById("sWin").onchange = e => {
+  state.seriesUI.window = parseInt(e.target.value, 10) || 0; renderSeries();
+};
+
+document.querySelectorAll("#pf th[data-sort]").forEach(th => {
+  th.onclick = () => {
+    const col = th.getAttribute("data-sort");
+    state.sort = { col, dir: (state.sort.col === col && state.sort.dir === "desc") ? "asc" : "desc" };
+    renderPortfolio();
+  };
+});
+
+boot();
+</script>
+</body>
+</html>

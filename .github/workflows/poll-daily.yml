@@ -1,0 +1,119 @@
+# 13D/G · Form 3/4 신규 감지 (준실시간 채널).
+#
+# 13F 는 45일 지연이지만 SC 13D 는 취득 후 5영업일(정정 2영업일),
+# Form 4 는 거래 후 2영업일 내 제출된다. 이 워크플로우는 신규 제출을 감지해
+# GitHub Issue 로 알린다 — 별도 알림 인프라 없이 GitHub 자체 알림을 재사용한다.
+#
+# 감지만 하고 파싱은 하지 않는다(13D 파싱은 백로그 T7). 따라서 무결성 게이트
+# 대상이 아니며, 중복 알림 방지를 위해 last_seen.json 의 `alerted` 집합만 갱신한다.
+name: poll-daily
+
+on:
+  schedule:
+    # 평일 UTC 22:00 = 미 동부 장마감(21:00 UTC, 서머타임 20:00 UTC) 이후
+    - cron: "0 22 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      forms:
+        description: "감지할 폼 타입 (쉼표 구분)"
+        type: string
+        default: "SC 13D,SC 13D/A,SC 13G,SC 13G/A,3,4"
+
+permissions:
+  contents: write   # data/state/last_seen.json 커밋
+  issues: write     # 신규 공시 / 실패 알림
+
+# fetch-13f 와 같은 그룹 — 두 워크플로우가 동시에 push 하지 않도록 직렬화한다.
+concurrency:
+  group: ackman-tracker-data
+  cancel-in-progress: false
+
+env:
+  SEC_USER_AGENT: "AckmanTracker younggil jinhae8971@gmail.com"
+  PYTHONUNBUFFERED: "1"
+  PYTHONPATH: ${{ github.workspace }}
+
+jobs:
+  poll:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Python 설치
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 의존성 설치
+        run: python -m pip install --upgrade pip requests
+
+      - name: 신규 공시 감지
+        id: pipeline
+        run: |
+          set -euo pipefail
+          python -m src.pipeline.run \
+            --mode incremental \
+            --detect-only \
+            --forms "${{ inputs.forms || 'SC 13D,SC 13D/A,SC 13G,SC 13G/A,3,4' }}" \
+            --alert-file "${{ runner.temp }}/alert.md"
+
+      # 커밋보다 먼저 알린다. 상태(`alerted`)가 먼저 커밋되면 알림 실패 시
+      # 다음 실행에서 그 공시를 다시 감지하지 못해 알림이 유실된다.
+      - name: 신규 공시 Issue 생성
+        if: steps.pipeline.outputs.alert == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          T: ${{ steps.pipeline.outputs.alert_title }}
+          BODY: ${{ runner.temp }}/alert.md
+        run: |
+          set -euo pipefail
+          # 1차 방어: 상태 파일의 `alerted` 집합 (같은 accession 재알림 없음)
+          # 2차 방어: 제목이 동일한 이슈가 이미 있으면 생성하지 않음
+          NUM=$(gh issue list --state all --limit 200 --json number,title \
+                  --jq '.[] | select(.title == env.T) | .number' | head -n1)
+          if [ -n "$NUM" ]; then
+            echo "::notice::이미 존재하는 이슈 #$NUM — 새로 만들지 않습니다."
+          else
+            gh issue create --title "$T" --body-file "$BODY"
+          fi
+
+      - name: 상태 변경분 커밋
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A data/state
+          if git diff --cached --quiet; then
+            echo "::notice::상태 변경 없음 — 빈 커밋을 만들지 않습니다."
+            exit 0
+          fi
+          git commit -m "state(poll): 신규 공시 알림 기록 (run ${GITHUB_RUN_ID})"
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: 실패 Issue 생성
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          T: "[FAILURE] ${{ github.workflow }} 워크플로우 실패"
+          FALLBACK: ${{ runner.temp }}/failure.md
+        run: |
+          set -euo pipefail
+          {
+            echo "일간 공시 폴링이 실패했습니다."
+            echo
+            echo "- 실행 링크: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+            echo "- 커밋: \`${GITHUB_SHA}\`"
+            echo
+            echo "이 워크플로우 실패는 13F 수집(\`fetch-13f\`)에 영향을 주지 않습니다."
+            echo "감지되지 않은 공시는 다음 실행에서 다시 조회됩니다."
+          } > "$FALLBACK"
+          NUM=$(gh issue list --state open --limit 200 --json number,title \
+                  --jq '.[] | select(.title == env.T) | .number' | head -n1)
+          if [ -n "$NUM" ]; then
+            gh issue comment "$NUM" --body-file "$FALLBACK"
+          else
+            gh issue create --title "$T" --body-file "$FALLBACK"
+          fi
