@@ -102,7 +102,7 @@ class Filing:
 @dataclass
 class Event:
     """감지된 변화. data/normalized/events.jsonl 한 행."""
-    event_id: str             # {report_date}:{cusip}:{event_type} — 결정적 ID
+    event_id: str             # {report_date}:{cusip}:{event_type}[:PUT|:CALL] — 결정적 ID
     report_date: str
     filing_date: str
     event_type: EventType
@@ -119,6 +119,8 @@ class Event:
     weight_before: float
     weight_after: float
     weight_delta_bp: float
+    put_call: Optional[str] = None  # PUT | CALL | None(보통주). 옵션 포지션은
+                                    # '확신 매수'로 읽으면 안 되므로 별도 표기한다.
     source: str = "13F"       # 13F | 13D | 13G | FORM4
     provisional: bool = False # 13D 기반 조기 이벤트는 True
 
@@ -250,8 +252,22 @@ def normalize_value(raw_value: int, schema_version: Optional[str]) -> int:
     return raw_value * 1000
 
 
-def make_event_id(report_date: str, cusip: str, event_type: str) -> str:
-    return f"{report_date}:{cusip}:{event_type}"
+def make_event_id(report_date: str, cusip: str, event_type: str,
+                  put_call: Optional[str] = None) -> str:
+    """결정적 이벤트 ID.
+
+    put_call 이 키에 들어가는 이유
+    -----------------------------
+    같은 CUSIP 을 보통주와 PUT/CALL 로 동시에 보유하는 운용사가 있다
+    (Situational Awareness: NVDA 보통주 2,855주 + PUT $1.57B). 이 셋은
+    diff.position_key 기준으로 이미 별개 포지션이므로, ID 에 put_call 이
+    없으면 한 분기에 같은 ID 가 두세 번 생겨 DUP_EVENT_ID 로 게이트가 막힌다.
+
+    보통주(put_call=None)는 접미가 붙지 않는다. 기존 3사의 event_id 는
+    바이트 단위로 그대로 유지된다.
+    """
+    suffix = f":{put_call.upper()}" if put_call else ""
+    return f"{report_date}:{cusip}:{event_type}{suffix}"
 
 
 def edgar_period_to_iso(period: str) -> str:

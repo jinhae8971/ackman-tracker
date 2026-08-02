@@ -240,17 +240,35 @@ def parse_13f(accession: str, filing_date: str, form_type: str,
 
     rows = parse_information_table(info_bytes)
 
-    # --- 체크섬: 정규화 **이전** raw 합계와 tableValueTotal 대조 (하드 실패) ---
+    # --- 체크섬 1: 행 수. tableEntryTotal 은 파싱 행 수와 정확히 같아야 한다 ---
+    # 행 누락은 가장 위험한 실패다. 조용히 한 종목이 사라지면 그 종목은
+    # '전량청산' 이벤트로 둔갑한다. 보유 71건 전량에서 불일치가 0건이므로
+    # 경고가 아니라 하드 실패로 둔다.
+    if meta["entry_total"] is not None and meta["entry_total"] != len(rows):
+        raise ChecksumError(
+            f"entry count mismatch {len(rows)} != {meta['entry_total']} "
+            f"({accession}, {info_name})")
+
+    # --- 체크섬 2: 금액. 정규화 **이전** raw 합계와 tableValueTotal 대조 ---
+    # 제출인 스스로의 반올림 때문에 총액이 몇 달러 어긋나는 경우가 실제로 있다
+    # (0002045724-26-000002: 29행 합계가 커버페이지보다 정확히 $1 많다).
+    # 이걸 하드 실패로 두면 정상 공시가 파이프라인을 멈춘다.
+    #
+    # 허용 오차는 '행 수'다. 행마다 최대 1단위의 반올림 오차를 가정한 상한이며,
+    # 그 이상은 반올림으로 설명되지 않는다. 행 누락은 위 체크섬 1이 이미
+    # 잡으므로, 이 완화가 누락을 통과시키지 않는다.
     raw_sum = sum(r["raw_value"] for r in rows)
     declared = meta["value_total_raw"]
     if declared is None:
         log.warning("%s: tableValueTotal 이 없어 금액 체크섬을 건너뜀", accession)
     elif raw_sum != declared:
-        raise ChecksumError(
-            f"checksum mismatch {raw_sum} != {declared} ({accession}, {info_name})")
-    if meta["entry_total"] is not None and meta["entry_total"] != len(rows):
-        log.warning("%s: tableEntryTotal %s != 파싱 행수 %d",
-                    accession, meta["entry_total"], len(rows))
+        drift = raw_sum - declared
+        if abs(drift) > len(rows):
+            raise ChecksumError(
+                f"checksum mismatch {raw_sum} != {declared} "
+                f"({accession}, {info_name}, 차이 {drift:+d} > 행수 {len(rows)})")
+        log.warning("%s: tableValueTotal 이 %+d 어긋남 (행수 %d 이내 — "
+                    "제출인 반올림으로 간주하고 진행)", accession, drift, len(rows))
 
     # --- 단위 정규화 -> 달러 ---
     total_usd = sum(schema.normalize_value(r["raw_value"], schema_version)

@@ -272,7 +272,8 @@ def quarter_diff(prev: list, curr: list) -> list:
         src = c if c is not None else p
 
         ev = Event(
-            event_id=make_event_id(report_date, key[0], etype),
+            # key = (cusip, title_of_class, put_call) — position_key 와 동일
+            event_id=make_event_id(report_date, key[0], etype, key[2] or None),
             report_date=report_date,
             filing_date=str((c or {}).get("filing_date") or quarter_filing),
             event_type=etype,
@@ -280,6 +281,7 @@ def quarter_diff(prev: list, curr: list) -> list:
             cusip=key[0],
             ticker=(c or {}).get("ticker") or (p or {}).get("ticker"),
             issuer_name=str(src.get("issuer_name") or ""),
+            put_call=(src.get("put_call") or None),
             prev_shares=prev_shares,
             curr_shares=curr_shares,
             share_delta_pct=share_delta_pct,
@@ -296,5 +298,6 @@ def quarter_diff(prev: list, curr: list) -> list:
         events.append(ev)
 
     # 결정적 정렬: 현재 평가액 큰 순 -> 이전 평가액 큰 순 -> CUSIP
-    events.sort(key=lambda e: (-e.curr_value_usd, -e.prev_value_usd, e.cusip, e.event_type))
+    events.sort(key=lambda e: (-e.curr_value_usd, -e.prev_value_usd, e.cusip,
+                               e.event_type, e.put_call or ""))
     return events

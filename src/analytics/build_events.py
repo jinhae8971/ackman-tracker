@@ -2,7 +2,7 @@
 
     python -m src.analytics.build_events [--help]
 
-멱등: event_id 가 {report_date}:{cusip}:{event_type} 로 결정적이고 출력 정렬도
+멱등: event_id 가 {report_date}:{cusip}:{event_type}[:PUT|:CALL] 로 결정적이고 출력 정렬도
 고정이므로, 같은 입력에 대해 몇 번을 재실행해도 바이트 단위로 동일한 파일이 나온다.
 네트워크 호출은 하지 않는다.
 """
@@ -22,7 +22,8 @@ from .metrics import holding_periods, quarter_metrics
 
 log = logging.getLogger("analytics.build_events")
 
-EVENT_SORT_KEY = lambda r: (r["report_date"], r["cusip"], r["event_type"])  # noqa: E731
+EVENT_SORT_KEY = lambda r: (r["report_date"], r["cusip"], r["event_type"],  # noqa: E731
+                            r.get("put_call") or "")
 METRIC_SORT_KEY = lambda r: (r["report_date"],)                              # noqa: E731
 
 
@@ -75,8 +76,11 @@ def _to_dict(rec) -> dict:
 def _assert_unique_event_ids(events: list[dict]) -> None:
     """event_id 중복은 무결성 위반이다 (pipeline gate 도 동일 조건을 본다).
 
-    schema.make_event_id 는 title_of_class 를 키에 넣지 않으므로, 한 CUSIP 이
-    한 분기에 복수 클래스로 등장하면 충돌한다. 조용히 넘기지 않고 실패시킨다.
+    ID 키는 (report_date, cusip, event_type, put_call) 이다. 보유 4사 전체
+    이력에서 이 조합의 충돌은 0건이지만, 같은 CUSIP·같은 put_call 이 서로 다른
+    title_of_class 로 등장하는 공시가 나타나면 다시 충돌할 수 있다. 그때는
+    조용히 덮어쓰지 말고 여기서 멈춰야 한다 — 이벤트 한 건이 소리 없이
+    사라지는 것이 최악이다.
     """
     seen: dict[str, int] = {}
     for e in events:
@@ -84,8 +88,9 @@ def _assert_unique_event_ids(events: list[dict]) -> None:
     dupes = sorted(k for k, v in seen.items() if v > 1)
     if dupes:
         raise ValueError(
-            "duplicate event_id detected (%d): %s — 동일 CUSIP 이 한 분기에 "
-            "복수 title_of_class 로 존재한다. schema.make_event_id 확장 필요."
+            "duplicate event_id detected (%d): %s — 동일 (cusip, put_call) 이 "
+            "한 분기에 복수 title_of_class 로 존재한다. "
+            "schema.make_event_id 에 title_of_class 를 추가해야 한다."
             % (len(dupes), ", ".join(dupes[:5]))
         )
 

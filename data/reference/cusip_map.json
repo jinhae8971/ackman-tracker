@@ -60,6 +60,32 @@
     "ticker": "AGNC",
     "unresolved": false
   },
+  "00130H105": {
+    "composite_figi": "BBG000C23KJ3",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000C23KJ3",
+    "market_sector": "Equity",
+    "name": "AES CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S6B1L5",
+    "source": "openfigi",
+    "ticker": "AES",
+    "unresolved": false
+  },
+  "001744101": {
+    "composite_figi": "BBG000BCT197",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BCT197",
+    "market_sector": "Equity",
+    "name": "AMN HEALTHCARE SERVICES INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S6Q193",
+    "source": "openfigi",
+    "ticker": "AMN",
+    "unresolved": false
+  },
   "00206R102": {
     "composite_figi": "BBG000BSJK37",
     "delisted": false,
@@ -99,6 +125,32 @@
     "ticker": "ABBV",
     "unresolved": false
   },
+  "002896207": {
+    "composite_figi": "BBG000H9G7X2",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000H9G7X2",
+    "market_sector": "Equity",
+    "name": "ABERCROMBIE & FITCH CO-CL A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S97027",
+    "source": "openfigi",
+    "ticker": "ANF",
+    "unresolved": false
+  },
+  "00370M103": {
+    "composite_figi": "BBG01JLQNZ03",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG01JLQNZ03",
+    "market_sector": "Equity",
+    "name": "ABIVAX SA-ADR",
+    "security_type": "ADR",
+    "share_class_figi": "BBG01JLQNZV9",
+    "source": "openfigi",
+    "ticker": "ABVX",
+    "unresolved": false
+  },
   "00401C108": {
     "composite_figi": "BBG00359HX70",
     "delisted": false,
@@ -110,6 +162,19 @@
     "share_class_figi": "BBG00359HX89",
     "source": "openfigi",
     "ticker": "ACIA",
+    "unresolved": false
+  },
+  "00402L107": {
+    "composite_figi": "BBG00X7L1C14",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00X7L1C14",
+    "market_sector": "Equity",
+    "name": "ACADEMY SPORTS & OUTDOORS IN",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00X7L1CW0",
+    "source": "openfigi",
+    "ticker": "ASO",
     "unresolved": false
   },
   "00404A109": {
@@ -158,6 +223,32 @@
     "share_class_figi": "BBG001S6C009",
     "source": "openfigi",
     "ticker": "4ATVI",
+    "unresolved": false
+  },
+  "00508Y102": {
+    "composite_figi": "BBG000BJ5HK0",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BJ5HK0",
+    "market_sector": "Equity",
+    "name": "ACUITY INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SBG656",
+    "source": "openfigi",
+    "ticker": "AYI",
+    "unresolved": false
+  },
+  "006739106": {
+    "composite_figi": "BBG000NJGX84",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000NJGX84",
+    "market_sector": "Equity",
+    "name": "ADDUS HOMECARE CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001T56D18",
+    "source": "openfigi",
+    "ticker": "ADUS",
     "unresolved": false
   },
   "00724F101": {
@@ -212,6 +303,19 @@
     "ticker": "AMD",
     "unresolved": false
   },
+  "00790R104": {
+    "composite_figi": "BBG000G7CDN9",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000G7CDN9",
+    "market_sector": "Equity",
+    "name": "ADVANCED DRAINAGE SYSTEMS IN",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SH4LQ0",
+    "source": "openfigi",
+    "ticker": "WMS",
+    "unresolved": false
+  },
   "008252108": {
     "composite_figi": "BBG000C060M4",
     "delisted": false,
@@ -263,6 +367,19 @@
     "ticker": "AEM",
     "unresolved": false
   },
+  "008492100": {
+    "composite_figi": "BBG000BC9DK0",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BC9DK0",
+    "market_sector": "Equity",
+    "name": "AGREE REALTY CORP",
+    "security_type": "REIT",
+    "share_class_figi": "BBG001S6RY81",
+    "source": "openfigi",
+    "ticker": "ADC",
+    "unresolved": false
+  },
   "009066101": {
     "composite_figi": "BBG001Y2XS07",
     "delisted": false,
@@ -299,6 +416,19 @@
     "share_class_figi": "BBG001S7YHX0",
     "source": "openfigi",
     "ticker": "AKAM",
+    "unresolved": false
+  },
+  "00973Y108": {
+    "composite_figi": "BBG00PNFSCC5",
+    "delisted": false,
+    "exch_code": "GR",
+    "figi": "BBG00PNFSCC5",
+    "market_sector": "Equity",
+    "name": "AKERO THERAPEUTICS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00L9211Z7",
+    "source": "openfigi",
+    "ticker": "0K4",
     "unresolved": false
   },
   "011659109": {
@@ -392,6 +522,19 @@
     "ticker": "ALGN",
     "unresolved": false
   },
+  "01741R102": {
+    "composite_figi": "BBG000LC1FS4",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000LC1FS4",
+    "market_sector": "Equity",
+    "name": "ATI INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S8WY72",
+    "source": "openfigi",
+    "ticker": "ATI",
+    "unresolved": false
+  },
   "018490102": {
     "figi": null,
     "name": null,
@@ -412,6 +555,19 @@
     "share_class_figi": "BBG001S8ZQ30",
     "source": "openfigi",
     "ticker": "LNT",
+    "unresolved": false
+  },
+  "01988P108": {
+    "composite_figi": "BBG000BLDXH5",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BLDXH5",
+    "market_sector": "Equity",
+    "name": "VERADIGM INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S7VDS8",
+    "source": "openfigi",
+    "ticker": "MDRX",
     "unresolved": false
   },
   "020002101": {
@@ -477,6 +633,19 @@
     "ticker": "GOOGL",
     "unresolved": false
   },
+  "02156B103": {
+    "composite_figi": "BBG00GBG5G50",
+    "delisted": false,
+    "exch_code": "XS",
+    "figi": "BBG00GBG5GN0",
+    "market_sector": "Equity",
+    "name": "ALTERYX INC - CLASS A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001T9FXC4",
+    "source": "openfigi",
+    "ticker": "AYXEUR",
+    "unresolved": false
+  },
   "02156K103": {
     "composite_figi": "BBG00GFMPRK0",
     "delisted": false,
@@ -513,6 +682,19 @@
     "share_class_figi": "BBG001S5PQL7",
     "source": "openfigi",
     "ticker": "AMZN",
+    "unresolved": false
+  },
+  "023436108": {
+    "composite_figi": "BBG000JYD410",
+    "delisted": false,
+    "exch_code": "GR",
+    "figi": "BBG000JYD410",
+    "market_sector": "Equity",
+    "name": "AMEDISYS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5NN72",
+    "source": "openfigi",
+    "ticker": "ADY",
     "unresolved": false
   },
   "023608102": {
@@ -580,6 +762,19 @@
     "ticker": "AXP",
     "unresolved": false
   },
+  "025932104": {
+    "composite_figi": "BBG000DPKKK0",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000DPKKK0",
+    "market_sector": "Equity",
+    "name": "AMERICAN FINANCIAL GROUP INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S8JK86",
+    "source": "openfigi",
+    "ticker": "AFG",
+    "unresolved": false
+  },
   "02665T306": {
     "composite_figi": "BBG003NXJNH6",
     "delisted": false,
@@ -591,6 +786,19 @@
     "share_class_figi": "BBG003NXJNJ4",
     "source": "openfigi",
     "ticker": "AMH",
+    "unresolved": false
+  },
+  "026874784": {
+    "composite_figi": "BBG000BBDZG3",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BBDZG3",
+    "market_sector": "Equity",
+    "name": "AMERICAN INTERNATIONAL GROUP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5NJG1",
+    "source": "openfigi",
+    "ticker": "AIG",
     "unresolved": false
   },
   "03027X100": {
@@ -645,6 +853,19 @@
     "ticker": "COR",
     "unresolved": false
   },
+  "03076C106": {
+    "composite_figi": "BBG000G3QLY3",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000G3QLY3",
+    "market_sector": "Equity",
+    "name": "AMERIPRISE FINANCIAL INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SK6096",
+    "source": "openfigi",
+    "ticker": "AMP",
+    "unresolved": false
+  },
   "031100100": {
     "composite_figi": "BBG000B9XG87",
     "delisted": false,
@@ -669,6 +890,32 @@
     "share_class_figi": "BBG001S5NNL6",
     "source": "openfigi",
     "ticker": "AMGN",
+    "unresolved": false
+  },
+  "03152W109": {
+    "composite_figi": "BBG00JVRN5F1",
+    "delisted": false,
+    "exch_code": "LN",
+    "figi": "BBG00JVRN5G0",
+    "market_sector": "Equity",
+    "name": "AMICUS THERAPEUTICS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SN96V9",
+    "source": "openfigi",
+    "ticker": "0HF9",
+    "unresolved": false
+  },
+  "031652100": {
+    "composite_figi": "BBG000BCKGW7",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BCKGW7",
+    "market_sector": "Equity",
+    "name": "AMKOR TECHNOLOGY INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S64YF8",
+    "source": "openfigi",
+    "ticker": "AMKR",
     "unresolved": false
   },
   "032095101": {
@@ -697,6 +944,19 @@
     "ticker": "BLOK",
     "unresolved": false
   },
+  "03237H101": {
+    "composite_figi": "BBG00DP10YT5",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00DP10YT5",
+    "market_sector": "Equity",
+    "name": "AMYLYX PHARMACEUTICALS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00DP10YW1",
+    "source": "openfigi",
+    "ticker": "AMLX",
+    "unresolved": false
+  },
   "032654105": {
     "composite_figi": "BBG000BB6G37",
     "delisted": false,
@@ -708,6 +968,19 @@
     "share_class_figi": "BBG001S5ND38",
     "source": "openfigi",
     "ticker": "ADI",
+    "unresolved": false
+  },
+  "032724106": {
+    "composite_figi": "BBG0026ZDHR0",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG0026ZDHR0",
+    "market_sector": "Equity",
+    "name": "ANAPTYSBIO INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG0026ZDHT8",
+    "source": "openfigi",
+    "ticker": "ANAB",
     "unresolved": false
   },
   "03272L108": {
@@ -810,6 +1083,19 @@
     "ticker": null,
     "unresolved": true
   },
+  "03753U106": {
+    "composite_figi": "BBG01TNWBDF2",
+    "delisted": false,
+    "exch_code": "IM",
+    "figi": "BBG01TNWBDG1",
+    "market_sector": "Equity",
+    "name": "APELLIS PHARMACEUTICALS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG007KGRPZ3",
+    "source": "openfigi",
+    "ticker": "1APLS",
+    "unresolved": false
+  },
   "03769M106": {
     "composite_figi": "BBG00ZNLTFK3",
     "delisted": false,
@@ -836,6 +1122,19 @@
     "ticker": "AAPL",
     "unresolved": false
   },
+  "038169207": {
+    "composite_figi": "BBG000DSJYS8",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000DSJYS8",
+    "market_sector": "Equity",
+    "name": "APPLIED DIGITAL CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SK4K76",
+    "source": "openfigi",
+    "ticker": "APLD",
+    "unresolved": false
+  },
   "038222105": {
     "composite_figi": "BBG000BBPFB9",
     "delisted": false,
@@ -860,6 +1159,19 @@
     "share_class_figi": "BBG006HFPX86",
     "source": "openfigi",
     "ticker": "APP",
+    "unresolved": false
+  },
+  "03969K108": {
+    "composite_figi": "BBG00QN8K4M4",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00QN8K4M4",
+    "market_sector": "Equity",
+    "name": "ARCUTIS BIOTHERAPEUTICS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00QN8K4P1",
+    "source": "openfigi",
+    "ticker": "ARQT",
     "unresolved": false
   },
   "03990B101": {
@@ -938,6 +1250,19 @@
     "share_class_figi": "BBG01J1GY084",
     "source": "openfigi",
     "ticker": "ARM",
+    "unresolved": false
+  },
+  "04271T100": {
+    "composite_figi": "BBG001V4SF46",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG001V4SF46",
+    "market_sector": "Equity",
+    "name": "ARRAY TECHNOLOGIES INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG002MX7TQ9",
+    "source": "openfigi",
+    "ticker": "ARRY",
     "unresolved": false
   },
   "04351P101": {
@@ -1052,6 +1377,19 @@
     "ticker": "ADP",
     "unresolved": false
   },
+  "05329W102": {
+    "composite_figi": "BBG000BBXLW4",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BBXLW4",
+    "market_sector": "Equity",
+    "name": "AUTONATION INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5NQB0",
+    "source": "openfigi",
+    "ticker": "AN",
+    "unresolved": false
+  },
   "053332102": {
     "composite_figi": "BBG000C7LMS8",
     "delisted": false,
@@ -1089,6 +1427,71 @@
     "share_class_figi": "BBG00G2HHYF5",
     "source": "openfigi",
     "ticker": "AVTR",
+    "unresolved": false
+  },
+  "053611109": {
+    "composite_figi": "BBG000BCQ4P6",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BCQ4P6",
+    "market_sector": "Equity",
+    "name": "AVERY DENNISON CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5NZM8",
+    "source": "openfigi",
+    "ticker": "AVY",
+    "unresolved": false
+  },
+  "05368M106": {
+    "composite_figi": "BBG00C0L8HB8",
+    "delisted": false,
+    "exch_code": "XS",
+    "figi": "BBG00C0L8J60",
+    "market_sector": "Equity",
+    "name": "AVID BIOSERVICES INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SD4YL6",
+    "source": "openfigi",
+    "ticker": "PPHMEUR",
+    "unresolved": false
+  },
+  "05464CAB7": {
+    "composite_figi": null,
+    "delisted": false,
+    "exch_code": "TRACE",
+    "figi": "BBG01BWTNRZ2",
+    "market_sector": "Corp",
+    "name": "AXON ENTERPRISE INC",
+    "security_type": "US DOMESTIC",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "AXON 0.5 12/15/27",
+    "unresolved": false
+  },
+  "05464T104": {
+    "composite_figi": "BBG00B6G7GL7",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00B6G7GL7",
+    "market_sector": "Equity",
+    "name": "AXSOME THERAPEUTICS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00B6G7GM6",
+    "source": "openfigi",
+    "ticker": "AXSM",
+    "unresolved": false
+  },
+  "05465P101": {
+    "composite_figi": "BBG00SBW6TC2",
+    "delisted": true,
+    "exch_code": "MF",
+    "figi": "BBG00SBW6TD1",
+    "market_sector": "Equity",
+    "name": "AXONICS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG0067QVJ69",
+    "source": "openfigi",
+    "ticker": "AXNX",
     "unresolved": false
   },
   "05478C105": {
@@ -1141,6 +1544,19 @@
     "share_class_figi": "BBG001S5W4F5",
     "source": "openfigi",
     "ticker": "BP",
+    "unresolved": false
+  },
+  "05614L209": {
+    "composite_figi": "BBG007H0TDK3",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG007H0TDK3",
+    "market_sector": "Equity",
+    "name": "BABCOCK & WILCOX ENTERPR",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG007H0TDL2",
+    "source": "openfigi",
+    "ticker": "BW",
     "unresolved": false
   },
   "056752108": {
@@ -1307,6 +1723,19 @@
     "ticker": "BRK/B",
     "unresolved": false
   },
+  "08579W103": {
+    "composite_figi": "BBG01BPWWDJ2",
+    "delisted": true,
+    "exch_code": "MM",
+    "figi": "BBG01BPWWDJ2",
+    "market_sector": "Equity",
+    "name": "BERRY GLOBAL GROUP INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001T6B4W6",
+    "source": "openfigi",
+    "ticker": "BERY",
+    "unresolved": false
+  },
   "086516101": {
     "composite_figi": "BBG000BCWCG1",
     "delisted": false,
@@ -1318,6 +1747,19 @@
     "share_class_figi": "BBG001S5P285",
     "source": "openfigi",
     "ticker": "BBY",
+    "unresolved": false
+  },
+  "088786108": {
+    "composite_figi": "BBG00P0YWPK6",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00P0YWPK6",
+    "market_sector": "Equity",
+    "name": "BICYCLE THERAPEUTICS PLC-ADR",
+    "security_type": "ADR",
+    "share_class_figi": "BBG00P0YWQ97",
+    "source": "openfigi",
+    "ticker": "BCYC",
     "unresolved": false
   },
   "090040AB2": {
@@ -1359,6 +1801,19 @@
     "ticker": "BILL 0 12/01/25",
     "unresolved": false
   },
+  "090572207": {
+    "composite_figi": "BBG000DY28W5",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000DY28W5",
+    "market_sector": "Equity",
+    "name": "BIO-RAD LABORATORIES-A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S625W4",
+    "source": "openfigi",
+    "ticker": "BIO",
+    "unresolved": false
+  },
   "09061G101": {
     "composite_figi": "BBG000CZWZ05",
     "delisted": false,
@@ -1385,6 +1840,45 @@
     "ticker": "BIIB",
     "unresolved": false
   },
+  "09073M104": {
+    "composite_figi": "BBG000C15114",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000C15114",
+    "market_sector": "Equity",
+    "name": "BIO-TECHNE CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S66C28",
+    "source": "openfigi",
+    "ticker": "TECH",
+    "unresolved": false
+  },
+  "09075V102": {
+    "composite_figi": "BBG00Q70B3V1",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00Q70B3V1",
+    "market_sector": "Equity",
+    "name": "BIONTECH SE-ADR",
+    "security_type": "ADR",
+    "share_class_figi": "BBG00Q70B4L0",
+    "source": "openfigi",
+    "ticker": "BNTX",
+    "unresolved": false
+  },
+  "09173B107": {
+    "composite_figi": "BBG01FFXJNJ5",
+    "delisted": false,
+    "exch_code": "GR",
+    "figi": "BBG01FFXJNJ5",
+    "market_sector": "Equity",
+    "name": "BITFARMS LTD/CANADA",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00PGMZVM7",
+    "source": "openfigi",
+    "ticker": "1B2",
+    "unresolved": false
+  },
   "09175A206": {
     "composite_figi": "BBG000BWFL03",
     "delisted": false,
@@ -1396,6 +1890,19 @@
     "share_class_figi": "BBG001SBD1J5",
     "source": "openfigi",
     "ticker": "BMNR",
+    "unresolved": false
+  },
+  "092113109": {
+    "composite_figi": "BBG000BD9ZM7",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BD9ZM7",
+    "market_sector": "Equity",
+    "name": "BLACK HILLS CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5P6X8",
+    "source": "openfigi",
+    "ticker": "BKH",
     "unresolved": false
   },
   "09215C105": {
@@ -1449,6 +1956,58 @@
     "ticker": "BLK",
     "unresolved": false
   },
+  "093712107": {
+    "composite_figi": "BBG000N7KBZ3",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000N7KBZ3",
+    "market_sector": "Equity",
+    "name": "BLOOM ENERGY CORP- A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001T53509",
+    "source": "openfigi",
+    "ticker": "BE",
+    "unresolved": false
+  },
+  "093712AH0": {
+    "composite_figi": null,
+    "delisted": false,
+    "exch_code": "TRACE",
+    "figi": "BBG00WJVNCT7",
+    "market_sector": "Corp",
+    "name": "BLOOM ENERGY CORP",
+    "security_type": "US DOMESTIC",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "BE 2.5 08/15/25",
+    "unresolved": false
+  },
+  "09581B103": {
+    "composite_figi": "BBG00XV417R8",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00XV417R8",
+    "market_sector": "Equity",
+    "name": "BLUE OWL CAPITAL INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00XV417S7",
+    "source": "openfigi",
+    "ticker": "OWL",
+    "unresolved": false
+  },
+  "09627Y109": {
+    "composite_figi": "BBG01TNWK131",
+    "delisted": false,
+    "exch_code": "IM",
+    "figi": "BBG01TNWK140",
+    "market_sector": "Equity",
+    "name": "BLUEPRINT MEDICINES CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001V11BV0",
+    "source": "openfigi",
+    "ticker": "1BPMC",
+    "unresolved": false
+  },
   "097023105": {
     "composite_figi": "BBG000BCSST7",
     "delisted": false,
@@ -1473,6 +2032,19 @@
     "share_class_figi": "BBG001S89N72",
     "source": "openfigi",
     "ticker": "BKNG",
+    "unresolved": false
+  },
+  "099502106": {
+    "composite_figi": "BBG000R2YFG7",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000R2YFG7",
+    "market_sector": "Equity",
+    "name": "BOOZ ALLEN HAMILTON HOLDINGS",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001T91S76",
+    "source": "openfigi",
+    "ticker": "BAH",
     "unresolved": false
   },
   "099724106": {
@@ -1527,6 +2099,19 @@
     "ticker": "BSX",
     "unresolved": false
   },
+  "10576N102": {
+    "composite_figi": "BBG00294NX45",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00294NX45",
+    "market_sector": "Equity",
+    "name": "BRAZE INC-A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00294NX54",
+    "source": "openfigi",
+    "ticker": "BRZE",
+    "unresolved": false
+  },
   "10806X102": {
     "composite_figi": "BBG00P9KDZK6",
     "delisted": false,
@@ -1551,6 +2136,19 @@
     "share_class_figi": null,
     "source": "openfigi",
     "ticker": "BBIO 2.5 03/15/27",
+    "unresolved": false
+  },
+  "109194100": {
+    "composite_figi": "BBG003LFWP05",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG003LFWP05",
+    "market_sector": "Equity",
+    "name": "BRIGHT HORIZONS FAMILY SOLUT",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG003LFWPT4",
+    "source": "openfigi",
+    "ticker": "BFAM",
     "unresolved": false
   },
   "109641100": {
@@ -1590,6 +2188,19 @@
     "share_class_figi": "BBG001S6VV46",
     "source": "openfigi",
     "ticker": "BTI",
+    "unresolved": false
+  },
+  "11120U105": {
+    "composite_figi": "BBG001LFLZZ1",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG001LFLZZ1",
+    "market_sector": "Equity",
+    "name": "BRIXMOR PROPERTY GROUP INC",
+    "security_type": "REIT",
+    "share_class_figi": "BBG001V0T8T2",
+    "source": "openfigi",
+    "ticker": "BRX",
     "unresolved": false
   },
   "11135F101": {
@@ -1676,6 +2287,19 @@
     "share_class_figi": "BBG001SF69P0",
     "source": "openfigi",
     "ticker": "BRKR",
+    "unresolved": false
+  },
+  "12008R107": {
+    "composite_figi": "BBG000BKD3K9",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BKD3K9",
+    "market_sector": "Equity",
+    "name": "BUILDERS FIRSTSOURCE INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S9CFC7",
+    "source": "openfigi",
+    "ticker": "BLDR",
     "unresolved": false
   },
   "12047B105": {
@@ -1882,6 +2506,19 @@
     "ticker": "CPT",
     "unresolved": false
   },
+  "13321L108": {
+    "composite_figi": "BBG000DSZTN6",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000DSZTN6",
+    "market_sector": "Equity",
+    "name": "CAMECO CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5Y5S6",
+    "source": "openfigi",
+    "ticker": "CCJ",
+    "unresolved": false
+  },
   "134429109": {
     "composite_figi": "BBG000BG4202",
     "delisted": false,
@@ -2007,6 +2644,19 @@
     "ticker": "CCL1EUR",
     "unresolved": false
   },
+  "144285103": {
+    "composite_figi": "BBG000BGCQT9",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BGCQT9",
+    "market_sector": "Equity",
+    "name": "CARPENTER TECHNOLOGY",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5Q5M1",
+    "source": "openfigi",
+    "ticker": "CRS",
+    "unresolved": false
+  },
   "14448C104": {
     "composite_figi": "BBG00RP5HYS8",
     "delisted": false,
@@ -2059,6 +2709,19 @@
     "ticker": "CTLTEUR",
     "unresolved": false
   },
+  "148929102": {
+    "composite_figi": "BBG00GBR8753",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00GBR8753",
+    "market_sector": "Equity",
+    "name": "CAVA GROUP INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00GBR8762",
+    "source": "openfigi",
+    "ticker": "CAVA",
+    "unresolved": false
+  },
   "149123101": {
     "composite_figi": "BBG000BF0K17",
     "delisted": false,
@@ -2083,6 +2746,45 @@
     "share_class_figi": "BBG001SJDDG5",
     "source": "openfigi",
     "ticker": "CE",
+    "unresolved": false
+  },
+  "15101Q108": {
+    "composite_figi": "BBG00K7MDJ30",
+    "delisted": false,
+    "exch_code": "X1",
+    "figi": "BBG00QFZWQK3",
+    "market_sector": "Equity",
+    "name": "CELESTICA INC",
+    "security_type": "Common Stock",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "CLSCAD",
+    "unresolved": false
+  },
+  "15101Q207": {
+    "composite_figi": "BBG000BPS2C3",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BPS2C3",
+    "market_sector": "Equity",
+    "name": "CELESTICA INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S9CXM7",
+    "source": "openfigi",
+    "ticker": "CLS",
+    "unresolved": false
+  },
+  "15117B202": {
+    "composite_figi": "BBG000FW8LZ9",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000FW8LZ9",
+    "market_sector": "Equity",
+    "name": "CELLDEX THERAPEUTICS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S7QN20",
+    "source": "openfigi",
+    "ticker": "CLDX",
     "unresolved": false
   },
   "15118V207": {
@@ -2111,6 +2813,19 @@
     "ticker": "CNC",
     "unresolved": false
   },
+  "15135U109": {
+    "composite_figi": "BBG000PSJP22",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000PSJP22",
+    "market_sector": "Equity",
+    "name": "CENOVUS ENERGY INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001T2PJV8",
+    "source": "openfigi",
+    "ticker": "CVE",
+    "unresolved": false
+  },
   "15189T107": {
     "composite_figi": "BBG000FDBX90",
     "delisted": false,
@@ -2122,6 +2837,32 @@
     "share_class_figi": "BBG001SB10S0",
     "source": "openfigi",
     "ticker": "CNP",
+    "unresolved": false
+  },
+  "15189TBD8": {
+    "composite_figi": null,
+    "delisted": false,
+    "exch_code": "TRACE",
+    "figi": "BBG01HQJ6ZC4",
+    "market_sector": "Corp",
+    "name": "CENTERPOINT ENERGY INC",
+    "security_type": "US DOMESTIC",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "CNP 4.25 08/15/26",
+    "unresolved": false
+  },
+  "152309100": {
+    "composite_figi": "BBG0118S87L9",
+    "delisted": false,
+    "exch_code": "GR",
+    "figi": "BBG0118S87L9",
+    "market_sector": "Equity",
+    "name": "CENTESSA PHARMACEUTICALS-ADR",
+    "security_type": "ADR",
+    "share_class_figi": "BBG01081FC68",
+    "source": "openfigi",
+    "ticker": "260",
     "unresolved": false
   },
   "15677J108": {
@@ -2163,6 +2904,15 @@
     "ticker": "CRL",
     "unresolved": false
   },
+  "16115Q308": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
   "16119P108": {
     "composite_figi": "BBG000VPGNR2",
     "delisted": false,
@@ -2187,6 +2937,19 @@
     "share_class_figi": "BBG001TBCK85",
     "source": "openfigi",
     "ticker": "CHGG",
+    "unresolved": false
+  },
+  "16359R103": {
+    "composite_figi": "BBG000C19QW1",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000C19QW1",
+    "market_sector": "Equity",
+    "name": "CHEMED CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S679X0",
+    "source": "openfigi",
+    "ticker": "CHE",
     "unresolved": false
   },
   "16411R208": {
@@ -2254,6 +3017,19 @@
     "ticker": "CHYM",
     "unresolved": false
   },
+  "16961L106": {
+    "composite_figi": "BBG008KF3ZD1",
+    "delisted": false,
+    "exch_code": "GR",
+    "figi": "BBG008KF3ZD1",
+    "market_sector": "Equity",
+    "name": "CHINOOK THERAPEUTICS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001T20HH5",
+    "source": "openfigi",
+    "ticker": "290A",
+    "unresolved": false
+  },
   "169656105": {
     "composite_figi": "BBG000QX74T1",
     "exch_code": "US",
@@ -2292,6 +3068,19 @@
     "ticker": "CHDN",
     "unresolved": false
   },
+  "171757206": {
+    "composite_figi": "BBG008LFPWG0",
+    "delisted": false,
+    "exch_code": "GR",
+    "figi": "BBG008LFPWG0",
+    "market_sector": "Equity",
+    "name": "CIDARA THERAPEUTICS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG006R5MFV3",
+    "source": "openfigi",
+    "ticker": "20D0",
+    "unresolved": false
+  },
   "171779309": {
     "composite_figi": "BBG000BP1152",
     "delisted": false,
@@ -2318,6 +3107,19 @@
     "ticker": "XECEUR",
     "unresolved": false
   },
+  "17243V102": {
+    "composite_figi": "BBG000QDVR53",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000QDVR53",
+    "market_sector": "Equity",
+    "name": "CINEMARK HOLDINGS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SS31W4",
+    "source": "openfigi",
+    "ticker": "CNK",
+    "unresolved": false
+  },
   "17243VAB8": {
     "composite_figi": null,
     "delisted": false,
@@ -2331,6 +3133,32 @@
     "ticker": "CNK 4.5 08/15/25",
     "unresolved": false
   },
+  "17253J106": {
+    "composite_figi": "BBG00XYHY0K2",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00XYHY0K2",
+    "market_sector": "Equity",
+    "name": "CIPHER DIGITAL INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00XYHY0L1",
+    "source": "openfigi",
+    "ticker": "CIFR",
+    "unresolved": false
+  },
+  "17253JAA4": {
+    "composite_figi": null,
+    "delisted": false,
+    "exch_code": "TRACE",
+    "figi": "BBG01V59N2T4",
+    "market_sector": "Corp",
+    "name": "CIPHER DIGITAL INC",
+    "security_type": "US DOMESTIC",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "CIFR 1.75 05/15/30",
+    "unresolved": false
+  },
   "172573107": {
     "composite_figi": "BBG01T61V2V3",
     "delisted": false,
@@ -2342,6 +3170,19 @@
     "share_class_figi": "BBG01T61V3Q7",
     "source": "openfigi",
     "ticker": "CRCL",
+    "unresolved": false
+  },
+  "172755100": {
+    "composite_figi": "BBG000C1DHF5",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000C1DHF5",
+    "market_sector": "Equity",
+    "name": "CIRRUS LOGIC INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S67J86",
+    "source": "openfigi",
+    "ticker": "CRUS",
     "unresolved": false
   },
   "17275R102": {
@@ -2394,6 +3235,32 @@
     "share_class_figi": "BBG006Q0HZT0",
     "source": "openfigi",
     "ticker": "CFG",
+    "unresolved": false
+  },
+  "17888H103": {
+    "composite_figi": "BBG00GLNJ018",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00GLNJ018",
+    "market_sector": "Equity",
+    "name": "CIVITAS RESOURCES INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00GLNJ0R0",
+    "source": "openfigi",
+    "ticker": "CIVI",
+    "unresolved": false
+  },
+  "18452B209": {
+    "composite_figi": "BBG001MB89V6",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG001MB89V6",
+    "market_sector": "Equity",
+    "name": "CLEANSPARK INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S7F576",
+    "source": "openfigi",
+    "ticker": "CLSK",
     "unresolved": false
   },
   "185123106": {
@@ -2474,6 +3341,32 @@
     "ticker": "KO",
     "unresolved": false
   },
+  "19240Q201": {
+    "composite_figi": "BBG007DHZQR7",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG007DHZQR7",
+    "market_sector": "Equity",
+    "name": "COGENT BIOSCIENCES INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG007DHY102",
+    "source": "openfigi",
+    "ticker": "COGT",
+    "unresolved": false
+  },
+  "192422103": {
+    "composite_figi": "BBG000BPBVW5",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BPBVW5",
+    "market_sector": "Equity",
+    "name": "COGNEX CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5TC16",
+    "source": "openfigi",
+    "ticker": "CGNX",
+    "unresolved": false
+  },
   "192446102": {
     "composite_figi": "BBG000BBDV81",
     "delisted": false,
@@ -2552,6 +3445,19 @@
     "ticker": "INVH 3.5 01/15/22",
     "unresolved": false
   },
+  "199908104": {
+    "composite_figi": "BBG000BWN2Y9",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BWN2Y9",
+    "market_sector": "Equity",
+    "name": "COMFORT SYSTEMS USA INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SB1GG8",
+    "source": "openfigi",
+    "ticker": "FIX",
+    "unresolved": false
+  },
   "20030N101": {
     "composite_figi": "BBG000BFT2L4",
     "delisted": false,
@@ -2604,6 +3510,19 @@
     "ticker": "CAG",
     "unresolved": false
   },
+  "20717M103": {
+    "composite_figi": "BBG01TNXKKR1",
+    "delisted": false,
+    "exch_code": "IM",
+    "figi": "BBG01TNXKKS0",
+    "market_sector": "Equity",
+    "name": "CONFLUENT INC-CLASS A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG007HWGYS3",
+    "source": "openfigi",
+    "ticker": "1CFLT",
+    "unresolved": false
+  },
   "207410AF8": {
     "composite_figi": null,
     "delisted": false,
@@ -2615,6 +3534,19 @@
     "share_class_figi": null,
     "source": "openfigi",
     "ticker": "CNMD 2.625 02/01/24",
+    "unresolved": false
+  },
+  "207410AH4": {
+    "composite_figi": null,
+    "delisted": false,
+    "exch_code": "TRACE",
+    "figi": "BBG017Y3WXZ3",
+    "market_sector": "Corp",
+    "name": "CONMED CORP",
+    "security_type": "US DOMESTIC",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "CNMD 2.25 06/15/27",
     "unresolved": false
   },
   "20825C104": {
@@ -2654,6 +3586,19 @@
     "share_class_figi": "BBG001SD31G5",
     "source": "openfigi",
     "ticker": "STZ",
+    "unresolved": false
+  },
+  "21037T109": {
+    "composite_figi": "BBG014KFRNP7",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG014KFRNP7",
+    "market_sector": "Equity",
+    "name": "CONSTELLATION ENERGY",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG014KFRPJ9",
+    "source": "openfigi",
+    "ticker": "CEG",
     "unresolved": false
   },
   "216648402": {
@@ -2730,6 +3675,58 @@
     "ticker": "CRBG",
     "unresolved": false
   },
+  "21873S108": {
+    "composite_figi": "BBG011ZTRJ21",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG011ZTRJ21",
+    "market_sector": "Equity",
+    "name": "COREWEAVE INC-CL A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG011ZTRJ49",
+    "source": "openfigi",
+    "ticker": "CRWV",
+    "unresolved": false
+  },
+  "21874A106": {
+    "composite_figi": "BBG01L5GH011",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG01L5GH011",
+    "market_sector": "Equity",
+    "name": "CORE SCIENTIFIC INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG01L5GH1G3",
+    "source": "openfigi",
+    "ticker": "CORZ",
+    "unresolved": false
+  },
+  "21874A114": {
+    "composite_figi": "BBG01L5JV947",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG01L5JV947",
+    "market_sector": "Equity",
+    "name": "CORE SCIENTIFIC INC - 27",
+    "security_type": "Equity WRT",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "CORZW",
+    "unresolved": false
+  },
+  "21874C102": {
+    "composite_figi": "BBG01163K2X0",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG01163K2X0",
+    "market_sector": "Equity",
+    "name": "CORE & MAIN INC-CLASS A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG01163K3R5",
+    "source": "openfigi",
+    "ticker": "CNM",
+    "unresolved": false
+  },
   "219350105": {
     "composite_figi": "BBG000BKFZM4",
     "delisted": false,
@@ -2795,6 +3792,19 @@
     "ticker": "CSGP",
     "unresolved": false
   },
+  "222070203": {
+    "composite_figi": "BBG000F395V1",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000F395V1",
+    "market_sector": "Equity",
+    "name": "COTY INC-CL A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S8GLM1",
+    "source": "openfigi",
+    "ticker": "COTY",
+    "unresolved": false
+  },
   "22266L106": {
     "composite_figi": "BBG00DZHZW33",
     "delisted": false,
@@ -2806,6 +3816,45 @@
     "share_class_figi": "BBG001V0GVM2",
     "source": "openfigi",
     "ticker": "COUPEUR",
+    "unresolved": false
+  },
+  "22266T109": {
+    "composite_figi": "BBG00XMJRPQ8",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00XMJRPQ8",
+    "market_sector": "Equity",
+    "name": "COUPANG INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00XMJRPR7",
+    "source": "openfigi",
+    "ticker": "CPNG",
+    "unresolved": false
+  },
+  "224408104": {
+    "composite_figi": "BBG016G0L0Q5",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG016G0L0Q5",
+    "market_sector": "Equity",
+    "name": "CRANE CO",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG016G0L0V9",
+    "source": "openfigi",
+    "ticker": "CR",
+    "unresolved": false
+  },
+  "22663K107": {
+    "composite_figi": "BBG00BC59224",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00BC59224",
+    "market_sector": "Equity",
+    "name": "CRINETICS PHARMACEUTICALS IN",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00BC592C3",
+    "source": "openfigi",
+    "ticker": "CRNX",
     "unresolved": false
   },
   "227046109": {
@@ -2884,6 +3933,19 @@
     "share_class_figi": "BBG001S5Q9M3",
     "source": "openfigi",
     "ticker": "CMI",
+    "unresolved": false
+  },
+  "23257D103": {
+    "composite_figi": "BBG01LR58M13",
+    "delisted": false,
+    "exch_code": "X9",
+    "figi": "BBG01LR58M22",
+    "market_sector": "Equity",
+    "name": "CYMABAY THERAPEUTICS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG005NJY3M3",
+    "source": "openfigi",
+    "ticker": "CBAY1EUR",
     "unresolved": false
   },
   "23282W605": {
@@ -2975,6 +4037,19 @@
     "share_class_figi": "BBG0112Z58K1",
     "source": "openfigi",
     "ticker": "DTM",
+    "unresolved": false
+  },
+  "23355L106": {
+    "composite_figi": "BBG00FN64XT9",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00FN64XT9",
+    "market_sector": "Equity",
+    "name": "DXC TECHNOLOGY CO",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00FN64XV6",
+    "source": "openfigi",
+    "ticker": "DXC",
     "unresolved": false
   },
   "235851102": {
@@ -3198,6 +4273,19 @@
     "ticker": "FANG",
     "unresolved": false
   },
+  "252828108": {
+    "composite_figi": "BBG00FB2NPZ0",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00FB2NPZ0",
+    "market_sector": "Equity",
+    "name": "DIANTHUS THERAPEUTICS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00FB2NQ15",
+    "source": "openfigi",
+    "ticker": "DNTH",
+    "unresolved": false
+  },
   "253393102": {
     "composite_figi": "BBG000F6ZWH2",
     "delisted": false,
@@ -3392,6 +4480,19 @@
     "ticker": "DASH",
     "unresolved": false
   },
+  "25862V105": {
+    "composite_figi": "BBG00ZNRRJM2",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00ZNRRJM2",
+    "market_sector": "Equity",
+    "name": "DOUBLEVERIFY HOLDINGS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00ZNRRKL0",
+    "source": "openfigi",
+    "ticker": "DV",
+    "unresolved": false
+  },
   "260003108": {
     "composite_figi": "BBG000BHB3M6",
     "delisted": false,
@@ -3431,6 +4532,19 @@
     "ticker": "DBX",
     "unresolved": false
   },
+  "26210V102": {
+    "composite_figi": "BBG00YN8NCD6",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00YN8NCD6",
+    "market_sector": "Equity",
+    "name": "DRIVEN BRANDS HOLDINGS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00YN8ND71",
+    "source": "openfigi",
+    "ticker": "DRVN",
+    "unresolved": false
+  },
   "264411505": {
     "composite_figi": "BBG013Y28BL4",
     "delisted": false,
@@ -3457,6 +4571,19 @@
     "ticker": "DUK",
     "unresolved": false
   },
+  "26441CBY0": {
+    "composite_figi": null,
+    "delisted": false,
+    "exch_code": "TRACE",
+    "figi": "BBG01G4DPF45",
+    "market_sector": "Corp",
+    "name": "DUKE ENERGY CORP",
+    "security_type": "US DOMESTIC",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "DUK 4.125 04/15/26",
+    "unresolved": false
+  },
   "26614N102": {
     "composite_figi": "BBG00Y448G99",
     "delisted": false,
@@ -3470,6 +4597,19 @@
     "ticker": "DDUSD",
     "unresolved": false
   },
+  "26622P107": {
+    "composite_figi": "BBG0026ZJQX7",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG0026ZJQX7",
+    "market_sector": "Equity",
+    "name": "DOXIMITY INC-CLASS A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG0026ZJQY6",
+    "source": "openfigi",
+    "ticker": "DOCS",
+    "unresolved": false
+  },
   "26701L100": {
     "composite_figi": "BBG01282ZHB3",
     "delisted": false,
@@ -3481,6 +4621,19 @@
     "share_class_figi": "BBG01282ZJ56",
     "source": "openfigi",
     "ticker": "BROS",
+    "unresolved": false
+  },
+  "267475101": {
+    "composite_figi": "BBG000C4SKT1",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000C4SKT1",
+    "market_sector": "Equity",
+    "name": "DYCOM INDUSTRIES INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S6MGW8",
+    "source": "openfigi",
+    "ticker": "DY",
     "unresolved": false
   },
   "268150109": {
@@ -3600,6 +4753,19 @@
     "ticker": "EBAY",
     "unresolved": false
   },
+  "278768106": {
+    "composite_figi": "BBG000TGLV00",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000TGLV00",
+    "market_sector": "Equity",
+    "name": "ECHOSTAR CORP-A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001T048Z5",
+    "source": "openfigi",
+    "ticker": "ECHO",
+    "unresolved": false
+  },
   "278768AB2": {
     "composite_figi": null,
     "delisted": false,
@@ -3717,6 +4883,19 @@
     "ticker": "ENB",
     "unresolved": false
   },
+  "29260Y109": {
+    "composite_figi": "BBG00Q9SS8S3",
+    "delisted": false,
+    "exch_code": "GR",
+    "figi": "BBG00Q9SS8S3",
+    "market_sector": "Equity",
+    "name": "ENDEAVOR GROUP HOLD-CLASS A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00P8TCHD7",
+    "source": "openfigi",
+    "ticker": "0C3",
+    "unresolved": false
+  },
   "29261A100": {
     "composite_figi": "BBG000BGBRG2",
     "delisted": false,
@@ -3730,6 +4909,19 @@
     "ticker": "EHC",
     "unresolved": false
   },
+  "292766102": {
+    "composite_figi": "BBG018R0BKT3",
+    "delisted": false,
+    "exch_code": "X9",
+    "figi": "BBG018R0BKW9",
+    "market_sector": "Equity",
+    "name": "ENERPLUS CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SGHVD0",
+    "source": "openfigi",
+    "ticker": "ERFEUR",
+    "unresolved": false
+  },
   "29355A107": {
     "composite_figi": "BBG001R3MNY9",
     "delisted": false,
@@ -3741,6 +4933,19 @@
     "share_class_figi": "BBG001V28NC6",
     "source": "openfigi",
     "ticker": "ENPH",
+    "unresolved": false
+  },
+  "293594107": {
+    "composite_figi": "BBG00YC53854",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00YC53854",
+    "market_sector": "Equity",
+    "name": "ENOVIX CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00YC538B7",
+    "source": "openfigi",
+    "ticker": "ENVX",
     "unresolved": false
   },
   "29362U104": {
@@ -3821,6 +5026,19 @@
     "ticker": "EQIX",
     "unresolved": false
   },
+  "29446M102": {
+    "composite_figi": "BBG000NT0ZZ4",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000NT0ZZ4",
+    "market_sector": "Equity",
+    "name": "EQUINOR ASA-SPON ADR",
+    "security_type": "ADR",
+    "share_class_figi": "BBG001SJ3R93",
+    "source": "openfigi",
+    "ticker": "EQNR",
+    "unresolved": false
+  },
   "29452E101": {
     "composite_figi": "BBG00J7CBVW8",
     "delisted": false,
@@ -3873,6 +5091,19 @@
     "ticker": "EPRT",
     "unresolved": false
   },
+  "29670G102": {
+    "composite_figi": "BBG000BRMJN6",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BRMJN6",
+    "market_sector": "Equity",
+    "name": "ESSENTIAL UTILITIES INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5VFD3",
+    "source": "openfigi",
+    "ticker": "WTRG",
+    "unresolved": false
+  },
   "297178105": {
     "composite_figi": "BBG000CGJMB9",
     "delisted": false,
@@ -3912,6 +5143,19 @@
     "ticker": "ETSY 0.125 10/01/26",
     "unresolved": false
   },
+  "29977A105": {
+    "composite_figi": "BBG000BP30Y0",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BP30Y0",
+    "market_sector": "Equity",
+    "name": "EVERCORE INC - A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SC3S41",
+    "source": "openfigi",
+    "ticker": "EVR",
+    "unresolved": false
+  },
   "30034W106": {
     "composite_figi": "BBG00H433CR2",
     "delisted": false,
@@ -3925,6 +5169,19 @@
     "ticker": "EVRG",
     "unresolved": false
   },
+  "30034WAD8": {
+    "composite_figi": null,
+    "delisted": false,
+    "exch_code": "TRACE",
+    "figi": "BBG01KFFYT94",
+    "market_sector": "Corp",
+    "name": "EVERGY INC",
+    "security_type": "US DOMESTIC",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "EVRG 4.5 12/15/27",
+    "unresolved": false
+  },
   "30040W108": {
     "composite_figi": "BBG000BQ87N0",
     "delisted": false,
@@ -3936,6 +5193,19 @@
     "share_class_figi": "BBG001S5TRL1",
     "source": "openfigi",
     "ticker": "ES",
+    "unresolved": false
+  },
+  "30050B101": {
+    "composite_figi": "BBG005CHLM96",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG005CHLM96",
+    "market_sector": "Equity",
+    "name": "EVOLENT HEALTH INC - A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG005CHLMB3",
+    "source": "openfigi",
+    "ticker": "EVH",
     "unresolved": false
   },
   "30063P105": {
@@ -3975,6 +5245,19 @@
     "share_class_figi": "BBG001SBJMT2",
     "source": "openfigi",
     "ticker": "EXC",
+    "unresolved": false
+  },
+  "30161Q104": {
+    "composite_figi": "BBG000BQ4WF8",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BQ4WF8",
+    "market_sector": "Equity",
+    "name": "EXELIXIS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SD42W4",
+    "source": "openfigi",
+    "ticker": "EXEL",
     "unresolved": false
   },
   "30212P303": {
@@ -4093,6 +5376,19 @@
     "ticker": "FTCHQ",
     "unresolved": false
   },
+  "31188V100": {
+    "composite_figi": "BBG004NLQHL0",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG004NLQHL0",
+    "market_sector": "Equity",
+    "name": "FASTLY INC - CLASS A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG004NLQHM9",
+    "source": "openfigi",
+    "ticker": "FSLY",
+    "unresolved": false
+  },
   "31189P102": {
     "composite_figi": "BBG000QP35H2",
     "delisted": false,
@@ -4171,6 +5467,32 @@
     "ticker": "FFIV",
     "unresolved": false
   },
+  "31572Q808": {
+    "composite_figi": "BBG00H8P68F8",
+    "delisted": false,
+    "exch_code": "X1",
+    "figi": "BBG00QFZH0K7",
+    "market_sector": "Equity",
+    "name": "FIBROGEN INC",
+    "security_type": "Common Stock",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "FGENEUR",
+    "unresolved": false
+  },
+  "315948109": {
+    "composite_figi": "BBG01KY66PW6",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG01KY66PW6",
+    "market_sector": "Equity",
+    "name": "FIDELITY WISE ORIGIN BITCOIN",
+    "security_type": "ETP",
+    "share_class_figi": "BBG01KY66QQ1",
+    "source": "openfigi",
+    "ticker": "FBTC",
+    "unresolved": false
+  },
   "31620M106": {
     "composite_figi": "BBG000BK2F42",
     "delisted": false,
@@ -4182,6 +5504,19 @@
     "share_class_figi": "BBG001S8SWQ0",
     "source": "openfigi",
     "ticker": "FIS",
+    "unresolved": false
+  },
+  "31620R303": {
+    "composite_figi": "BBG006N7S6K9",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG006N7S6K9",
+    "market_sector": "Equity",
+    "name": "FIDELITY NATIONAL FINANCIAL",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG006N7S6J1",
+    "source": "openfigi",
+    "ticker": "FNF",
     "unresolved": false
   },
   "316773100": {
@@ -4353,6 +5688,19 @@
     "ticker": "FLR",
     "unresolved": false
   },
+  "34354P105": {
+    "composite_figi": "BBG000FFH4P5",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000FFH4P5",
+    "market_sector": "Equity",
+    "name": "FLOWSERVE CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SB3F87",
+    "source": "openfigi",
+    "ticker": "FLS",
+    "unresolved": false
+  },
   "345370860": {
     "composite_figi": "BBG000BQPC32",
     "delisted": false,
@@ -4364,6 +5712,19 @@
     "share_class_figi": "BBG001S5TZ33",
     "source": "openfigi",
     "ticker": "F",
+    "unresolved": false
+  },
+  "345370CZ1": {
+    "composite_figi": null,
+    "delisted": false,
+    "exch_code": "TRACE",
+    "figi": "BBG00ZNKGD88",
+    "market_sector": "Corp",
+    "name": "FORD MOTOR COMPANY",
+    "security_type": "US DOMESTIC",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "F 0 03/15/26",
     "unresolved": false
   },
   "34959J108": {
@@ -4379,6 +5740,19 @@
     "ticker": "FTV",
     "unresolved": false
   },
+  "34964C106": {
+    "composite_figi": "BBG001B4BV87",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG001B4BV87",
+    "market_sector": "Equity",
+    "name": "FORTUNE BRANDS INNOVATIONS I",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001THLZ70",
+    "source": "openfigi",
+    "ticker": "FBIN",
+    "unresolved": false
+  },
   "35137L105": {
     "composite_figi": "BBG00JHNJW99",
     "delisted": false,
@@ -4390,6 +5764,19 @@
     "share_class_figi": "BBG00JHNJX06",
     "source": "openfigi",
     "ticker": "FOXA",
+    "unresolved": false
+  },
+  "351858105": {
+    "composite_figi": "BBG000RD3CL8",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000RD3CL8",
+    "market_sector": "Equity",
+    "name": "FRANCO-NEVADA CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001STGSR5",
+    "source": "openfigi",
+    "ticker": "FNV",
     "unresolved": false
   },
   "354613101": {
@@ -4418,6 +5805,19 @@
     "ticker": "FCX",
     "unresolved": false
   },
+  "35834F104": {
+    "composite_figi": "BBG01KR6BS70",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG01KR6BS70",
+    "market_sector": "Equity",
+    "name": "T1 ENERGY INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG01KR6BS89",
+    "source": "openfigi",
+    "ticker": "TE",
+    "unresolved": false
+  },
   "35909D109": {
     "composite_figi": "BBG010MVVVW7",
     "delisted": false,
@@ -4429,6 +5829,32 @@
     "share_class_figi": "BBG010MVVVX6",
     "source": "openfigi",
     "ticker": "FYBR",
+    "unresolved": false
+  },
+  "36118L106": {
+    "composite_figi": "BBG00MYXW4R8",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00MYXW4R8",
+    "market_sector": "Equity",
+    "name": "FUTU HOLDINGS LTD-ADR",
+    "security_type": "ADR",
+    "share_class_figi": "BBG00MYXW5H6",
+    "source": "openfigi",
+    "ticker": "FUTU",
+    "unresolved": false
+  },
+  "36162J106": {
+    "composite_figi": "BBG000GC0TZ3",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000GC0TZ3",
+    "market_sector": "Equity",
+    "name": "GEO GROUP INC/THE",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S6VYZ6",
+    "source": "openfigi",
+    "ticker": "GEO",
     "unresolved": false
   },
   "36164V305": {
@@ -4483,6 +5909,19 @@
     "ticker": "GEHC",
     "unresolved": false
   },
+  "36317J209": {
+    "composite_figi": "BBG0120SWLS0",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG0120SWLS0",
+    "market_sector": "Equity",
+    "name": "GALAXY DIGITAL INC-A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG0120SWLT9",
+    "source": "openfigi",
+    "ticker": "GLXY",
+    "unresolved": false
+  },
   "363576109": {
     "composite_figi": "BBG000BBHXQ3",
     "delisted": false,
@@ -4507,6 +5946,19 @@
     "share_class_figi": "BBG003MSMCT5",
     "source": "openfigi",
     "ticker": "GLPI",
+    "unresolved": false
+  },
+  "364760108": {
+    "composite_figi": "BBG000BKLH74",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BKLH74",
+    "market_sector": "Equity",
+    "name": "GAP INC/THE",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5RNN0",
+    "source": "openfigi",
+    "ticker": "GAP",
     "unresolved": false
   },
   "366651107": {
@@ -4644,6 +6096,15 @@
     "ticker": "GKOS",
     "unresolved": false
   },
+  "37733W105": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
   "37733W204": {
     "composite_figi": "BBG000BLB481",
     "delisted": false,
@@ -4655,6 +6116,19 @@
     "share_class_figi": "BBG001SD6SM6",
     "source": "openfigi",
     "ticker": "GSK",
+    "unresolved": false
+  },
+  "37890U108": {
+    "composite_figi": "BBG00JQCJ6T8",
+    "delisted": false,
+    "exch_code": "XB",
+    "figi": "BBG00JQCJ6V5",
+    "market_sector": "Equity",
+    "name": "GLOBAL BLOOD THERAPEUTICS IN",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00341H6N9",
+    "source": "openfigi",
+    "ticker": "GBTEUR",
     "unresolved": false
   },
   "37940X102": {
@@ -4748,6 +6222,19 @@
     "ticker": "GVA 2.75 11/01/24",
     "unresolved": false
   },
+  "388689101": {
+    "composite_figi": "BBG000GQ7K93",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000GQ7K93",
+    "market_sector": "Equity",
+    "name": "GRAPHIC PACKAGING HOLDING CO",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S90195",
+    "source": "openfigi",
+    "ticker": "GPK",
+    "unresolved": false
+  },
   "40131M109": {
     "composite_figi": "BBG006D97VY9",
     "delisted": false,
@@ -4800,6 +6287,32 @@
     "ticker": "HPQ",
     "unresolved": false
   },
+  "405024100": {
+    "composite_figi": "BBG000C7TF41",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000C7TF41",
+    "market_sector": "Equity",
+    "name": "HAEMONETICS CORP/MASS",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S6QB64",
+    "source": "openfigi",
+    "ticker": "HAE",
+    "unresolved": false
+  },
+  "405552100": {
+    "composite_figi": "BBG018GZNCH6",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG018GZNCH6",
+    "market_sector": "Equity",
+    "name": "HALEON PLC-ADR",
+    "security_type": "ADR",
+    "share_class_figi": "BBG018GZNDB0",
+    "source": "openfigi",
+    "ticker": "HLN",
+    "unresolved": false
+  },
   "406216101": {
     "composite_figi": "BBG000BKTFN2",
     "delisted": false,
@@ -4811,6 +6324,19 @@
     "share_class_figi": "BBG001S5RS59",
     "source": "openfigi",
     "ticker": "HAL",
+    "unresolved": false
+  },
+  "40637HAD1": {
+    "composite_figi": null,
+    "delisted": false,
+    "exch_code": "TRACE",
+    "figi": "BBG00ZFDCBK7",
+    "market_sector": "Corp",
+    "name": "HALOZYME THERAPEUTICS IN",
+    "security_type": "US DOMESTIC",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "HALO 0.25 03/01/27",
     "unresolved": false
   },
   "407497106": {
@@ -4863,6 +6389,19 @@
     "share_class_figi": "BBG001S5RSQ6",
     "source": "openfigi",
     "ticker": "HAS",
+    "unresolved": false
+  },
+  "42226A107": {
+    "composite_figi": "BBG000TYXCT9",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000TYXCT9",
+    "market_sector": "Equity",
+    "name": "HEALTHEQUITY INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001T8JKN8",
+    "source": "openfigi",
+    "ticker": "HQY",
     "unresolved": false
   },
   "42250P103": {
@@ -5006,6 +6545,19 @@
     "ticker": "HLT",
     "unresolved": false
   },
+  "433921103": {
+    "composite_figi": "BBG000HSWHL3",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000HSWHL3",
+    "market_sector": "Equity",
+    "name": "HIVE DIGITAL TECHNOLOGIES LT",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SFKS45",
+    "source": "openfigi",
+    "ticker": "HIVE",
+    "unresolved": false
+  },
   "436440101": {
     "composite_figi": "BBG00JRY8LL6",
     "delisted": false,
@@ -5118,6 +6670,19 @@
     "ticker": "HWM",
     "unresolved": false
   },
+  "44332N106": {
+    "composite_figi": "BBG000QFPM65",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000QFPM65",
+    "market_sector": "Equity",
+    "name": "H WORLD GROUP LTD-ADR",
+    "security_type": "ADR",
+    "share_class_figi": "BBG001T6Y5T2",
+    "source": "openfigi",
+    "ticker": "HTHT",
+    "unresolved": false
+  },
   "443510607": {
     "composite_figi": "BBG000BLK267",
     "delisted": false,
@@ -5222,6 +6787,19 @@
     "ticker": "HII",
     "unresolved": false
   },
+  "44812J104": {
+    "composite_figi": "BBG00K8H39V2",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00K8H39V2",
+    "market_sector": "Equity",
+    "name": "HUT 8 CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00390LJJ8",
+    "source": "openfigi",
+    "ticker": "HUT",
+    "unresolved": false
+  },
   "448579102": {
     "composite_figi": "BBG000CVRFS4",
     "delisted": false,
@@ -5246,6 +6824,45 @@
     "share_class_figi": "BBG001S712B3",
     "source": "openfigi",
     "ticker": "ICUI",
+    "unresolved": false
+  },
+  "450056106": {
+    "composite_figi": "BBG001J19V24",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG001J19V24",
+    "market_sector": "Equity",
+    "name": "IRHYTHM HOLDINGS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001TSQV70",
+    "source": "openfigi",
+    "ticker": "IRTC",
+    "unresolved": false
+  },
+  "45166A102": {
+    "composite_figi": "BBG00CTZ4D83",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00CTZ4D83",
+    "market_sector": "Equity",
+    "name": "IDEAYA BIOSCIENCES INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00CTZ4D92",
+    "source": "openfigi",
+    "ticker": "IDYA",
+    "unresolved": false
+  },
+  "45167R104": {
+    "composite_figi": "BBG000C1HN22",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000C1HN22",
+    "market_sector": "Equity",
+    "name": "IDEX CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S67N14",
+    "source": "openfigi",
+    "ticker": "IEX",
     "unresolved": false
   },
   "45168D104": {
@@ -5287,6 +6904,45 @@
     "ticker": "ILMN",
     "unresolved": false
   },
+  "45253H101": {
+    "composite_figi": "BBG00GVX5FP1",
+    "delisted": false,
+    "exch_code": "XS",
+    "figi": "BBG00GVX5G51",
+    "market_sector": "Equity",
+    "name": "IMMUNOGEN INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S6CTN1",
+    "source": "openfigi",
+    "ticker": "IMGNEUR",
+    "unresolved": false
+  },
+  "45257U108": {
+    "composite_figi": "BBG00BR93ZG8",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00BR93ZG8",
+    "market_sector": "Equity",
+    "name": "IMMUNOME INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00BR94298",
+    "source": "openfigi",
+    "ticker": "IMNM",
+    "unresolved": false
+  },
+  "45258J102": {
+    "composite_figi": "BBG00P5MC0Q8",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00P5MC0Q8",
+    "market_sector": "Equity",
+    "name": "IMMUNOVANT INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00P5MC0R7",
+    "source": "openfigi",
+    "ticker": "IMVT",
+    "unresolved": false
+  },
   "452907108": {
     "composite_figi": "BBG000BLXT19",
     "delisted": false,
@@ -5300,6 +6956,32 @@
     "ticker": "IMMU",
     "unresolved": false
   },
+  "453038408": {
+    "composite_figi": "BBG000C32XT3",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000C32XT3",
+    "market_sector": "Equity",
+    "name": "IMPERIAL OIL LTD",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5T1N6",
+    "source": "openfigi",
+    "ticker": "IMO",
+    "unresolved": false
+  },
+  "453204109": {
+    "composite_figi": "BBG000GRK2Z7",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000GRK2Z7",
+    "market_sector": "Equity",
+    "name": "IMPINJ INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001T313Q3",
+    "source": "openfigi",
+    "ticker": "PI",
+    "unresolved": false
+  },
   "453204AD1": {
     "composite_figi": null,
     "delisted": false,
@@ -5311,6 +6993,19 @@
     "share_class_figi": null,
     "source": "openfigi",
     "ticker": "PI 1.125 05/15/27",
+    "unresolved": false
+  },
+  "45332Y109": {
+    "composite_figi": "BBG01LT2FXF1",
+    "delisted": false,
+    "exch_code": "X9",
+    "figi": "BBG01LT2FXG0",
+    "market_sector": "Equity",
+    "name": "INARI MEDICAL INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG009J8K7N9",
+    "source": "openfigi",
+    "ticker": "NARIEUR",
     "unresolved": false
   },
   "45337C102": {
@@ -5337,6 +7032,19 @@
     "share_class_figi": null,
     "source": "openfigi",
     "ticker": "INFN 2.125 09/01/24",
+    "unresolved": false
+  },
+  "456788108": {
+    "composite_figi": "BBG000BSGQL7",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BSGQL7",
+    "market_sector": "Equity",
+    "name": "INFOSYS LTD-SP ADR",
+    "security_type": "ADR",
+    "share_class_figi": "BBG001S6ZLV4",
+    "source": "openfigi",
+    "ticker": "INFY",
     "unresolved": false
   },
   "45687V106": {
@@ -5428,6 +7136,19 @@
     "share_class_figi": null,
     "source": "openfigi",
     "ticker": "PODD 1.375 11/15/24",
+    "unresolved": false
+  },
+  "45784PAK7": {
+    "composite_figi": null,
+    "delisted": false,
+    "exch_code": "TRACE",
+    "figi": "BBG00Q5KYJN8",
+    "market_sector": "Corp",
+    "name": "INSULET CORPORATION",
+    "security_type": "US DOMESTIC",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "PODD 0.375 09/01/26",
     "unresolved": false
   },
   "458140100": {
@@ -5610,6 +7331,19 @@
     "share_class_figi": "BBG001SB7RD1",
     "source": "openfigi",
     "ticker": "IONS",
+    "unresolved": false
+  },
+  "462260100": {
+    "composite_figi": "BBG000FTLBV7",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000FTLBV7",
+    "market_sector": "Equity",
+    "name": "IOVANCE BIOTHERAPEUTICS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001T2PM32",
+    "source": "openfigi",
+    "ticker": "IOVA",
     "unresolved": false
   },
   "46266C105": {
@@ -5807,6 +7541,19 @@
     "ticker": "IWM",
     "unresolved": false
   },
+  "464287739": {
+    "composite_figi": "BBG000BXW687",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BXW687",
+    "market_sector": "Equity",
+    "name": "ISHARES US REAL ESTATE ETF",
+    "security_type": "ETP",
+    "share_class_figi": "BBG001SFGXJ3",
+    "source": "openfigi",
+    "ticker": "IYR",
+    "unresolved": false
+  },
   "464288414": {
     "composite_figi": "BBG000TC0WT9",
     "delisted": false,
@@ -5844,6 +7591,19 @@
     "share_class_figi": "BBG001SSD8B1",
     "source": "openfigi",
     "ticker": "MBB",
+    "unresolved": false
+  },
+  "464288646": {
+    "composite_figi": "BBG000QN2BW8",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000QN2BW8",
+    "market_sector": "Equity",
+    "name": "ISHARES 1-5Y INV GRADE CORP",
+    "security_type": "ETP",
+    "share_class_figi": "BBG001SSD858",
+    "source": "openfigi",
+    "ticker": "IGSB",
     "unresolved": false
   },
   "464288661": {
@@ -5924,6 +7684,32 @@
     "ticker": "IBIT",
     "unresolved": false
   },
+  "46438R105": {
+    "composite_figi": "BBG01NXX8H49",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG01NXX8H49",
+    "market_sector": "Equity",
+    "name": "ISHARES ETHEREUM TRUST ETF",
+    "security_type": "ETP",
+    "share_class_figi": "BBG01NXX8HZ5",
+    "source": "openfigi",
+    "ticker": "ETHA",
+    "unresolved": false
+  },
+  "46583P102": {
+    "composite_figi": "BBG00JVPSXP8",
+    "delisted": false,
+    "exch_code": "XB",
+    "figi": "BBG00JVPSXQ7",
+    "market_sector": "Equity",
+    "name": "IVERIC BIO INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001TG36J3",
+    "source": "openfigi",
+    "ticker": "OPHTEUR",
+    "unresolved": false
+  },
   "46591M109": {
     "composite_figi": "BBG003H0XV18",
     "delisted": false,
@@ -5950,6 +7736,32 @@
     "ticker": "JPM",
     "unresolved": false
   },
+  "466313103": {
+    "composite_figi": "BBG000BJNGN9",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BJNGN9",
+    "market_sector": "Equity",
+    "name": "JABIL INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S7RB70",
+    "source": "openfigi",
+    "ticker": "JBL",
+    "unresolved": false
+  },
+  "466367109": {
+    "composite_figi": "BBG000GZYVY1",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000GZYVY1",
+    "market_sector": "Equity",
+    "name": "JACK IN THE BOX INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SDBB01",
+    "source": "openfigi",
+    "ticker": "JACK",
+    "unresolved": false
+  },
   "46982L108": {
     "composite_figi": "BBG019C1BQR4",
     "delisted": false,
@@ -5962,6 +7774,15 @@
     "source": "openfigi",
     "ticker": "J",
     "unresolved": false
+  },
+  "47030M106": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
   },
   "47215P106": {
     "composite_figi": "BBG005YHY0Q7",
@@ -6067,6 +7888,15 @@
     "ticker": "KSUEUR",
     "unresolved": false
   },
+  "48576A100": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
   "487836108": {
     "composite_figi": "BBG00JSKSG98",
     "delisted": false,
@@ -6091,6 +7921,19 @@
     "share_class_figi": "BBG01C79X614",
     "source": "openfigi",
     "ticker": "KVUE",
+    "unresolved": false
+  },
+  "492327101": {
+    "composite_figi": "BBG00H1HP9G9",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00H1HP9G9",
+    "market_sector": "Equity",
+    "name": "KEROS THERAPEUTICS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00H1HP9H8",
+    "source": "openfigi",
+    "ticker": "KROS",
     "unresolved": false
   },
   "49271V100": {
@@ -6132,6 +7975,19 @@
     "ticker": "KEYS",
     "unresolved": false
   },
+  "49427F108": {
+    "composite_figi": "BBG000BLMXN8",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BLMXN8",
+    "market_sector": "Equity",
+    "name": "KILROY REALTY CORP",
+    "security_type": "REIT",
+    "share_class_figi": "BBG001S9BHB5",
+    "source": "openfigi",
+    "ticker": "KRC",
+    "unresolved": false
+  },
   "494368103": {
     "composite_figi": "BBG000BMW2Z0",
     "delisted": false,
@@ -6156,6 +8012,19 @@
     "share_class_figi": "BBG001S70279",
     "source": "openfigi",
     "ticker": "KIM",
+    "unresolved": false
+  },
+  "49845K101": {
+    "composite_figi": "BBG009WR3FL5",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG009WR3FL5",
+    "market_sector": "Equity",
+    "name": "KLAVIYO INC-A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG009WR3FM4",
+    "source": "openfigi",
+    "ticker": "KVYO",
     "unresolved": false
   },
   "499049104": {
@@ -6208,6 +8077,32 @@
     "share_class_figi": "BBG001S5SN40",
     "source": "openfigi",
     "ticker": "KR",
+    "unresolved": false
+  },
+  "501147102": {
+    "composite_figi": "BBG00HDGRHH7",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00HDGRHH7",
+    "market_sector": "Equity",
+    "name": "KRYSTAL BIOTECH INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00HDGRHJ5",
+    "source": "openfigi",
+    "ticker": "KRYS",
+    "unresolved": false
+  },
+  "501242101": {
+    "composite_figi": "BBG000BMTX31",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BMTX31",
+    "market_sector": "Equity",
+    "name": "KULICKE & SOFFA INDUSTRIES",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5SLP1",
+    "source": "openfigi",
+    "ticker": "KLIC",
     "unresolved": false
   },
   "50202MAB8": {
@@ -6323,6 +8218,19 @@
     "ticker": "LW",
     "unresolved": false
   },
+  "516544103": {
+    "composite_figi": "BBG006Q52RD0",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG006Q52RD0",
+    "market_sector": "Equity",
+    "name": "LANTHEUS HOLDINGS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG006Q52RF8",
+    "source": "openfigi",
+    "ticker": "LNTH",
+    "unresolved": false
+  },
   "517834107": {
     "composite_figi": "BBG000JWD753",
     "delisted": false,
@@ -6360,6 +8268,19 @@
     "share_class_figi": "BBG001S8L5H6",
     "source": "openfigi",
     "ticker": "EL",
+    "unresolved": false
+  },
+  "521865204": {
+    "composite_figi": "BBG000PTLGZ1",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000PTLGZ1",
+    "market_sector": "Equity",
+    "name": "LEAR CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001T60092",
+    "source": "openfigi",
+    "ticker": "LEA",
     "unresolved": false
   },
   "525327102": {
@@ -6451,6 +8372,19 @@
     "share_class_figi": "BBG01YYX1Z23",
     "source": "openfigi",
     "ticker": "LLYVK",
+    "unresolved": false
+  },
+  "53115L104": {
+    "composite_figi": "BBG00GK831B6",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00GK831B6",
+    "market_sector": "Equity",
+    "name": "LIBERTY ENERGY INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00GK831C5",
+    "source": "openfigi",
+    "ticker": "LBRT",
     "unresolved": false
   },
   "531229409": {
@@ -6609,6 +8543,32 @@
     "ticker": "LLY",
     "unresolved": false
   },
+  "53626N102": {
+    "composite_figi": "BBG01TT3G7W9",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG01TT3G7W9",
+    "market_sector": "Equity",
+    "name": "LIONSGATE STUDIOS CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG01TT3G7X8",
+    "source": "openfigi",
+    "ticker": "LION",
+    "unresolved": false
+  },
+  "536797103": {
+    "composite_figi": "BBG000K3BC83",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000K3BC83",
+    "market_sector": "Equity",
+    "name": "LITHIA MOTORS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SC88P7",
+    "source": "openfigi",
+    "ticker": "LAD",
+    "unresolved": false
+  },
   "538034109": {
     "composite_figi": "BBG000FQ7YR4",
     "delisted": false,
@@ -6738,6 +8698,19 @@
     "ticker": "LITE",
     "unresolved": false
   },
+  "55024UAD1": {
+    "composite_figi": null,
+    "delisted": false,
+    "exch_code": "TRACE",
+    "figi": "BBG00R2G6425",
+    "market_sector": "Corp",
+    "name": "LUMENTUM HOLDINGS INC",
+    "security_type": "US DOMESTIC",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "LITE 0.5 12/15/26",
+    "unresolved": false
+  },
   "55087P104": {
     "composite_figi": "BBG004M9ZHX5",
     "delisted": false,
@@ -6855,6 +8828,45 @@
     "ticker": "M",
     "unresolved": false
   },
+  "558256103": {
+    "composite_figi": "BBG019980TD4",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG019980TD4",
+    "market_sector": "Equity",
+    "name": "MADISON SQUARE GARDEN ENTERT",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG019980TF2",
+    "source": "openfigi",
+    "ticker": "MSGE",
+    "unresolved": false
+  },
+  "55825T103": {
+    "composite_figi": "BBG007FG0C23",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG007FG0C23",
+    "market_sector": "Equity",
+    "name": "MADISON SQUARE GARDEN SPORTS",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG007FG0C32",
+    "source": "openfigi",
+    "ticker": "MSGS",
+    "unresolved": false
+  },
+  "55826T102": {
+    "composite_figi": "BBG00L9HLWV8",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00L9HLWV8",
+    "market_sector": "Equity",
+    "name": "SPHERE ENTERTAINMENT CO",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00L9HLWW7",
+    "source": "openfigi",
+    "ticker": "SPHR",
+    "unresolved": false
+  },
   "558868105": {
     "composite_figi": "BBG000QS6NV8",
     "delisted": false,
@@ -6866,6 +8878,19 @@
     "share_class_figi": "BBG001SNKQ42",
     "source": "openfigi",
     "ticker": "MDGL",
+    "unresolved": false
+  },
+  "559222401": {
+    "composite_figi": "BBG000BNLPJ7",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BNLPJ7",
+    "market_sector": "Equity",
+    "name": "MAGNA INTERNATIONAL INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5SY91",
+    "source": "openfigi",
+    "ticker": "MGA",
     "unresolved": false
   },
   "562750109": {
@@ -6892,6 +8917,19 @@
     "share_class_figi": "BBG00KG5VJG3",
     "source": "openfigi",
     "ticker": "CART",
+    "unresolved": false
+  },
+  "565788AF3": {
+    "composite_figi": null,
+    "delisted": false,
+    "exch_code": "FRANKFURT",
+    "figi": "BBG01QXLNQC2",
+    "market_sector": "Corp",
+    "name": "MARA HOLDINGS INC",
+    "security_type": "US DOMESTIC",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "MARA 0 03/01/30",
     "unresolved": false
   },
   "565849106": {
@@ -6985,6 +9023,19 @@
     "ticker": "MAR",
     "unresolved": false
   },
+  "573284106": {
+    "composite_figi": "BBG000BGYMH7",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BGYMH7",
+    "market_sector": "Equity",
+    "name": "MARTIN MARIETTA MATERIALS",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S7QC51",
+    "source": "openfigi",
+    "ticker": "MLM",
+    "unresolved": false
+  },
   "573874104": {
     "composite_figi": "BBG00ZXBJ153",
     "delisted": false,
@@ -6996,6 +9047,19 @@
     "share_class_figi": "BBG00ZXBJ162",
     "source": "openfigi",
     "ticker": "MRVL",
+    "unresolved": false
+  },
+  "574599106": {
+    "composite_figi": "BBG000BNNKG9",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BNNKG9",
+    "market_sector": "Equity",
+    "name": "MASCO CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5SZ70",
+    "source": "openfigi",
+    "ticker": "MAS",
     "unresolved": false
   },
   "574795100": {
@@ -7035,6 +9099,19 @@
     "share_class_figi": "BBG001SKNNS6",
     "source": "openfigi",
     "ticker": "MA",
+    "unresolved": false
+  },
+  "576485205": {
+    "composite_figi": "BBG000JCPGZ1",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000JCPGZ1",
+    "market_sector": "Equity",
+    "name": "MATADOR RESOURCES CO",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001T3L5S4",
+    "source": "openfigi",
+    "ticker": "MTDR",
     "unresolved": false
   },
   "57667L107": {
@@ -7179,6 +9256,19 @@
     "ticker": "MRK",
     "unresolved": false
   },
+  "589889104": {
+    "composite_figi": "BBG000C42VX0",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000C42VX0",
+    "market_sector": "Equity",
+    "name": "MERIT MEDICAL SYSTEMS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S6KLT3",
+    "source": "openfigi",
+    "ticker": "MMSI",
+    "unresolved": false
+  },
   "59001A102": {
     "composite_figi": "BBG000F4F1N0",
     "delisted": false,
@@ -7256,6 +9346,45 @@
     "ticker": "MSTR 0.75 12/15/25",
     "unresolved": false
   },
+  "594972AJ0": {
+    "composite_figi": null,
+    "delisted": false,
+    "exch_code": "TRACE",
+    "figi": "BBG01LTZH889",
+    "market_sector": "Corp",
+    "name": "STRATEGY INC",
+    "security_type": "US DOMESTIC",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "MSTR 0.625 03/15/30",
+    "unresolved": false
+  },
+  "594972AN1": {
+    "composite_figi": null,
+    "delisted": false,
+    "exch_code": "TRACE",
+    "figi": "BBG01N9V4X03",
+    "market_sector": "Corp",
+    "name": "STRATEGY INC",
+    "security_type": "US DOMESTIC",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "MSTR 2.25 06/15/32",
+    "unresolved": false
+  },
+  "594972AS0": {
+    "composite_figi": null,
+    "delisted": false,
+    "exch_code": "FRANKFURT",
+    "figi": "BBG01QXR1L07",
+    "market_sector": "Corp",
+    "name": "STRATEGY INC",
+    "security_type": "GLOBAL",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "MSTR 0 12/01/29",
+    "unresolved": false
+  },
   "595017104": {
     "composite_figi": "BBG000BHCP19",
     "delisted": false,
@@ -7308,6 +9437,32 @@
     "ticker": "MIDD",
     "unresolved": false
   },
+  "603170101": {
+    "composite_figi": "BBG00ZXN1GN3",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00ZXN1GN3",
+    "market_sector": "Equity",
+    "name": "MINERALYS THERAPEUTICS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00ZXN1GR9",
+    "source": "openfigi",
+    "ticker": "MLYS",
+    "unresolved": false
+  },
+  "60741F104": {
+    "composite_figi": "BBG019X46Z37",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG019X46Z37",
+    "market_sector": "Equity",
+    "name": "MOBILEYE GLOBAL INC-A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG019X46ZY3",
+    "source": "openfigi",
+    "ticker": "MBLY",
+    "unresolved": false
+  },
   "60770K107": {
     "composite_figi": "BBG003PHHZT1",
     "delisted": false,
@@ -7321,6 +9476,19 @@
     "ticker": "MRNA",
     "unresolved": false
   },
+  "607828100": {
+    "composite_figi": "BBG000BP7CL4",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BP7CL4",
+    "market_sector": "Equity",
+    "name": "MODINE MANUFACTURING CO",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5T913",
+    "source": "openfigi",
+    "ticker": "MOD",
+    "unresolved": false
+  },
   "608190104": {
     "composite_figi": "BBG000FLZN98",
     "delisted": false,
@@ -7332,6 +9500,19 @@
     "share_class_figi": "BBG001SBGSZ5",
     "source": "openfigi",
     "ticker": "MHK",
+    "unresolved": false
+  },
+  "60855R100": {
+    "composite_figi": "BBG000MBHNC8",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000MBHNC8",
+    "market_sector": "Equity",
+    "name": "MOLINA HEALTHCARE INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SKBQ20",
+    "source": "openfigi",
+    "ticker": "MOH",
     "unresolved": false
   },
   "60871R209": {
@@ -7450,6 +9631,32 @@
     "ticker": "MS",
     "unresolved": false
   },
+  "61775R105": {
+    "composite_figi": "BBG00ZR84PQ7",
+    "delisted": false,
+    "exch_code": "X9",
+    "figi": "BBG00ZR84PR6",
+    "market_sector": "Equity",
+    "name": "MORPHIC HOLDING INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00PBD6WR7",
+    "source": "openfigi",
+    "ticker": "MORFUSD",
+    "unresolved": false
+  },
+  "61945C103": {
+    "composite_figi": "BBG000BFXHL6",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BFXHL6",
+    "market_sector": "Equity",
+    "name": "MOSAIC CO/THE",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S7LJN1",
+    "source": "openfigi",
+    "ticker": "MOS",
+    "unresolved": false
+  },
   "620076307": {
     "composite_figi": "BBG000BP8Z50",
     "delisted": false,
@@ -7461,6 +9668,19 @@
     "share_class_figi": "BBG001S5T9L1",
     "source": "openfigi",
     "ticker": "MSI",
+    "unresolved": false
+  },
+  "626717102": {
+    "composite_figi": "BBG000BPMH90",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BPMH90",
+    "market_sector": "Equity",
+    "name": "MURPHY OIL CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5TG80",
+    "source": "openfigi",
+    "ticker": "MUR",
     "unresolved": false
   },
   "62886HAT8": {
@@ -7541,6 +9761,19 @@
     "ticker": "NVR",
     "unresolved": false
   },
+  "62955J103": {
+    "composite_figi": "BBG000BJX8C8",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BJX8C8",
+    "market_sector": "Equity",
+    "name": "NOV INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S6HFR2",
+    "source": "openfigi",
+    "ticker": "NOV",
+    "unresolved": false
+  },
   "63009RAD1": {
     "composite_figi": null,
     "delisted": false,
@@ -7580,6 +9813,19 @@
     "ticker": "NTRA",
     "unresolved": false
   },
+  "640491106": {
+    "composite_figi": "BBG000C1BCK2",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000C1BCK2",
+    "market_sector": "Equity",
+    "name": "NEOGEN CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S67B47",
+    "source": "openfigi",
+    "ticker": "NEOG",
+    "unresolved": false
+  },
   "64110D104": {
     "composite_figi": "BBG000FP1N32",
     "delisted": false,
@@ -7603,6 +9849,19 @@
     "share_class_figi": "BBG001SF6L46",
     "source": "openfigi",
     "ticker": "NFLX",
+    "unresolved": false
+  },
+  "64115T104": {
+    "composite_figi": "BBG000C136Z8",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000C136Z8",
+    "market_sector": "Equity",
+    "name": "NETSCOUT SYSTEMS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SD3PL6",
+    "source": "openfigi",
+    "ticker": "NTCT",
     "unresolved": false
   },
   "64125C109": {
@@ -7629,6 +9888,32 @@
     "share_class_figi": null,
     "source": "openfigi",
     "ticker": "NVRO 2.75 04/01/25",
+    "unresolved": false
+  },
+  "644393100": {
+    "composite_figi": "BBG00MJH9LC4",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00MJH9LC4",
+    "market_sector": "Equity",
+    "name": "NEW FORTRESS ENERGY INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00MJH9M32",
+    "source": "openfigi",
+    "ticker": "NFE",
+    "unresolved": false
+  },
+  "647581206": {
+    "composite_figi": "BBG000PTRRM5",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000PTRRM5",
+    "market_sector": "Equity",
+    "name": "NEW ORIENTAL EDUCATIO-SP ADR",
+    "security_type": "ADR",
+    "share_class_figi": "BBG001SP9P33",
+    "source": "openfigi",
+    "ticker": "EDU",
     "unresolved": false
   },
   "64829B100": {
@@ -7709,6 +9994,32 @@
     "ticker": "NWSA",
     "unresolved": false
   },
+  "65290E101": {
+    "composite_figi": "BBG00835TPZ2",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00835TPZ2",
+    "market_sector": "Equity",
+    "name": "NEXTPOWER INC-CL A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00835TQ17",
+    "source": "openfigi",
+    "ticker": "NXT",
+    "unresolved": false
+  },
+  "65336K103": {
+    "composite_figi": "BBG000DZJVH0",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000DZJVH0",
+    "market_sector": "Equity",
+    "name": "NEXSTAR MEDIA GROUP INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SKJJT9",
+    "source": "openfigi",
+    "ticker": "NXST",
+    "unresolved": false
+  },
   "65339F101": {
     "composite_figi": "BBG000BJSBJ0",
     "delisted": false,
@@ -7773,6 +10084,19 @@
     "ticker": "NI",
     "unresolved": false
   },
+  "654902204": {
+    "composite_figi": "BBG000BNGBW9",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BNGBW9",
+    "market_sector": "Equity",
+    "name": "NOKIA CORP-SPON ADR",
+    "security_type": "ADR",
+    "share_class_figi": "BBG001SCPCG9",
+    "source": "openfigi",
+    "ticker": "NOK",
+    "unresolved": false
+  },
   "655044105": {
     "composite_figi": "BBG00D0MY7Q1",
     "delisted": false,
@@ -7825,6 +10149,19 @@
     "ticker": "GEN",
     "unresolved": false
   },
+  "66987V109": {
+    "composite_figi": "BBG000LYF3S8",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000LYF3S8",
+    "market_sector": "Equity",
+    "name": "NOVARTIS AG-SPONSORED ADR",
+    "security_type": "ADR",
+    "share_class_figi": "BBG001SF5LW6",
+    "source": "openfigi",
+    "ticker": "NVS",
+    "unresolved": false
+  },
   "670002401": {
     "composite_figi": "BBG000NVSBL7",
     "delisted": false,
@@ -7836,6 +10173,19 @@
     "share_class_figi": "BBG001SGL8G3",
     "source": "openfigi",
     "ticker": "NVAX",
+    "unresolved": false
+  },
+  "670002AB0": {
+    "composite_figi": null,
+    "delisted": false,
+    "exch_code": "TRACE",
+    "figi": "BBG00C07JSX9",
+    "market_sector": "Corp",
+    "name": "NOVAVAX INC",
+    "security_type": "US DOMESTIC",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "NVAX 3.75 02/01/23",
     "unresolved": false
   },
   "670100205": {
@@ -7942,6 +10292,19 @@
     "ticker": "NTR",
     "unresolved": false
   },
+  "67098H104": {
+    "composite_figi": "BBG00R2JZG39",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00R2JZG39",
+    "market_sector": "Equity",
+    "name": "O-I GLASS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00R2JZG48",
+    "source": "openfigi",
+    "ticker": "OI",
+    "unresolved": false
+  },
   "67103H107": {
     "composite_figi": "BBG000BGYWY6",
     "delisted": false,
@@ -8029,6 +10392,19 @@
     "ticker": "ONB",
     "unresolved": false
   },
+  "68062P106": {
+    "composite_figi": "BBG00T5JMRT4",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00T5JMRT4",
+    "market_sector": "Equity",
+    "name": "OLEMA PHARMACEUTICALS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00T5JMRV1",
+    "source": "openfigi",
+    "ticker": "OLMA",
+    "unresolved": false
+  },
   "680665205": {
     "composite_figi": "BBG000BQHTV3",
     "delisted": false,
@@ -8092,6 +10468,19 @@
     "share_class_figi": "BBG001S5TWK1",
     "source": "openfigi",
     "ticker": "OKE",
+    "unresolved": false
+  },
+  "683344105": {
+    "composite_figi": "BBG000BPRN29",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BPRN29",
+    "market_sector": "Equity",
+    "name": "ONTO INNOVATION INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5THX0",
+    "source": "openfigi",
+    "ticker": "ONTO",
     "unresolved": false
   },
   "68389X105": {
@@ -8211,6 +10600,19 @@
     "ticker": "PCG",
     "unresolved": false
   },
+  "69331CAL2": {
+    "composite_figi": null,
+    "delisted": false,
+    "exch_code": "TRACE",
+    "figi": "BBG01KCBD7R7",
+    "market_sector": "Corp",
+    "name": "PG&E CORP",
+    "security_type": "US DOMESTIC",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "PCG 4.25 12/01/27",
+    "unresolved": false
+  },
   "693475105": {
     "composite_figi": "BBG000BRD0D8",
     "delisted": false,
@@ -8222,6 +10624,19 @@
     "share_class_figi": "BBG001S5V947",
     "source": "openfigi",
     "ticker": "PNC",
+    "unresolved": false
+  },
+  "69349H107": {
+    "composite_figi": "BBG000BRDFF3",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BRDFF3",
+    "market_sector": "Equity",
+    "name": "TXNM ENERGY INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5V9J1",
+    "source": "openfigi",
+    "ticker": "TXNM",
     "unresolved": false
   },
   "693506107": {
@@ -8263,6 +10678,19 @@
     "ticker": "PVH",
     "unresolved": false
   },
+  "69366J200": {
+    "composite_figi": "BBG000QT15P7",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000QT15P7",
+    "market_sector": "Equity",
+    "name": "PTC THERAPEUTICS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SNNC86",
+    "source": "openfigi",
+    "ticker": "PTCT",
+    "unresolved": false
+  },
   "69366JAD3": {
     "composite_figi": null,
     "delisted": false,
@@ -8302,6 +10730,32 @@
     "ticker": "PCAR",
     "unresolved": false
   },
+  "69404D108": {
+    "composite_figi": "BBG000QKXH20",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000QKXH20",
+    "market_sector": "Equity",
+    "name": "PACIFIC BIOSCIENCES OF CALIF",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SS9G64",
+    "source": "openfigi",
+    "ticker": "PACB",
+    "unresolved": false
+  },
+  "695156109": {
+    "composite_figi": "BBG000BB8SW7",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BB8SW7",
+    "market_sector": "Equity",
+    "name": "PACKAGING CORP OF AMERICA",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5V741",
+    "source": "openfigi",
+    "ticker": "PKG",
+    "unresolved": false
+  },
   "69608A108": {
     "composite_figi": "BBG000N7QR55",
     "delisted": false,
@@ -8339,6 +10793,19 @@
     "share_class_figi": null,
     "source": "openfigi",
     "ticker": "PANW 0.375 06/01/25",
+    "unresolved": false
+  },
+  "697900108": {
+    "composite_figi": "BBG000C0RGY3",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000C0RGY3",
+    "market_sector": "Equity",
+    "name": "PAN AMERICAN SILVER CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5ZXR5",
+    "source": "openfigi",
+    "ticker": "PAAS",
     "unresolved": false
   },
   "700517105": {
@@ -8599,6 +11066,15 @@
     "ticker": "PDD 0 12/01/25",
     "unresolved": false
   },
+  "72346Q104": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
   "723484101": {
     "composite_figi": "BBG000BRDSX5",
     "delisted": false,
@@ -8673,6 +11149,19 @@
     "ticker": null,
     "unresolved": true
   },
+  "72919P202": {
+    "composite_figi": "BBG000C1XSP8",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000C1XSP8",
+    "market_sector": "Equity",
+    "name": "PLUG POWER INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S6GJB2",
+    "source": "openfigi",
+    "ticker": "PLUG",
+    "unresolved": false
+  },
   "72919PAD5": {
     "composite_figi": null,
     "delisted": false,
@@ -8725,6 +11214,58 @@
     "ticker": "POST",
     "unresolved": false
   },
+  "737446AT1": {
+    "composite_figi": null,
+    "delisted": false,
+    "exch_code": "TRACE",
+    "figi": "BBG0194C9017",
+    "market_sector": "Corp",
+    "name": "POST HOLDINGS INC",
+    "security_type": "US DOMESTIC",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "POST 2.5 08/15/27",
+    "unresolved": false
+  },
+  "73933G202": {
+    "composite_figi": "BBG000QDHKS9",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000QDHKS9",
+    "market_sector": "Equity",
+    "name": "POWER SOLUTIONS INTERNATIONA",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SMP466",
+    "source": "openfigi",
+    "ticker": "PSIX",
+    "unresolved": false
+  },
+  "74006W207": {
+    "composite_figi": "BBG00W9LF2G5",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00W9LF2G5",
+    "market_sector": "Equity",
+    "name": "PRAXIS PRECISION MEDICINES I",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00W9LF2H4",
+    "source": "openfigi",
+    "ticker": "PRAX",
+    "unresolved": false
+  },
+  "74051N102": {
+    "composite_figi": "BBG000G7QX50",
+    "delisted": false,
+    "exch_code": "VK",
+    "figi": "BBG005630QT6",
+    "market_sector": "Equity",
+    "name": "PREMIER INC-CLASS A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SJLD58",
+    "source": "openfigi",
+    "ticker": "2655957D",
+    "unresolved": false
+  },
   "74144T108": {
     "composite_figi": "BBG000BVMPN3",
     "delisted": false,
@@ -8763,6 +11304,19 @@
     "ticker": "PG",
     "unresolved": false
   },
+  "74276R102": {
+    "composite_figi": "BBG00ZXYXVP9",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00ZXYXVP9",
+    "market_sector": "Equity",
+    "name": "PRIVIA HEALTH GROUP INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00ZXYXWJ4",
+    "source": "openfigi",
+    "ticker": "PRVA",
+    "unresolved": false
+  },
   "743315103": {
     "composite_figi": "BBG000BR37X2",
     "delisted": false,
@@ -8790,6 +11344,28 @@
     "unresolved": false
   },
   "74347G432": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
+  "74347M108": {
+    "composite_figi": "BBG00FYCQ352",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00FYCQ352",
+    "market_sector": "Equity",
+    "name": "PROPETRO HOLDING CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00FYCQ3Y0",
+    "source": "openfigi",
+    "ticker": "PUMP",
+    "unresolved": false
+  },
+  "74349U108": {
     "figi": null,
     "name": null,
     "reason": "No identifier found.",
@@ -8850,6 +11426,19 @@
     "ticker": "PSA",
     "unresolved": false
   },
+  "745848101": {
+    "composite_figi": "BBG000LZVJC9",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000LZVJC9",
+    "market_sector": "Equity",
+    "name": "PULMONX CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001T4HJ52",
+    "source": "openfigi",
+    "ticker": "LUNG",
+    "unresolved": false
+  },
   "745867101": {
     "composite_figi": "BBG000BR54L0",
     "delisted": false,
@@ -8887,6 +11476,19 @@
     "share_class_figi": "BBG007TJF1P5",
     "source": "openfigi",
     "ticker": "QRVO",
+    "unresolved": false
+  },
+  "74743L100": {
+    "composite_figi": "BBG01TRL73S5",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG01TRL73S5",
+    "market_sector": "Equity",
+    "name": "QNITY ELECTRONICS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG01TRL7564",
+    "source": "openfigi",
+    "ticker": "Q",
     "unresolved": false
   },
   "747525103": {
@@ -8993,6 +11595,58 @@
     "ticker": "RPM",
     "unresolved": false
   },
+  "750236101": {
+    "composite_figi": "BBG000BMWV95",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BMWV95",
+    "market_sector": "Equity",
+    "name": "RADIAN GROUP INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SBWXG7",
+    "source": "openfigi",
+    "ticker": "RDN",
+    "unresolved": false
+  },
+  "750491102": {
+    "composite_figi": "BBG000CXSF54",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000CXSF54",
+    "market_sector": "Equity",
+    "name": "RADNET INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S75DK5",
+    "source": "openfigi",
+    "ticker": "RDNT",
+    "unresolved": false
+  },
+  "750940108": {
+    "composite_figi": "BBG01V4YRP24",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG01V4YRP24",
+    "market_sector": "Equity",
+    "name": "RALLIANT CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG01V4YRP33",
+    "source": "openfigi",
+    "ticker": "RAL",
+    "unresolved": false
+  },
+  "751212101": {
+    "composite_figi": "BBG000BS0ZF1",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BS0ZF1",
+    "market_sector": "Equity",
+    "name": "RALPH LAUREN CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S9TL45",
+    "source": "openfigi",
+    "ticker": "RL",
+    "unresolved": false
+  },
   "75281A109": {
     "composite_figi": "BBG000FVXD63",
     "delisted": false,
@@ -9004,6 +11658,19 @@
     "share_class_figi": "BBG001SBZNN8",
     "source": "openfigi",
     "ticker": "RRC",
+    "unresolved": false
+  },
+  "753422104": {
+    "composite_figi": "BBG009DFHWG6",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG009DFHWG6",
+    "market_sector": "Equity",
+    "name": "RAPID7 INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG009DFHWH5",
+    "source": "openfigi",
+    "ticker": "RPD",
     "unresolved": false
   },
   "754730109": {
@@ -9071,6 +11738,19 @@
     "ticker": "RP 1.5 05/15/25",
     "unresolved": false
   },
+  "75615P103": {
+    "composite_figi": "BBG00FRMRGJ3",
+    "delisted": false,
+    "exch_code": "XS",
+    "figi": "BBG00FRMRH01",
+    "market_sector": "Equity",
+    "name": "REATA PHARMACEUTICALS INC-A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001T921P4",
+    "source": "openfigi",
+    "ticker": "RETAEUR",
+    "unresolved": false
+  },
   "75734B100": {
     "composite_figi": "BBG005K1D4S0",
     "delisted": false,
@@ -9082,6 +11762,19 @@
     "share_class_figi": "BBG015RGX648",
     "source": "openfigi",
     "ticker": "RDDT",
+    "unresolved": false
+  },
+  "758750103": {
+    "composite_figi": "BBG000BRXTR8",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BRXTR8",
+    "market_sector": "Equity",
+    "name": "REGAL REXNORD CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5VL68",
+    "source": "openfigi",
+    "ticker": "RRX",
     "unresolved": false
   },
   "75886F107": {
@@ -9121,6 +11814,19 @@
     "share_class_figi": "BBG001S6P9Q8",
     "source": "openfigi",
     "ticker": "RGA",
+    "unresolved": false
+  },
+  "75943R102": {
+    "composite_figi": "BBG00DSS08K9",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00DSS08K9",
+    "market_sector": "Equity",
+    "name": "RELAY THERAPEUTICS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00DSS08L8",
+    "source": "openfigi",
+    "ticker": "RLAY",
     "unresolved": false
   },
   "75972AAC7": {
@@ -9200,6 +11906,19 @@
     "ticker": "RVNC 1.75 02/15/27",
     "unresolved": false
   },
+  "76243J105": {
+    "composite_figi": "BBG007DLZ601",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG007DLZ601",
+    "market_sector": "Equity",
+    "name": "RHYTHM PHARMACEUTICALS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG007DLZ629",
+    "source": "openfigi",
+    "ticker": "RYTM",
+    "unresolved": false
+  },
   "76680R206": {
     "composite_figi": "BBG000J094P3",
     "delisted": false,
@@ -9224,6 +11943,45 @@
     "share_class_figi": "BBG001SB0LX9",
     "source": "openfigi",
     "ticker": "RIO",
+    "unresolved": false
+  },
+  "767292105": {
+    "composite_figi": "BBG000BQ4512",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BQ4512",
+    "market_sector": "Equity",
+    "name": "RIOT PLATFORMS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SDW128",
+    "source": "openfigi",
+    "ticker": "RIOT",
+    "unresolved": false
+  },
+  "76954A103": {
+    "composite_figi": "BBG00741Y1N2",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00741Y1N2",
+    "market_sector": "Equity",
+    "name": "RIVIAN AUTOMOTIVE INC-A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00741Y1P0",
+    "source": "openfigi",
+    "ticker": "RIVN",
+    "unresolved": false
+  },
+  "770323103": {
+    "composite_figi": "BBG000BS5DR2",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BS5DR2",
+    "market_sector": "Equity",
+    "name": "ROBERT HALF INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5VP41",
+    "source": "openfigi",
+    "ticker": "RHI",
     "unresolved": false
   },
   "770700102": {
@@ -9252,6 +12010,19 @@
     "ticker": "RBLX",
     "unresolved": false
   },
+  "77311W101": {
+    "composite_figi": "BBG00VY1MYW7",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00VY1MYW7",
+    "market_sector": "Equity",
+    "name": "ROCKET COS INC-CLASS A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00VY1MZN4",
+    "source": "openfigi",
+    "ticker": "RKT",
+    "unresolved": false
+  },
   "773903109": {
     "composite_figi": "BBG000BBCDZ2",
     "delisted": false,
@@ -9263,6 +12034,19 @@
     "share_class_figi": "BBG001S5VRF5",
     "source": "openfigi",
     "ticker": "ROK",
+    "unresolved": false
+  },
+  "775109200": {
+    "composite_figi": "BBG000BSZ3J0",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BSZ3J0",
+    "market_sector": "Equity",
+    "name": "ROGERS COMMUNICATIONS INC-B",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S604S4",
+    "source": "openfigi",
+    "ticker": "RCI",
     "unresolved": false
   },
   "77543R102": {
@@ -9315,6 +12099,19 @@
     "share_class_figi": "BBG001S5VRS1",
     "source": "openfigi",
     "ticker": "ROST",
+    "unresolved": false
+  },
+  "778920306": {
+    "composite_figi": "BBG013B8HDZ7",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG013B8HDZ7",
+    "market_sector": "Equity",
+    "name": "SHARONAI HOLDINGS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG013B8HFT9",
+    "source": "openfigi",
+    "ticker": "SHAZ",
     "unresolved": false
   },
   "780259305": {
@@ -9406,6 +12203,19 @@
     "share_class_figi": "BBG001SRXRD7",
     "source": "openfigi",
     "ticker": "SPEM",
+    "unresolved": false
+  },
+  "78464A375": {
+    "composite_figi": "BBG000F8Y230",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000F8Y230",
+    "market_sector": "Equity",
+    "name": "SS SPDR P INT C CORP ETF",
+    "security_type": "ETP",
+    "share_class_figi": "BBG001T2HCY9",
+    "source": "openfigi",
+    "ticker": "SPIB",
     "unresolved": false
   },
   "78464A664": {
@@ -9525,6 +12335,19 @@
     "ticker": "SIVBEUR",
     "unresolved": false
   },
+  "78667J108": {
+    "composite_figi": "BBG00GST3XH6",
+    "delisted": false,
+    "exch_code": "XS",
+    "figi": "BBG00GST3XZ6",
+    "market_sector": "Equity",
+    "name": "SAGE THERAPEUTICS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG0025X16Z4",
+    "source": "openfigi",
+    "ticker": "SAGEEUR",
+    "unresolved": false
+  },
   "78709Y105": {
     "composite_figi": "BBG000P5LMQ0",
     "delisted": false,
@@ -9575,6 +12398,32 @@
     "share_class_figi": "BBG01R388JK6",
     "source": "openfigi",
     "ticker": "SNDK",
+    "unresolved": false
+  },
+  "80105N105": {
+    "composite_figi": "BBG000BBD5N1",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BBD5N1",
+    "market_sector": "Equity",
+    "name": "SANOFI-ADR",
+    "security_type": "ADR",
+    "share_class_figi": "BBG001S5W768",
+    "source": "openfigi",
+    "ticker": "SNY",
+    "unresolved": false
+  },
+  "803054204": {
+    "composite_figi": "BBG000BDSLD7",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BDSLD7",
+    "market_sector": "Equity",
+    "name": "SAP SE-SPONSORED ADR",
+    "security_type": "ADR",
+    "share_class_figi": "BBG001S6RD41",
+    "source": "openfigi",
+    "ticker": "SAP",
     "unresolved": false
   },
   "803607100": {
@@ -9640,6 +12489,19 @@
     "share_class_figi": "BBG001S5VXD4",
     "source": "openfigi",
     "ticker": "SCHW",
+    "unresolved": false
+  },
+  "810186106": {
+    "composite_figi": "BBG000BT5PG5",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BT5PG5",
+    "market_sector": "Equity",
+    "name": "SCOTTS MIRACLE-GRO CO",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5W5H0",
+    "source": "openfigi",
+    "ticker": "SMG",
     "unresolved": false
   },
   "81141R100": {
@@ -9819,6 +12681,28 @@
     "ticker": "XLU",
     "unresolved": false
   },
+  "81619Q105": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
+  "816850101": {
+    "composite_figi": "BBG000DBKR53",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000DBKR53",
+    "market_sector": "Equity",
+    "name": "SEMTECH CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S7TWW4",
+    "source": "openfigi",
+    "ticker": "SMTC",
+    "unresolved": false
+  },
   "816851109": {
     "composite_figi": "BBG000C2ZCH8",
     "delisted": false,
@@ -9858,6 +12742,19 @@
     "ticker": "NOW",
     "unresolved": false
   },
+  "819047101": {
+    "composite_figi": "BBG0063GCHH8",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG0063GCHH8",
+    "market_sector": "Equity",
+    "name": "SHAKE SHACK INC - CLASS A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG0063GCHJ6",
+    "source": "openfigi",
+    "ticker": "SHAK",
+    "unresolved": false
+  },
   "824348106": {
     "composite_figi": "BBG000BSXQV7",
     "delisted": false,
@@ -9869,6 +12766,19 @@
     "share_class_figi": "BBG001S5W2F9",
     "source": "openfigi",
     "ticker": "SHW",
+    "unresolved": false
+  },
+  "82452J109": {
+    "composite_figi": "BBG00TX393L4",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00TX393L4",
+    "market_sector": "Equity",
+    "name": "SHIFT4 PAYMENTS INC-CLASS A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00TX393M3",
+    "source": "openfigi",
+    "ticker": "FOUR",
     "unresolved": false
   },
   "82489T104": {
@@ -9910,6 +12820,19 @@
     "ticker": "SBNY",
     "unresolved": false
   },
+  "82671G100": {
+    "composite_figi": "BBG016C9FT75",
+    "delisted": false,
+    "exch_code": "XS",
+    "figi": "BBG016C9FT75",
+    "market_sector": "Equity",
+    "name": "SIGNIFY HEALTH INC -CLASS A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00YZ6JB44",
+    "source": "openfigi",
+    "ticker": "SGFYGBP",
+    "unresolved": false
+  },
   "826919102": {
     "composite_figi": "BBG000BB99S3",
     "delisted": false,
@@ -9921,6 +12844,19 @@
     "share_class_figi": "BBG001S5W492",
     "source": "openfigi",
     "ticker": "SLAB",
+    "unresolved": false
+  },
+  "82706C108": {
+    "composite_figi": "BBG000GT7XY1",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000GT7XY1",
+    "market_sector": "Equity",
+    "name": "SILICON MOTION TECHNOL-ADR",
+    "security_type": "ADR",
+    "share_class_figi": "BBG001SP0YQ8",
+    "source": "openfigi",
+    "ticker": "SIMO",
     "unresolved": false
   },
   "828806109": {
@@ -9962,6 +12898,19 @@
     "ticker": "SIRI",
     "unresolved": false
   },
+  "83001A102": {
+    "composite_figi": "BBG00J0BLQS2",
+    "delisted": false,
+    "exch_code": "XB",
+    "figi": "BBG00J0BLQT1",
+    "market_sector": "Equity",
+    "name": "SIX FLAGS ENTERTAINMENT CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S8H000",
+    "source": "openfigi",
+    "ticker": "SIXEUR",
+    "unresolved": false
+  },
   "830566105": {
     "composite_figi": "BBG000BBX0Q7",
     "delisted": false,
@@ -9973,6 +12922,19 @@
     "share_class_figi": "BBG001S5XTG8",
     "source": "openfigi",
     "ticker": "SKAA",
+    "unresolved": false
+  },
+  "830830105": {
+    "composite_figi": "BBG000BT2TP0",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BT2TP0",
+    "market_sector": "Equity",
+    "name": "CHAMPION HOMES INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5W456",
+    "source": "openfigi",
+    "ticker": "SKY",
     "unresolved": false
   },
   "83088M102": {
@@ -10131,6 +13093,71 @@
     "ticker": "SEDG",
     "unresolved": false
   },
+  "83418M103": {
+    "composite_figi": "BBG00G7D6C05",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00G7D6C05",
+    "market_sector": "Equity",
+    "name": "SOLARIS ENERGY INFRASTRUCTUR",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00G7D6CQ7",
+    "source": "openfigi",
+    "ticker": "SEI",
+    "unresolved": false
+  },
+  "834203309": {
+    "composite_figi": "BBG01YLV1NS0",
+    "delisted": false,
+    "exch_code": "IM",
+    "figi": "BBG01YLV1NT9",
+    "market_sector": "Equity",
+    "name": "SOLENO THERAPEUTICS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG0024L5B95",
+    "source": "openfigi",
+    "ticker": "1SLNO",
+    "unresolved": false
+  },
+  "83443Q103": {
+    "composite_figi": "BBG01X5744P5",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG01X5744P5",
+    "market_sector": "Equity",
+    "name": "SOLSTICE ADV MATERIALS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG01X5744Z4",
+    "source": "openfigi",
+    "ticker": "SOLS",
+    "unresolved": false
+  },
+  "83444M101": {
+    "composite_figi": "BBG018YZH6T3",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG018YZH6T3",
+    "market_sector": "Equity",
+    "name": "SOLVENTUM CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG018YZH6V0",
+    "source": "openfigi",
+    "ticker": "SOLV",
+    "unresolved": false
+  },
+  "835699307": {
+    "composite_figi": "BBG000BT7ZK6",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BT7ZK6",
+    "market_sector": "Equity",
+    "name": "SONY GROUP CORP - SP ADR",
+    "security_type": "ADR",
+    "share_class_figi": "BBG001S5W6H8",
+    "source": "openfigi",
+    "ticker": "SONY",
+    "unresolved": false
+  },
   "840441109": {
     "composite_figi": "BBG00RM7ZJH2",
     "delisted": false,
@@ -10157,6 +13184,19 @@
     "ticker": "SO",
     "unresolved": false
   },
+  "842587DP9": {
+    "composite_figi": null,
+    "delisted": false,
+    "exch_code": "TRACE",
+    "figi": "BBG01FMYG3P5",
+    "market_sector": "Corp",
+    "name": "SOUTHERN CO",
+    "security_type": "US DOMESTIC",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "SO 3.875 12/15/25",
+    "unresolved": false
+  },
   "84472E102": {
     "composite_figi": "BBG000BNPYN9",
     "delisted": false,
@@ -10168,6 +13208,19 @@
     "share_class_figi": "BBG001S9J7Z3",
     "source": "openfigi",
     "ticker": "SSB",
+    "unresolved": false
+  },
+  "844741108": {
+    "composite_figi": "BBG000BNJHS8",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BNJHS8",
+    "market_sector": "Equity",
+    "name": "SOUTHWEST AIRLINES CO",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5SXC9",
+    "source": "openfigi",
+    "ticker": "LUV",
     "unresolved": false
   },
   "845467109": {
@@ -10183,6 +13236,19 @@
     "ticker": "SW5",
     "unresolved": false
   },
+  "848574109": {
+    "composite_figi": "BBG000C0J8Z9",
+    "delisted": false,
+    "exch_code": "GF",
+    "figi": "BBG000C0J9X9",
+    "market_sector": "Equity",
+    "name": "SPIRIT AEROSYSTEMS HOLD-CL A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SKF1N8",
+    "source": "openfigi",
+    "ticker": "S9Q",
+    "unresolved": false
+  },
   "848637104": {
     "composite_figi": "BBG007F5YJP0",
     "delisted": false,
@@ -10194,6 +13260,19 @@
     "share_class_figi": "BBG001TWMNG3",
     "source": "openfigi",
     "ticker": "SPLKCHF",
+    "unresolved": false
+  },
+  "85205L107": {
+    "composite_figi": "BBG011DXDT29",
+    "delisted": false,
+    "exch_code": "X9",
+    "figi": "BBG011DXDT38",
+    "market_sector": "Equity",
+    "name": "SPRINGWORKS THERAPEUTICS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00Q011TX8",
+    "source": "openfigi",
+    "ticker": "SWTXUSD",
     "unresolved": false
   },
   "85208M102": {
@@ -10338,6 +13417,19 @@
     "ticker": "SYK",
     "unresolved": false
   },
+  "86366E106": {
+    "composite_figi": "BBG01CBVHLW1",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG01CBVHLW1",
+    "market_sector": "Equity",
+    "name": "STRUCTURE THERAPEUTICS INC",
+    "security_type": "ADR",
+    "share_class_figi": "BBG01CBVHMQ6",
+    "source": "openfigi",
+    "ticker": "GPCR",
+    "unresolved": false
+  },
   "866674104": {
     "composite_figi": "BBG000BLJWF3",
     "delisted": false,
@@ -10362,6 +13454,19 @@
     "share_class_figi": "BBG001S5YSF0",
     "source": "openfigi",
     "ticker": "SU",
+    "unresolved": false
+  },
+  "86771W105": {
+    "composite_figi": "BBG0025XVR85",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG0025XVR85",
+    "market_sector": "Equity",
+    "name": "SUNRUN INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG0025XVR94",
+    "source": "openfigi",
+    "ticker": "RUN",
     "unresolved": false
   },
   "86800U104": {
@@ -10390,6 +13495,45 @@
     "ticker": "SMCI",
     "unresolved": false
   },
+  "868459108": {
+    "composite_figi": "BBG000BP0HX7",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BP0HX7",
+    "market_sector": "Equity",
+    "name": "SUPERNUS PHARMACEUTICALS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SFKFF1",
+    "source": "openfigi",
+    "ticker": "SUPN",
+    "unresolved": false
+  },
+  "86881A100": {
+    "composite_figi": "BBG009T0TKV8",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG009T0TKV8",
+    "market_sector": "Equity",
+    "name": "SURGERY PARTNERS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG009T0TKW7",
+    "source": "openfigi",
+    "ticker": "SGRY",
+    "unresolved": false
+  },
+  "87157D109": {
+    "composite_figi": "BBG000BQV1S2",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BQV1S2",
+    "market_sector": "Equity",
+    "name": "SYNAPTICS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SCDXM9",
+    "source": "openfigi",
+    "ticker": "SYNA",
+    "unresolved": false
+  },
   "871607107": {
     "composite_figi": "BBG000BSFRF3",
     "delisted": false,
@@ -10414,6 +13558,19 @@
     "share_class_figi": "BBG001SFQWB2",
     "source": "openfigi",
     "ticker": "SNX",
+    "unresolved": false
+  },
+  "87164F105": {
+    "composite_figi": "BBG000R33JY1",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000R33JY1",
+    "market_sector": "Equity",
+    "name": "SYNDAX PHARMACEUTICALS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001T92272",
+    "source": "openfigi",
+    "ticker": "SNDX",
     "unresolved": false
   },
   "87165B103": {
@@ -10533,6 +13690,32 @@
     "ticker": "TTWO",
     "unresolved": false
   },
+  "874060205": {
+    "composite_figi": "BBG000LF8708",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000LF8708",
+    "market_sector": "Equity",
+    "name": "TAKEDA PHARMACEUTIC-SP ADR",
+    "security_type": "ADR",
+    "share_class_figi": "BBG001T8N8N0",
+    "source": "openfigi",
+    "ticker": "TAK",
+    "unresolved": false
+  },
+  "87422Q109": {
+    "composite_figi": "BBG01GWQVVD3",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG01GWQVVD3",
+    "market_sector": "Equity",
+    "name": "TALEN ENERGY CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG01GWQVW78",
+    "source": "openfigi",
+    "ticker": "TLN",
+    "unresolved": false
+  },
   "875372203": {
     "composite_figi": "BBG0019V9M65",
     "delisted": false,
@@ -10583,6 +13766,19 @@
     "share_class_figi": "BBG001TC94B9",
     "source": "openfigi",
     "ticker": "TRGP",
+    "unresolved": false
+  },
+  "87807B107": {
+    "composite_figi": "BBG000BVN235",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BVN235",
+    "market_sector": "Equity",
+    "name": "TC ENERGY CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5WW27",
+    "source": "openfigi",
+    "ticker": "TRP",
     "unresolved": false
   },
   "878742204": {
@@ -10650,6 +13846,45 @@
     "ticker": "TFX",
     "unresolved": false
   },
+  "88023U101": {
+    "composite_figi": "BBG000PXGT62",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000PXGT62",
+    "market_sector": "Equity",
+    "name": "SOMNIGROUP INTERNATIONAL INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SH81D4",
+    "source": "openfigi",
+    "ticker": "SGI",
+    "unresolved": false
+  },
+  "88025T102": {
+    "composite_figi": "BBG00LBLCD02",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00LBLCD02",
+    "market_sector": "Equity",
+    "name": "TENABLE HOLDINGS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00LBLCDR3",
+    "source": "openfigi",
+    "ticker": "TENB",
+    "unresolved": false
+  },
+  "88025U109": {
+    "composite_figi": "BBG007WX14X0",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG007WX14X0",
+    "market_sector": "Equity",
+    "name": "10X GENOMICS INC-CLASS A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG007WX14Y9",
+    "source": "openfigi",
+    "ticker": "TXG",
+    "unresolved": false
+  },
   "88031M109": {
     "composite_figi": "BBG000PLD4R3",
     "delisted": false,
@@ -10674,6 +13909,19 @@
     "share_class_figi": "BBG001S70FY0",
     "source": "openfigi",
     "ticker": "THC",
+    "unresolved": false
+  },
+  "88076W103": {
+    "composite_figi": "BBG000R0L5J4",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000R0L5J4",
+    "market_sector": "Equity",
+    "name": "TERADATA CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SPRJ28",
+    "source": "openfigi",
+    "ticker": "TDC",
     "unresolved": false
   },
   "880770102": {
@@ -10871,6 +14119,19 @@
     "ticker": "TOST",
     "unresolved": false
   },
+  "889478103": {
+    "composite_figi": "BBG000BVHBM1",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BVHBM1",
+    "market_sector": "Equity",
+    "name": "TOLL BROTHERS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5WT15",
+    "source": "openfigi",
+    "ticker": "TOL",
+    "unresolved": false
+  },
   "89055F103": {
     "composite_figi": "BBG00LVGH852",
     "delisted": false,
@@ -10949,6 +14210,19 @@
     "ticker": "TRV",
     "unresolved": false
   },
+  "89531P105": {
+    "composite_figi": "BBG000BTGKK9",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BTGKK9",
+    "market_sector": "Equity",
+    "name": "TREX COMPANY INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SB6TV8",
+    "source": "openfigi",
+    "ticker": "TREX",
+    "unresolved": false
+  },
   "896239100": {
     "composite_figi": "BBG000BNPS52",
     "delisted": false,
@@ -10975,6 +14249,19 @@
     "ticker": "TFC",
     "unresolved": false
   },
+  "90138A103": {
+    "composite_figi": "BBG001M32Y18",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG001M32Y18",
+    "market_sector": "Equity",
+    "name": "VNET GROUP INC-ADR",
+    "security_type": "ADR",
+    "share_class_figi": "BBG001V0ZQH8",
+    "source": "openfigi",
+    "ticker": "VNET",
+    "unresolved": false
+  },
   "90138F102": {
     "composite_figi": "BBG0029ZX840",
     "delisted": false,
@@ -10986,6 +14273,19 @@
     "share_class_figi": "BBG0029ZX859",
     "source": "openfigi",
     "ticker": "TWLO",
+    "unresolved": false
+  },
+  "90184D100": {
+    "composite_figi": "BBG006KDCHJ4",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG006KDCHJ4",
+    "market_sector": "Equity",
+    "name": "TWIST BIOSCIENCE CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG006KDCHK2",
+    "source": "openfigi",
+    "ticker": "TWST",
     "unresolved": false
   },
   "90184L102": {
@@ -11012,6 +14312,32 @@
     "share_class_figi": null,
     "source": "openfigi",
     "ticker": "TWOU 2.25 05/01/25",
+    "unresolved": false
+  },
+  "902681105": {
+    "composite_figi": "BBG000BVYN55",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BVYN55",
+    "market_sector": "Equity",
+    "name": "UGI CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5X0W3",
+    "source": "openfigi",
+    "ticker": "UGI",
+    "unresolved": false
+  },
+  "902681AB1": {
+    "composite_figi": null,
+    "delisted": false,
+    "exch_code": "FRANKFURT",
+    "figi": "BBG01N73SZM2",
+    "market_sector": "Corp",
+    "name": "UGI CORP",
+    "security_type": "US DOMESTIC",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "UGI 5 06/01/28",
     "unresolved": false
   },
   "902788108": {
@@ -11050,6 +14376,19 @@
     "share_class_figi": "BBG002B04MW4",
     "source": "openfigi",
     "ticker": "UBER",
+    "unresolved": false
+  },
+  "90364P105": {
+    "composite_figi": "BBG00GKS1G03",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00GKS1G03",
+    "market_sector": "Equity",
+    "name": "UIPATH INC - CLASS A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00GKS1G12",
+    "source": "openfigi",
+    "ticker": "PATH",
     "unresolved": false
   },
   "90384S303": {
@@ -11128,6 +14467,19 @@
     "share_class_figi": "BBG001SBGZ25",
     "source": "openfigi",
     "ticker": "URI",
+    "unresolved": false
+  },
+  "912008109": {
+    "composite_figi": "BBG00C6H6D40",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00C6H6D40",
+    "market_sector": "Equity",
+    "name": "US FOODS HOLDING CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00C6H6D59",
+    "source": "openfigi",
+    "ticker": "USFD",
     "unresolved": false
   },
   "912909108": {
@@ -11218,6 +14570,19 @@
     "share_class_figi": "BBG001S6S976",
     "source": "openfigi",
     "ticker": "UHS",
+    "unresolved": false
+  },
+  "91529Y106": {
+    "composite_figi": "BBG000BW2QX0",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BW2QX0",
+    "market_sector": "Equity",
+    "name": "UNUM GROUP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5X2J4",
+    "source": "openfigi",
+    "ticker": "UNM",
     "unresolved": false
   },
   "91879Q109": {
@@ -11398,6 +14763,19 @@
     "ticker": "VTR",
     "unresolved": false
   },
+  "92277GAZ0": {
+    "composite_figi": null,
+    "delisted": false,
+    "exch_code": "TRACE",
+    "figi": "BBG01GYZF1H1",
+    "market_sector": "Corp",
+    "name": "VENTAS REALTY LP",
+    "security_type": "US DOMESTIC",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "VTR 3.75 06/01/26",
+    "unresolved": false
+  },
   "922908363": {
     "composite_figi": "BBG0015VYNT4",
     "delisted": false,
@@ -11448,6 +14826,19 @@
     "share_class_figi": "BBG00VC84K47",
     "source": "openfigi",
     "ticker": "VTYXGBP",
+    "unresolved": false
+  },
+  "92337R101": {
+    "composite_figi": "BBG00Q72WYG3",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00Q72WYG3",
+    "market_sector": "Equity",
+    "name": "VERA THERAPEUTICS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00Q72WYH2",
+    "source": "openfigi",
+    "ticker": "VERA",
     "unresolved": false
   },
   "92339V308": {
@@ -11580,6 +14971,32 @@
     "ticker": "VICI",
     "unresolved": false
   },
+  "926400102": {
+    "composite_figi": "BBG01103B471",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG01103B471",
+    "market_sector": "Equity",
+    "name": "VICTORIA'S SECRET & CO",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG01103B480",
+    "source": "openfigi",
+    "ticker": "VSXY",
+    "unresolved": false
+  },
+  "92764N102": {
+    "composite_figi": "BBG00H2QQ8T5",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00H2QQ8T5",
+    "market_sector": "Equity",
+    "name": "VIR BIOTECHNOLOGY INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00H2QQ8V2",
+    "source": "openfigi",
+    "ticker": "VIR",
+    "unresolved": false
+  },
   "92826C839": {
     "composite_figi": "BBG000PSKYX7",
     "delisted": false,
@@ -11684,6 +15101,32 @@
     "ticker": "WEC",
     "unresolved": false
   },
+  "92939UAP1": {
+    "composite_figi": null,
+    "delisted": false,
+    "exch_code": "FRANKFURT",
+    "figi": "BBG01N0Q7CX0",
+    "market_sector": "Corp",
+    "name": "WEC ENERGY GROUP INC",
+    "security_type": "US DOMESTIC",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "WEC 4.375 06/01/27",
+    "unresolved": false
+  },
+  "929740108": {
+    "composite_figi": "BBG000BDD940",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BDD940",
+    "market_sector": "Equity",
+    "name": "WABTEC CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5XBT3",
+    "source": "openfigi",
+    "ticker": "WAB",
+    "unresolved": false
+  },
   "931142103": {
     "composite_figi": "BBG000BWXBC2",
     "delisted": false,
@@ -11695,6 +15138,19 @@
     "share_class_figi": "BBG001S5XH92",
     "source": "openfigi",
     "ticker": "WMT",
+    "unresolved": false
+  },
+  "931427108": {
+    "composite_figi": "BBG00JRYCBM2",
+    "delisted": false,
+    "exch_code": "LN",
+    "figi": "BBG00JRYCBN1",
+    "market_sector": "Equity",
+    "name": "WALGREENS BOOTS ALLIANCE INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5XBY7",
+    "source": "openfigi",
+    "ticker": "0LSZ",
     "unresolved": false
   },
   "934423104": {
@@ -11775,6 +15231,19 @@
     "ticker": "WSO",
     "unresolved": false
   },
+  "94419L101": {
+    "composite_figi": "BBG001B17MV2",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG001B17MV2",
+    "market_sector": "Equity",
+    "name": "WAYFAIR INC- CLASS A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001THKQ26",
+    "source": "openfigi",
+    "ticker": "W",
+    "unresolved": false
+  },
   "94419LAD3": {
     "composite_figi": null,
     "delisted": false,
@@ -11786,6 +15255,19 @@
     "share_class_figi": null,
     "source": "openfigi",
     "ticker": "W 1.125 11/01/24",
+    "unresolved": false
+  },
+  "946784105": {
+    "composite_figi": "BBG01JRQSDB9",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG01JRQSDB9",
+    "market_sector": "Equity",
+    "name": "WAYSTAR HOLDING CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG01JRQSF60",
+    "source": "openfigi",
+    "ticker": "WAY",
     "unresolved": false
   },
   "947890109": {
@@ -11825,6 +15307,45 @@
     "share_class_figi": "BBG001S5RTQ4",
     "source": "openfigi",
     "ticker": "WELL",
+    "unresolved": false
+  },
+  "95058W100": {
+    "composite_figi": "BBG000D52545",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000D52545",
+    "market_sector": "Equity",
+    "name": "WENDY'S CO/THE",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S7HBX2",
+    "source": "openfigi",
+    "ticker": "WEN",
+    "unresolved": false
+  },
+  "95082P105": {
+    "composite_figi": "BBG000D0FNV3",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000D0FNV3",
+    "market_sector": "Equity",
+    "name": "WESCO INTERNATIONAL INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SCRP78",
+    "source": "openfigi",
+    "ticker": "WCC",
+    "unresolved": false
+  },
+  "952845105": {
+    "composite_figi": "BBG000D6PCT6",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000D6PCT6",
+    "market_sector": "Equity",
+    "name": "WEST FRASER TIMBER CO LTD",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S60WD8",
+    "source": "openfigi",
+    "ticker": "WFG",
     "unresolved": false
   },
   "955306105": {
@@ -11970,6 +15491,19 @@
     "ticker": "WTFC",
     "unresolved": false
   },
+  "977852102": {
+    "composite_figi": "BBG00ZDPS4H5",
+    "delisted": false,
+    "exch_code": "X9",
+    "figi": "BBG00ZDPS4J3",
+    "market_sector": "Equity",
+    "name": "WOLFSPEED INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S6YWT4",
+    "source": "openfigi",
+    "ticker": "CREEEUR",
+    "unresolved": false
+  },
   "98138H101": {
     "composite_figi": "BBG000VC0T95",
     "delisted": false,
@@ -11981,6 +15515,19 @@
     "share_class_figi": "BBG001T21KQ7",
     "source": "openfigi",
     "ticker": "WDAY",
+    "unresolved": false
+  },
+  "98139A105": {
+    "composite_figi": "BBG007BVZ8H9",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG007BVZ8H9",
+    "market_sector": "Equity",
+    "name": "WORKIVA INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG007BVZ8J7",
+    "source": "openfigi",
+    "ticker": "WK",
     "unresolved": false
   },
   "98156QAB4": {
@@ -12074,6 +15621,19 @@
     "ticker": "XLNX",
     "unresolved": false
   },
+  "98401F105": {
+    "composite_figi": "BBG0026ZG4W0",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG0026ZG4W0",
+    "market_sector": "Equity",
+    "name": "XENCOR INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG0026ZG4X9",
+    "source": "openfigi",
+    "ticker": "XNCR",
+    "unresolved": false
+  },
   "98419M100": {
     "composite_figi": "BBG001D8R5D0",
     "delisted": false,
@@ -12087,6 +15647,19 @@
     "ticker": "XYL",
     "unresolved": false
   },
+  "98420N105": {
+    "composite_figi": "BBG0073DM784",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG0073DM784",
+    "market_sector": "Equity",
+    "name": "XENON PHARMACEUTICALS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG002VBMLS5",
+    "source": "openfigi",
+    "ticker": "XENE",
+    "unresolved": false
+  },
   "988498101": {
     "composite_figi": "BBG000BH3GZ2",
     "delisted": false,
@@ -12098,6 +15671,19 @@
     "share_class_figi": "BBG001S7JQ30",
     "source": "openfigi",
     "ticker": "YUM",
+    "unresolved": false
+  },
+  "989207105": {
+    "composite_figi": "BBG000CC7LQ7",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000CC7LQ7",
+    "market_sector": "Equity",
+    "name": "ZEBRA TECHNOLOGIES CORP-CL A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S6SX73",
+    "source": "openfigi",
+    "ticker": "ZBRA",
     "unresolved": false
   },
   "98936J101": {
@@ -12269,6 +15855,24 @@
     "ticker": null,
     "unresolved": true
   },
+  "G0260P102": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
+  "G037AX101": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
   "G0403H108": {
     "figi": null,
     "name": null,
@@ -12332,6 +15936,24 @@
     "ticker": null,
     "unresolved": true
   },
+  "G1110E107": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
+  "G11448100": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
   "G1151C101": {
     "figi": null,
     "name": null,
@@ -12342,6 +15964,15 @@
     "unresolved": true
   },
   "G16249107": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
+  "G16962105": {
     "figi": null,
     "name": null,
     "reason": "No identifier found.",
@@ -12395,7 +16026,34 @@
     "ticker": null,
     "unresolved": true
   },
+  "G3223R108": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
+  "G3265R107": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
   "G3323L100": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
+  "G3421J106": {
     "figi": null,
     "name": null,
     "reason": "No identifier found.",
@@ -12423,6 +16081,24 @@
     "unresolved": true
   },
   "G39387108": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
+  "G4124C109": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
+  "G4253H101": {
     "figi": null,
     "name": null,
     "reason": "No identifier found.",
@@ -12459,6 +16135,15 @@
     "unresolved": true
   },
   "G47567105": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
+  "G4766E116": {
     "figi": null,
     "name": null,
     "reason": "No identifier found.",
@@ -12522,6 +16207,15 @@
     "unresolved": true
   },
   "G54950103": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
+  "G5509L101": {
     "figi": null,
     "name": null,
     "reason": "No identifier found.",
@@ -12602,6 +16296,15 @@
     "ticker": null,
     "unresolved": true
   },
+  "G68707101": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
   "G7709Q104": {
     "figi": null,
     "name": null,
@@ -12639,6 +16342,15 @@
     "unresolved": true
   },
   "G8060N102": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
+  "G8473T100": {
     "figi": null,
     "name": null,
     "reason": "No identifier found.",
@@ -12710,6 +16422,15 @@
     "ticker": null,
     "unresolved": true
   },
+  "G96115103": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
   "G96629103": {
     "figi": null,
     "name": null,
@@ -12737,7 +16458,25 @@
     "ticker": null,
     "unresolved": true
   },
+  "H11356104": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
   "H1467J104": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
+  "H2906T109": {
     "figi": null,
     "name": null,
     "reason": "No identifier found.",
@@ -12800,6 +16539,15 @@
     "ticker": null,
     "unresolved": true
   },
+  "M6191J100": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
   "M7S64H106": {
     "figi": null,
     "name": null,
@@ -12809,7 +16557,25 @@
     "ticker": null,
     "unresolved": true
   },
+  "M87915274": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
   "M98068105": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
+  "N00985106": {
     "figi": null,
     "name": null,
     "reason": "No identifier found.",
@@ -12845,6 +16611,15 @@
     "ticker": null,
     "unresolved": true
   },
+  "N3167Y103": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
   "N53745100": {
     "figi": null,
     "name": null,
@@ -12855,6 +16630,42 @@
     "unresolved": true
   },
   "N6596X109": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
+  "N72482123": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
+  "N82405106": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
+  "N90064101": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
+  "P31076105": {
     "figi": null,
     "name": null,
     "reason": "No identifier found.",

@@ -651,6 +651,14 @@ function renderBanners(){
       '최신 분기 가치 커버리지 <b>' + pct1(cov) + '</b> (전 기간 최저 ' + pct1(mn) + '). ' +
       '비중(%)은 <b>절삭 전 전체 포트폴리오</b> 기준이라 합이 100%에 미달합니다 — 의도된 표기입니다.</div>');
   }
+  // 옵션 명목가가 총액을 지배하면 '총 포트폴리오 가치'가 보유 주식 가치로 오독된다.
+  // 임계 20%는 임의값이 아니라 '한 종목의 콜 하나로도 넘길 수 있는' 최소선이다.
+  if(!isMarketMaker() && (m.options_value_pct||0) >= 20){
+    out.push('<div class="banner"><b>금액의 ' + esc(String(m.options_value_pct)) + '%가 옵션 명목가입니다.</b> ' +
+      '이 운용사는 PUT/CALL ' + esc(String(m.options_position_count||0)) + '건을 보유하며, 13F 는 옵션을 ' +
+      '<b>기초자산 명목가</b>로 보고합니다 — 실제 투입 금액(프리미엄)이 아닙니다. ' +
+      '총액을 보유 주식 가치로 읽으면 크게 과대평가되고, PUT 은 방향이 반대입니다.</div>');
+  }
   (m.warnings||[]).forEach(w => out.push('<div class="banner">' + esc(w) + '</div>'));
   document.getElementById("banners").innerHTML = out.join("");
 }

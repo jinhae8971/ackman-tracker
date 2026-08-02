@@ -14,11 +14,12 @@
 ---------
 운용사마다 13F 의 성격이 완전히 다르다.
 
-  Pershing  ~11종목  / $13.7B  — 고확신 집중 포트폴리오
-  Berkshire ~29종목  / $263B   — 고확신 집중 (단, 복수 매니저 중복 행 존재)
-  Citadel   6,733종목/ $618B   — 마켓메이커. 옵션 7,304행 포함, 분기당 7.85MB
+  Pershing    ~11종목  / $13.7B  — 고확신 집중 포트폴리오
+  Berkshire   ~29종목  / $263B   — 고확신 집중 (단, 복수 매니저 중복 행 존재)
+  Citadel     6,733종목/ $618B   — 마켓메이커. 옵션 7,304행 포함, 분기당 7.85MB
+  Situational ~42종목  / $13.7B  — 신생. 2024Q4 부터 6개 분기뿐이라 시계열이 짧다
 
-Citadel 을 그대로 적재하면 저장소가 감당하지 못하고, Top-10 비중 21.7% 인
+Citadel·Point72 를 그대로 적재하면 저장소가 감당하지 못하고, Top-10 비중 21.7% 인
 포트폴리오에 '확신 매수' 같은 해석을 붙이는 것 자체가 오독이다. 그래서
 `exclude_options` / `max_positions` 정책으로 잘라내되, 잘라낸 사실을
 `coverage.jsonl` 에 남기고 대시보드에 명시한다.
@@ -121,8 +122,71 @@ CITADEL = Entity(
     alert_strong=False,
 )
 
-ORDER = ["pershing", "berkshire", "citadel"]
-REGISTRY = {e.key: e for e in (PERSHING, BERKSHIRE, CITADEL)}
+# CIK 선택 근거
+# ------------
+# EDGAR 에는 이름이 비슷한 두 법인이 있고 2026Q1 에 같은 포트폴리오
+# ($13,676,657,577 / 42종목)를 각자 제출했다.
+#
+#   0002045724  Situational Awareness LP           13F-HR 6건 (2024Q4~2026Q1)
+#   0002038540  Situational Awareness Partners LP  13F-HR 1건 (2026Q1)
+#
+# 둘 다 등록하면 2026Q1 이 두 배로 잡힌다. 이력이 온전한 2045724 만 쓴다.
+SITUATIONAL = Entity(
+    key="situational",
+    cik="0002045724",
+    name="Situational Awareness LP",
+    display="Situational Awareness",
+    manager="Leopold Aschenbrenner",
+    profile="conviction",
+    color="#7c3aed",
+    blurb="AI 테마에 집중하는 신생 헤지펀드. 첫 13F 가 2024Q4 라 비교 구간이 "
+          "다른 세 곳보다 짧고, 6개 분기 만에 $0.25B → $13.7B 로 불어난 만큼 "
+          "'증액'이 확신인지 신규 자금 유입인지 구분해서 봐야 한다.",
+    # 2025-12-31 은 커버페이지 tableValueTotal 이 5,516,758,344 로 행 합계보다
+    # $1 적다. 제출인 반올림이며 파서가 경고 후 통과시킨다(parse_13f 체크섬 2).
+    # 기준선은 '행 합계'로 잡는다 — 파이프라인이 실제로 만들어야 하는 값이다.
+    golden={
+        "2026-03-31": (42, 13_676_657_577),
+        "2025-12-31": (29, 5_516_758_345),
+        "2024-12-31": (6, 254_813_765),
+    },
+)
+
+# CIK 선택 근거
+# ------------
+# Point72 는 EDGAR 에 8개 관계사가 등록돼 있다(홍콩·싱가포르·런던·DIFC 등).
+# 13F-HR 을 제출하는 미국 본체는 0001603466 하나뿐이며 나머지는 해외
+# 자문 법인이라 13F 의무가 없다. 코헨의 이전 법인 SAC Capital(0001063296)
+# 은 2014년 폐쇄돼 공시가 끊겼으므로 연결하지 않는다.
+POINT72 = Entity(
+    key="point72",
+    cik="0001603466",
+    name="Point72 Asset Management, L.P.",
+    display="Point72",
+    manager="Steve Cohen",
+    profile="market_maker",
+    color="#be123c",
+    blurb="수백 명의 포트폴리오 매니저가 각자 운용하는 멀티매니저 펀드. "
+          "2026Q1 기준 3,704행 중 1,721행이 옵션이고 보통주 1,983종목의 "
+          "상위 10개 비중이 13.4%에 불과하다. 개별 종목 변화를 '코헨의 판단'"
+          "으로 읽으면 오독이다 — 대부분 개별 PM 의 독립 포지션이다.",
+    exclude_options=True,
+    max_positions=200,
+    default_backfill=20,
+    alert_strong=False,
+    # golden 을 비워 두는 이유는 Citadel 과 같다. 골든 검증은 절삭 **이후**
+    # 보유 목록과 대조하는데, 절삭 결과는 파이프라인 자신의 출력이라 기준선이
+    # 될 수 없다(순환 검증). 대신 파서의 2단 체크섬(행 수 하드 / 금액 tolerant)
+    # 이 절삭 이전 원본에서 이미 전량 대조를 끝낸다.
+    #
+    # 참고로 확인한 원본 커버페이지 값 — 체크섬이 전부 일치했다:
+    #   2026-03-31  3,704행 $78,051,184,236  (옵션 1,721 / 보통주 1,983)
+    #   2025-12-31  3,862행 $89,421,368,731  (옵션 1,745 / 보통주 2,117)
+    #   2024-12-31  2,038행 $45,388,177,650  (옵션   804 / 보통주 1,234)
+)
+
+ORDER = ["pershing", "berkshire", "citadel", "situational", "point72"]
+REGISTRY = {e.key: e for e in (PERSHING, BERKSHIRE, CITADEL, SITUATIONAL, POINT72)}
 
 
 def all_entities() -> list[Entity]:

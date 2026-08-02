@@ -7,7 +7,7 @@
 출력:
   dashboard/data/index.json      — 엔티티 목록 + 요약 (사이드탭이 제일 먼저 읽는다)
   dashboard/data/{key}.json      — 엔티티별 전체 페이로드
-  dashboard/data/compare.json    — 3사 비교 뷰 전용 사전 집계
+  dashboard/data/compare.json    — 다사 비교 뷰 전용 사전 집계
 
 입력 해석 (엔티티별):
   1) data/normalized/{key}/holdings.jsonl 이 있고 비어 있지 않으면 그것
@@ -562,6 +562,23 @@ def build_entity(key: str, allow_sample: bool) -> tuple:
     )
 
     cur = payload["current"]
+
+    # 옵션 명목가 비중 — 프론트가 배너를 띄울 근거. 여기서 계산하는 이유는
+    # 브라우저에서 다시 더하면 절삭 페이로드(상위 구간만 실림)로 계산돼
+    # 실제와 다른 값이 나오기 때문이다.
+    #
+    # 왜 필요한가: Situational Awareness 는 2026Q1 금액의 72%가 PUT/CALL
+    # 명목가다(NVDA 보통주는 $497,912 인데 NVDA PUT 이 $1.57B). 총액을
+    # '보유 주식 가치'로 읽으면 자릿수가 틀린다. 마켓메이커는 옵션을 애초에
+    # 버리므로(exclude_options) 이 경고가 필요 없다.
+    _cur_pos = cur.get("positions") or []
+    _tot = sum(p.get("value_usd") or 0 for p in _cur_pos)
+    _opt = [p for p in _cur_pos if p.get("put_call")]
+    payload["meta"]["options_value_usd"] = sum(p.get("value_usd") or 0 for p in _opt)
+    payload["meta"]["options_position_count"] = len(_opt)
+    payload["meta"]["options_value_pct"] = (
+        round(payload["meta"]["options_value_usd"] / _tot * 100, 1) if _tot else 0.0)
+
     summary = dict(
         key=key, **{k: em[k] for k in ("display", "name", "manager", "profile",
                                        "color", "blurb", "cik", "truncated")},
@@ -583,8 +600,43 @@ def build_entity(key: str, allow_sample: bool) -> tuple:
 DIRECTION = {"NEW": +1, "ADD": +1, "TRIM": -1, "EXIT": -1}
 
 
+def _compare_notes(keys: list, payloads: dict) -> list:
+    """비교 뷰 주석. 절삭 엔티티 목록을 레지스트리에서 끌어와 하드코딩을 없앤다.
+
+    엔티티가 늘 때마다 문구를 손대야 하는 구조였는데(Citadel 만 이름이 박혀
+    있었다), Point72 가 같은 정책으로 들어오면서 문구가 즉시 거짓이 된다.
+    truncated 플래그가 곧 사실이므로 그걸 그대로 읽는다.
+    """
+    notes = []
+    trunc = [_entity_meta(k)["display"] for k in keys if _entity_meta(k)["truncated"]]
+    if trunc:
+        notes.append(
+            f"{' · '.join(trunc)} 은(는) 보통주 상위 200종목만 수집하므로 총액·종목수를 "
+            "다른 곳과 직접 비교하면 안 된다. 추세(방향)만 비교 가능하다.")
+    # 옵션 명목가가 포트폴리오를 지배하는 엔티티는 '금액=확신'이 성립하지 않는다.
+    # 절삭 엔티티는 옵션을 이미 버렸으므로 해당 없음.
+    for k in keys:
+        m = _entity_meta(k)
+        if m["truncated"]:
+            continue
+        opts = [p for p in payloads[k]["current"]["positions"] if p.get("put_call")]
+        if not opts:
+            continue
+        tot = sum(p.get("value_usd") or 0
+                  for p in payloads[k]["current"]["positions"]) or 1
+        share = sum(p.get("value_usd") or 0 for p in opts) / tot * 100
+        if share >= 20:
+            notes.append(
+                f"{m['display']} 은(는) 최신 분기 금액의 {share:.0f}%가 옵션 명목가다. "
+                "총액을 '보유 주식 가치'로 읽으면 크게 과대평가된다.")
+    notes.append(
+        "13F 는 45일 지연 스냅샷이다. '엇갈린 매매'는 같은 분기말 기준일 뿐 "
+        "실제로 같은 날 반대로 거래했다는 뜻이 아니다.")
+    return notes
+
+
 def build_compare(payloads: dict) -> dict:
-    """3사 비교 사전 집계.
+    """엔티티 간 비교 사전 집계.
 
     분기 축은 모든 엔티티 report_date 의 합집합이고, 데이터가 없는 칸은 null 로
     남겨 프론트가 spanGaps 로 잇는다. 절삭 엔티티(Citadel)의 금액을 다른 두
@@ -697,12 +749,7 @@ def build_compare(payloads: dict) -> dict:
         series=series,
         common=common[:60],
         opposing=opposing[:120],
-        notes=[
-            "Citadel 은 보통주 상위 200종목만 수집하므로 총액·종목수를 다른 두 곳과 "
-            "직접 비교하면 안 된다. 추세(방향)만 비교 가능하다.",
-            "13F 는 45일 지연 스냅샷이다. '엇갈린 매매'는 같은 분기말 기준일 뿐 "
-            "실제로 같은 날 반대로 거래했다는 뜻이 아니다.",
-        ],
+        notes=_compare_notes(keys, payloads),
     )
 
 

@@ -1,7 +1,18 @@
 # Ackman Tracker
 
-빌 애크먼(**Pershing Square Capital Management, L.P.**, CIK `0001336528`)의 SEC 공시를
-수집·정규화·분석해 정적 대시보드로 서빙하는 시스템입니다.
+기관 투자자 5곳의 SEC 13F 공시를 수집·정규화·분석해 정적 대시보드로 서빙하는 시스템입니다.
+
+| 엔티티 | 운용역 | CIK | 성격 | 수집 정책 |
+|---|---|---|---|---|
+| Pershing Square | Bill Ackman | `0001336528` | 고확신 집중 (11종목) | 전량 |
+| Berkshire Hathaway | Warren Buffett | `0001067983` | 고확신 집중 (29종목) | 전량 |
+| Citadel Advisors | Ken Griffin | `0001423053` | 마켓메이커 (6,700종목) | 옵션 제외 · 보통주 상위 200 |
+| Situational Awareness | Leopold Aschenbrenner | `0002045724` | 신생 AI 테마 (42종목) | 전량 (금액의 72%가 옵션 명목가) |
+| Point72 | Steve Cohen | `0001603466` | 멀티매니저 (2,000종목) | 옵션 제외 · 보통주 상위 200 |
+
+절삭 엔티티도 **비중(weight_pct)은 절삭 이전 전체 포트폴리오 기준**으로 계산합니다.
+자르고 나서 100%로 다시 정규화하면 없는 집중도를 만들어내기 때문입니다. 무엇을
+얼마나 버렸는지는 `data/normalized/{entity}/coverage.jsonl` 에 분기별로 남습니다.
 
 **서버 0대 · 시크릿 0개 · 비용 $0.**
 GitHub Actions 크론이 EDGAR에서 데이터를 받아 JSONL을 리포지토리에 커밋하고,

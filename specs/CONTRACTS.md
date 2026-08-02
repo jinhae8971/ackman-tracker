@@ -37,7 +37,13 @@ def parse_13f(accession: str, filing_date: str, form_type: str) -> tuple[Filing,
     """13F 파싱. 반드시:
        1) primary_doc 에서 schemaVersion / amendmentType / tableValueTotal / periodOfReport 추출
        2) value 를 schema.normalize_value 로 달러 정규화
-       3) tableValueTotal 대조 체크섬 — 불일치 시 ValueError 로 하드 실패
+       3) 2단 체크섬:
+            3a) tableEntryTotal vs 파싱 행 수 — 불일치 시 ChecksumError 하드 실패.
+                행 누락은 그 종목을 '전량청산' 이벤트로 둔갑시키므로 타협 없음.
+            3b) tableValueTotal vs 정규화 이전 raw 합계 — 오차가 행 수를 넘으면
+                하드 실패, 그 이내면 경고 후 통과. 제출인 자신의 반올림으로
+                총액이 몇 달러 어긋나는 공시가 실재한다
+                (0002045724-26-000002 은 정확히 $1 어긋난다).
        4) weight_pct 계산
        ticker/figi 는 None 으로 두고 map_cusips 가 채운다."""
 
@@ -111,6 +117,11 @@ def holding_periods(all_holdings: list[dict]) -> dict[str, dict]
 #   python -m src.analytics.build_events
 #   holdings.jsonl 전체를 분기 순회하며 events.jsonl, metrics.jsonl 생성
 #   event_id 는 schema.make_event_id 로 생성 — 재실행 시 동일 결과(멱등)
+#   형식: {report_date}:{cusip}:{event_type}[:PUT|:CALL]
+#   put_call 이 들어가는 이유: 같은 CUSIP 을 보통주와 PUT/CALL 로 동시에
+#   보유하는 운용사가 있어(SA 의 NVDA, Pershing 의 2013년 PG) 접미가 없으면
+#   한 분기에 같은 ID 가 중복 생성돼 게이트의 DUP_EVENT_ID 에 걸린다.
+#   보통주는 접미가 붙지 않으므로 옵션을 안 든 엔티티의 기존 ID 는 불변이다.
 ```
 
 ---

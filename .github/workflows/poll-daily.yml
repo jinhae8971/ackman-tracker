@@ -1,4 +1,4 @@
-# 13D/G · Form 3/4 신규 감지 (준실시간 채널) — 3사 공통.
+# 13D/G · Form 3/4 신규 감지 (준실시간 채널) — 5사 공통.
 #
 # 13F 는 45일 지연이지만 SC 13D 는 취득 후 5영업일(정정 2영업일),
 # Form 4 는 거래 후 2영업일 내 제출된다. 이 워크플로우는 신규 제출을 감지해
@@ -48,13 +48,13 @@ env:
   SEC_USER_AGENT: "AckmanTracker younggil jinhae8971@gmail.com"
   PYTHONUNBUFFERED: "1"
   PYTHONPATH: ${{ github.workspace }}
-  ALL_ENTITIES: "pershing berkshire citadel"
+  ALL_ENTITIES: "pershing berkshire citadel situational point72"
   DEFAULT_FORMS: "SC 13D,SC 13D/A,SC 13G,SC 13G/A,SCHEDULE 13D,SCHEDULE 13D/A,SCHEDULE 13G,SCHEDULE 13G/A,3,4"
 
 jobs:
   poll:
     runs-on: ubuntu-latest
-    # submissions JSON 한 번씩만 받는다. 3사라도 1분 남짓.
+    # submissions JSON 한 번씩만 받는다. 5사라도 1분 남짓.
     timeout-minutes: 30
     steps:
       - name: 체크아웃

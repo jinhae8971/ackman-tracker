@@ -56,7 +56,7 @@ const w = dom.window;
   report.push(['차트 생성', (w.__charts || []).length]);
 
   // --- 엔티티 전환 ---
-  for (const key of ['berkshire', 'citadel']) {
+  for (const key of ['berkshire', 'citadel', 'situational', 'point72']) {
     await w.selectEntity(key);
     report.push(['--- ' + key, txt('#entname')]);
     report.push(['  포트폴리오 행', w.document.querySelectorAll('#pf tbody tr').length]);
