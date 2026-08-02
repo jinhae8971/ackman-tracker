@@ -2,7 +2,7 @@
 
 왜 필요한가
 -----------
-`fetch-13f` 와 `poll-daily` 는 같은 `data/state/last_seen.json` 에 쓴다. 두
+`fetch-13f` 와 `poll-daily` 는 같은 `data/state/{entity}.json` 에 쓴다. 두
 워크플로우가 겹치면 `git pull --rebase` 가 이 파일에서 충돌하고, 충돌은
 자동 해소되지 않으므로 워크플로우가 하드 실패한다. 실제 첫 운영 실행에서
 이 충돌이 발생해 `alerted` 상태가 유실됐다.
@@ -11,8 +11,8 @@
 따라서 두 버전의 정답 병합은 **항상 합집합**이며 순서·타이밍과 무관하게
 결과가 같다. 이 스크립트가 그 병합을 수행한다.
 
-    python -m src.pipeline.merge_state --into data/state/last_seen.json \
-        --with /tmp/remote_last_seen.json
+    python -m src.pipeline.merge_state --into data/state/pershing.json \
+        --with /tmp/remote_state.json
 
 `--with` 가 없거나 읽을 수 없으면 아무것도 하지 않고 성공한다(최초 실행).
 """

@@ -509,6 +509,9 @@ def main(argv=None) -> int:
     holdings = read_jsonl(Paths.HOLDINGS)
     metrics = read_jsonl(Paths.METRICS)
     events = read_jsonl(Paths.EVENTS)
+    # 절삭 엔티티는 weight_pct 합계 기대치가 100 이 아니다. 게이트가 이를
+    # 알려면 coverage.jsonl 을 함께 넘겨야 한다(gate.py 독스트링 참고).
+    coverage = read_jsonl(Paths.COVERAGE)
     log(f"산출물: holdings {len(holdings)}행 / events {len(events)}행 / "
         f"metrics {len(metrics)}행")
 
@@ -528,7 +531,7 @@ def main(argv=None) -> int:
         violations = []
     else:
         group("무결성 게이트")
-        violations = integrity_gate(holdings, metrics, events)
+        violations = integrity_gate(holdings, metrics, events, coverage)
         log(format_violations(violations, annotate=False))
         endgroup()
 
@@ -586,7 +589,12 @@ def main(argv=None) -> int:
 
     alert = "false"
     title = ""
-    if strong:
+    if strong and not schema.ENTITY.alert_strong:
+        # 마켓메이커: STRONG 은 계속 계산·저장·표시하되 Issue 로는 올리지 않는다
+        # (entities.Entity.alert_strong 주석 참고).
+        notice(f"STRONG 이벤트 {len(strong)}건 — {schema.ENTITY_DISPLAY} 는 "
+               "알림 대상이 아닙니다(마켓메이커). 데이터는 정상 반영됩니다.")
+    elif strong:
         title = notify.strong_issue_title(alert_events)
         write_alert(args.alert_file, title,
                     notify.render_strong_issue(alert_events, metrics))

@@ -49,6 +49,14 @@ class Entity:
     max_positions: Optional[int] = None   # 가치 상위 N 종목만 보존
     default_backfill: Optional[int] = None  # 기본 백필 분기 수 (None=전량)
 
+    # --- 알림 정책 -----------------------------------------------------
+    # STRONG('고확신 변화') Issue 를 낼 것인가. 마켓메이커는 분기당 90건 규모의
+    # STRONG 이 잡히는데, 그 대부분이 헤지·차익거래의 잔여물이라 '확신'이라는
+    # 라벨 자체가 오독이다. 알림을 끄는 것은 데이터를 숨기는 것이 아니라
+    # 의미 없는 신호로 알림 채널을 마비시키지 않기 위한 것이다 — 수집·저장·
+    # 대시보드 표시는 그대로 유지된다.
+    alert_strong: bool = True
+
     # --- 검증 기준선 (report_date -> (종목수, 총액 USD)) ----------------
     golden: dict = field(default_factory=dict)
 
@@ -110,6 +118,7 @@ CITADEL = Entity(
     exclude_options=True,
     max_positions=200,
     default_backfill=20,
+    alert_strong=False,
 )
 
 ORDER = ["pershing", "berkshire", "citadel"]

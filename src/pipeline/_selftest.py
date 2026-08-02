@@ -30,6 +30,7 @@ except ImportError:
     )
     from src.common.schema import Paths
 
+from src.common import schema
 from src.pipeline import gate, notify, run
 
 _failures: list[str] = []
@@ -85,9 +86,12 @@ def test_notify() -> None:
     check("metrics 가 None 이어도 크래시 없음",
           "분기 지표 없음" in notify.emit_summary(ev, None))
 
+    # 제목에 엔티티 표기명이 들어간다. 3사가 같은 분기에 STRONG 이벤트를 내면
+    # 접두가 없을 경우 제목이 충돌해 두 번째·세 번째 알림이 '중복'으로 묻힌다.
     title = notify.strong_issue_title(ev)
-    check("STRONG 이슈 제목이 분기별 결정적",
-          title == "[STRONG] 2026-03-31 고확신 변화 3건", f"({title})")
+    want = f"[STRONG][{schema.ENTITY_DISPLAY}] 2026-03-31 고확신 변화 3건"
+    check("STRONG 이슈 제목이 엔티티·분기별 결정적",
+          title == want, f"({title} != {want})")
     check("STRONG 이슈 제목이 재호출에도 동일",
           title == notify.strong_issue_title(list(reversed(ev))))
     check("STRONG 이슈 본문 렌더", len(notify.render_strong_issue(ev, me)) > 200)

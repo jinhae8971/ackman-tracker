@@ -322,7 +322,7 @@ def render_failure_issue(
         "",
         "1. 위 실행 링크에서 로그를 확인합니다.",
         "2. 원인을 고친 뒤 `workflow_dispatch` 로 재실행합니다.",
-        "3. `data/state/last_seen.json` 은 게이트 통과 시에만 갱신되므로,",
+        "3. `data/state/{entity}.json` 은 게이트 통과 시에만 갱신되므로,",
         "   실패한 accession 은 다음 실행에서 자동으로 재시도됩니다.",
         "",
         "동일 제목의 열린 이슈가 있으면 새 이슈 대신 코멘트가 달립니다.",

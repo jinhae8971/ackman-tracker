@@ -23,10 +23,10 @@ src/pipeline/             오케스트레이션 · 무결성 게이트 · 알림
 dashboard/                정적 HTML 대시보드 + 빌드 스크립트
 .github/workflows/        크론 3종
 data/
-  raw/                    EDGAR 원문 보존 (감사 추적)
-  normalized/             holdings / filings / events / metrics .jsonl
-  reference/              cusip_map.json (영구 캐시)
-  state/                  last_seen.json (멱등성 상태)
+  raw/{entity}/           EDGAR 원문 보존 (감사 추적)
+  normalized/{entity}/    holdings / filings / events / metrics / coverage .jsonl
+  reference/              cusip_map.json (영구 캐시 — 엔티티 공용)
+  state/{entity}.json     멱등성 상태 (엔티티별로 분리)
 ```
 
 데이터 흐름:
@@ -189,7 +189,7 @@ OpenFIGI는 무인증 시 **분당 25요청, 요청당 100건 배치**입니다.
 
 ### 멱등성과 상태 파일
 
-`data/state/last_seen.json`이 유일한 상태입니다.
+`data/state/{entity}.json`이 유일한 상태입니다. 엔티티별로 파일이 분리돼 한 운용사의 실패가 다른 운용사의 멱등성에 영향을 주지 않습니다.
 
 ```json
 {

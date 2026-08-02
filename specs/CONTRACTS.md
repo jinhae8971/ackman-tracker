@@ -120,7 +120,7 @@ def holding_periods(all_holdings: list[dict]) -> dict[str, dict]
 ```python
 # src/pipeline/run.py  (CLI)
 #   python -m src.pipeline.run --mode {incremental|backfill|events-only}
-#   1) state/last_seen.json 로 신규 accession 판정. 없으면 exit 0 + ::notice::
+#   1) state/{entity}.json 로 신규 accession 판정. 없으면 exit 0 + ::notice::
 #   2) collector 호출 -> holdings 갱신
 #   3) analytics 호출 -> events/metrics 갱신
 #   4) integrity_gate() 통과 시에만 state 갱신

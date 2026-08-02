@@ -9,9 +9,20 @@
 
     EMPTY_QUARTER  최신 분기 포지션 수 0
     TOTAL_SWING    총액이 전분기 대비 ±MAX_TOTAL_SWING_PCT 초과 변동
-    WEIGHT_SUM     weight_pct 합계가 100 ± 0.5 범위 밖
-    DUP_POSITION   동일 report_date 에 (cusip, title_of_class) 중복
+    WEIGHT_SUM     weight_pct 합계가 기대치 ± 0.5 범위 밖
+    DUP_POSITION   동일 report_date 에 (cusip, title_of_class, put_call) 중복
     DUP_EVENT_ID   event_id 중복
+
+절삭 엔티티(Citadel)의 WEIGHT_SUM
+---------------------------------
+Citadel 은 보통주 상위 200종목만 보존하므로 weight_pct 합계가 100 이 아니라
+12% 안팎이다. 결함이 아니라 의도된 표기다 — 비중은 '절삭 전 전체 포트폴리오'
+기준으로 계산해야 하며, 남은 200종목 기준으로 재계산하면 합이 100% 가 되어
+6,000종목을 든 마켓메이커가 집중 포트폴리오처럼 보인다.
+
+그래서 절삭 엔티티는 기대치를 100 이 아니라 `coverage.jsonl` 의 `coverage_pct`
+로 둔다. 느슨해지는 것이 아니라 오히려 더 강한 검사다 — 누군가 절삭 후 비중을
+재계산하면 합계가 100 으로 튀어 그 자리에서 걸린다.
 
 자체 단위 테스트:  python -m src.pipeline.gate
 """
@@ -85,17 +96,26 @@ def integrity_gate(
     holdings: list[dict],
     metrics: list[dict],
     events: Optional[list[dict]] = None,
+    coverage: Optional[list[dict]] = None,
 ) -> list[str]:
     """무결성 위반 사유 리스트를 반환한다. 빈 리스트면 통과.
 
     계약서 시그니처는 `(holdings, metrics)` 두 개다. `events` 는 event_id 중복
     검사를 위해 추가한 **선택 인자**이며, 생략하면 `data/normalized/events.jsonl`
     을 직접 읽는다. 위치 인자 두 개만 넘기는 기존 호출은 그대로 동작한다.
+
+    `coverage` 는 절삭 엔티티의 분기별 `coverage_pct` 를 담은 레코드다.
+    비어 있으면 모든 분기의 weight_pct 합계 기대치를 100 으로 본다.
     """
     violations: list[str] = []
 
     if events is None:
         events = read_jsonl(Paths.EVENTS)
+    expected_weight = {
+        c.get("report_date"): _num(c.get("coverage_pct"), 100.0)
+        for c in (coverage or [])
+        if c.get("report_date") and c.get("truncated")
+    }
 
     holdings = holdings or []
     mbd = _metrics_by_date(metrics)
@@ -145,13 +165,18 @@ def integrity_gate(
         # ---------- 3) weight_pct 합계
         for rd in dates:
             s = weights[rd]
-            if abs(s - 100.0) > WEIGHT_SUM_TOLERANCE_PCT:
+            want = expected_weight.get(rd, 100.0)
+            if abs(s - want) > WEIGHT_SUM_TOLERANCE_PCT:
+                note = "" if want == 100.0 else " (절삭 커버리지 기준)"
                 violations.append(
                     f"[WEIGHT_SUM] {rd} weight_pct 합계 {s:.4f} 가 "
-                    f"100 ± {WEIGHT_SUM_TOLERANCE_PCT} 범위 밖"
+                    f"{want:.4f} ± {WEIGHT_SUM_TOLERANCE_PCT} 범위 밖{note}"
                 )
 
         # ---------- 4) 동일 report_date 내 (cusip, title_of_class) 중복
+        # 키에 put_call 을 포함한다(schema.Holding.key 와 동일). 빼면 같은
+        # 발행사의 보통주와 PUT/CALL 행이 '중복'으로 오인돼, 정상 데이터가
+        # 게이트에서 튕긴다.
         keys: Counter = Counter()
         for h in holdings:
             keys[
@@ -159,13 +184,14 @@ def integrity_gate(
                     h.get("report_date"),
                     h.get("cusip"),
                     h.get("title_of_class"),
+                    h.get("put_call") or "",
                 )
             ] += 1
-        for (rd, cusip, cls), n in sorted(keys.items(), key=lambda kv: str(kv[0])):
+        for (rd, cusip, cls, pc), n in sorted(keys.items(), key=lambda kv: str(kv[0])):
             if n > 1:
                 violations.append(
                     f"[DUP_POSITION] {rd} 에 (cusip={cusip}, "
-                    f"title_of_class={cls}) 가 {n}회 중복"
+                    f"title_of_class={cls}, put_call={pc or '-'}) 가 {n}회 중복"
                 )
 
     # ---------- 5) event_id 중복
@@ -182,11 +208,16 @@ def integrity_gate(
 
 
 def gate_from_disk() -> list[str]:
-    """디스크의 normalized 산출물로 게이트를 돌린다."""
+    """디스크의 normalized 산출물로 게이트를 돌린다.
+
+    coverage.jsonl 은 절삭 엔티티에만 존재한다. 없으면 빈 리스트가 되어
+    기대치가 100 으로 유지되므로 기존 엔티티의 동작은 그대로다.
+    """
     return integrity_gate(
         read_jsonl(Paths.HOLDINGS),
         read_jsonl(Paths.METRICS),
         read_jsonl(Paths.EVENTS),
+        read_jsonl(Paths.COVERAGE),
     )
 
 
@@ -320,6 +351,46 @@ def _selftest() -> int:
     e.append(copy.deepcopy(e[0]))
     check("7) 복합 — WEIGHT_SUM + DUP_EVENT_ID",
           integrity_gate(h, m, e), {"WEIGHT_SUM", "DUP_EVENT_ID"})
+
+    # --- 8) 절삭 엔티티: 합계가 coverage_pct 와 맞으면 통과
+    h, m, e = _good_dataset()
+    dates = sorted({r["report_date"] for r in h})
+    for row in h:                       # 전체를 1/10 로 눌러 합계 ~10% 로 만든다
+        row["weight_pct"] = round(row["weight_pct"] / 10.0, 4)
+    cov = []
+    for rd in dates:
+        s_rd = sum(r["weight_pct"] for r in h if r["report_date"] == rd)
+        cov.append({"report_date": rd, "truncated": True,
+                    "coverage_pct": round(s_rd, 4)})
+    check("8a) 절삭 — 합계가 coverage_pct 와 일치 (통과)",
+          integrity_gate(h, m, e, cov), set())
+
+    # 절삭 후 비중을 재계산해 합이 100 이 되면 반드시 걸려야 한다.
+    # 이것이 이 게이트가 막으려는 진짜 사고다.
+    h2 = copy.deepcopy(h)
+    for rd in dates:
+        rows = [r for r in h2 if r["report_date"] == rd]
+        tot = sum(r["weight_pct"] for r in rows)
+        for r in rows:
+            r["weight_pct"] = round(r["weight_pct"] / tot * 100.0, 4)
+    check("8b) 절삭 — 비중 재계산으로 합계 100 (실패해야 정상)",
+          integrity_gate(h2, m, e, cov), {"WEIGHT_SUM"})
+
+    # coverage 를 안 넘기면 기대치가 100 이라 절삭 데이터는 위반으로 잡힌다.
+    check("8c) 절삭 — coverage 미제공 시 기대치 100",
+          integrity_gate(h, m, e), {"WEIGHT_SUM"})
+
+    # --- 9) DUP_POSITION 은 put_call 을 구분한다
+    h, m, e = _good_dataset()
+    opt = copy.deepcopy(h[-1])
+    opt["put_call"] = "Put"             # 같은 발행사의 PUT 은 중복이 아니다
+    opt["weight_pct"] = 0.0
+    opt["value_usd"] = 0
+    h.append(opt)
+    check("9a) DUP_POSITION — 보통주 + PUT 은 중복 아님", integrity_gate(h, m, e), set())
+    h.append(copy.deepcopy(opt))        # 같은 PUT 이 두 번이면 중복이다
+    check("9b) DUP_POSITION — 같은 PUT 2회는 중복",
+          integrity_gate(h, m, e), {"DUP_POSITION"})
 
     print("=" * 74)
     print("gate.integrity_gate 자체 테스트")

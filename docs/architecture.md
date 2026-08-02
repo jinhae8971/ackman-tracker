@@ -143,7 +143,9 @@ data/
     cusip_map.json                  # CUSIP → 티커 (영구 캐시)
     sector_map.json                 # 티커 → 섹터
   state/
-    last_seen.json                  # 마지막 처리 accession (멱등성 보장)
+    pershing.json                   # 마지막 처리 accession (멱등성 보장)
+    berkshire.json                  # 엔티티별로 분리 — 한쪽 실패가 다른 쪽에
+    citadel.json                    # 영향을 주지 않는다
 ```
 
 ### 4.2 정규화 스키마
@@ -292,10 +294,10 @@ on:
 
 ### 6.2 멱등성 설계
 
-파이프라인은 몇 번을 재실행해도 같은 결과를 내야 합니다. `state/last_seen.json`에 처리 완료한 accession 집합을 유지하고, 신규 accession만 처리합니다. `events.jsonl`의 `event_id`가 `{report_date}:{cusip}:{event_type}`로 결정적이므로 중복 삽입이 원천 차단됩니다.
+파이프라인은 몇 번을 재실행해도 같은 결과를 내야 합니다. `state/{entity}.json`에 처리 완료한 accession 집합을 유지하고, 신규 accession만 처리합니다. `events.jsonl`의 `event_id`가 `{report_date}:{cusip}:{event_type}`로 결정적이므로 중복 삽입이 원천 차단됩니다.
 
 ```python
-seen = set(json.load(open("state/last_seen.json"))["accessions"])
+seen = set(json.load(open(f"state/{entity}.json"))["accessions"])
 new = [a for a in submissions_accessions if a not in seen]
 if not new:
     print("::notice::No new filings"); sys.exit(0)
@@ -317,7 +319,7 @@ if not new:
 
 ```
 [submissions API]
-      │  신규 accession 판정 (state/last_seen.json)
+      │  신규 accession 판정 (state/{entity}.json)
       ▼
 [index.json → infotable.xml + primary_doc.xml 다운로드]
       │  raw/ 에 원문 보존

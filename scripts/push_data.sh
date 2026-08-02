@@ -4,7 +4,7 @@
 # 왜 별도 스크립트인가
 # --------------------
 # `fetch-13f` 와 `poll-daily` 는 같은 브랜치에 push 하고 같은
-# `data/state/last_seen.json` 을 건드린다. 기존 구현은 `git pull --rebase
+# `data/state/{entity}.json` 을 건드린다. 기존 구현은 `git pull --rebase
 # --autostash` 였는데, 두 워크플로우가 겹치면 이 JSON 에서 충돌이 나고
 # rebase 는 자동 해소를 못 해 워크플로우가 하드 실패했다(실제 발생).
 #
@@ -12,6 +12,10 @@
 # 단조 증가 집합이므로 정답 병합은 항상 합집합이고, 그 합집합은 순서와 무관하다.
 # 상태 파일 외의 충돌은 자동 해소하지 않고 즉시 실패시킨다 — 조용히 덮어쓰는
 # 것보다 시끄럽게 멈추는 편이 안전하다.
+#
+# 상태 파일은 엔티티별로 분리돼 있다(data/state/{entity}.json). 단일 경로를
+# 하드코딩하면 Berkshire·Citadel 상태 충돌이 "자동 해소 불가"로 분류돼 워크플로우가
+# 하드 실패하므로, data/state/ 아래 JSON 전부를 합집합 대상으로 본다.
 #
 # 사용:
 #   scripts/push_data.sh "<커밋 메시지>" <스테이징할 경로...>
@@ -25,7 +29,7 @@ shift
 PATHS=("$@")
 [ "${#PATHS[@]}" -gt 0 ] || PATHS=(data)
 
-STATE="data/state/last_seen.json"
+STATE_DIR="data/state"
 BRANCH="${GITHUB_REF_NAME:-main}"
 OUT="${GITHUB_OUTPUT:-/dev/null}"
 
@@ -55,7 +59,7 @@ resolve_conflicts() {
   local unresolved=0 f
   while IFS= read -r f; do
     [ -n "$f" ] || continue
-    if [ "$f" = "$STATE" ]; then
+    if [ "${f#"$STATE_DIR"/}" != "$f" ] && [ "${f%.json}" != "$f" ]; then
       # rebase 중 :2=onto(원격), :3=재생되는 우리 커밋. 합집합은 대칭이라
       # 어느 쪽을 base 로 두든 결과가 같다.
       git show ":2:$f" > /tmp/state_a.json 2>/dev/null || echo '{}' > /tmp/state_a.json
