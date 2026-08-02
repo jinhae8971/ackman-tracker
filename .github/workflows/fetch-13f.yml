@@ -23,6 +23,10 @@ on:
         description: "backfill 시 처리할 파일링 개수 상한 (비우면 전량)"
         type: string
         default: ""
+      force_rebuild:
+        description: "데이터 변경이 없어도 대시보드를 강제 재빌드"
+        type: boolean
+        default: false
 
 permissions:
   contents: write   # data/*.jsonl 커밋
@@ -105,13 +109,13 @@ jobs:
       # 조건에 `committed` 가 아니라 `normalized_changed` 를 쓰는 이유:
       # 상태 파일의 `last_run` 은 매 실행 바뀌어 `committed` 가 항상 true 다.
       - name: 대시보드 재빌드 트리거
-        if: steps.commit.outputs.normalized_changed == 'true'
+        if: steps.commit.outputs.normalized_changed == 'true' || inputs.force_rebuild
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           gh workflow run build-dashboard.yml --ref "${GITHUB_REF_NAME}"
-          echo "::notice::보유내역이 변경되어 대시보드 재빌드를 요청했습니다."
+          echo "::notice::대시보드 재빌드를 요청했습니다 (normalized_changed=${{ steps.commit.outputs.normalized_changed }}, force=${{ inputs.force_rebuild }})."
 
       - name: 실패 Issue 생성
         if: failure()
