@@ -27,6 +27,7 @@ on:
 permissions:
   contents: write   # data/*.jsonl 커밋
   issues: write     # 실패 / STRONG 이벤트 알림 (별도 알림 인프라 없음)
+  actions: write    # build-dashboard 워크플로우 디스패치 (아래 주석 참고)
 
 # 같은 리포지토리에 커밋하는 워크플로우끼리 그룹을 공유해 push 경합을 차단한다.
 concurrency:
@@ -92,19 +93,25 @@ jobs:
       - name: 데이터 변경분 커밋
         id: commit
         run: |
+          scripts/push_data.sh \
+            "data(13f): 파이프라인 자동 갱신 (run ${GITHUB_RUN_ID})" data
+
+      # GITHUB_TOKEN 으로 만든 push 는 다른 워크플로우의 `push` 이벤트를
+      # 트리거하지 않는다(GitHub 의 재귀 실행 방지 정책). 즉 이 단계가 없으면
+      # 데이터가 갱신돼도 build-dashboard 가 영원히 돌지 않아 대시보드가
+      # 과거 데이터에 멈춘다. `workflow_dispatch` 는 GITHUB_TOKEN 으로도
+      # 항상 실행되므로 명시적으로 디스패치한다.
+      #
+      # 조건에 `committed` 가 아니라 `normalized_changed` 를 쓰는 이유:
+      # 상태 파일의 `last_run` 은 매 실행 바뀌어 `committed` 가 항상 true 다.
+      - name: 대시보드 재빌드 트리거
+        if: steps.commit.outputs.normalized_changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
           set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A data
-          if git diff --cached --quiet; then
-            echo "::notice::데이터 변경 없음 — 빈 커밋을 만들지 않습니다."
-            echo "committed=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          git commit -m "data(13f): 파이프라인 자동 갱신 (run ${GITHUB_RUN_ID})"
-          git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
-          git push origin "HEAD:${GITHUB_REF_NAME}"
-          echo "committed=true" >> "$GITHUB_OUTPUT"
+          gh workflow run build-dashboard.yml --ref "${GITHUB_REF_NAME}"
+          echo "::notice::보유내역이 변경되어 대시보드 재빌드를 요청했습니다."
 
       - name: 실패 Issue 생성
         if: failure()

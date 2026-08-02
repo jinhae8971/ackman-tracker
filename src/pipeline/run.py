@@ -26,7 +26,7 @@ import importlib.util
 import os
 import subprocess
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 try:
     from src.common.schema import Paths, load_json, read_jsonl, save_json
@@ -318,6 +318,10 @@ def build_parser() -> argparse.ArgumentParser:
                    help="analytics 단계를 건너뛴다")
     p.add_argument("--skip-gate", action="store_true",
                    help="무결성 게이트를 건너뛴다 (디버깅 전용, 워크플로우에서 사용 금지)")
+    p.add_argument("--alert-window-days", type=int, default=14,
+                   help="detect-only 모드에서 알림을 낼 최대 공시 경과일. "
+                        "상태가 유실돼도 과거 공시가 대량 재알림되지 않도록 막는다. "
+                        "0 이면 창을 적용하지 않는다.")
     p.add_argument("--alert-file", default=None,
                    help="Issue 본문을 기록할 파일 경로")
     p.add_argument("--dry-run", action="store_true",
@@ -386,6 +390,51 @@ def main(argv=None) -> int:
                                    gate="skipped", alert="false")
                         save_state(state, args.dry_run)
                         return EXIT_OK
+
+                    # 콜드스타트: `alerted` 가 비어 있으면 이번이 첫 폴링이다.
+                    # 이때 감지된 것은 "신규"가 아니라 과거 이력 전체이므로
+                    # 알리지 않고 기준선으로만 적재한다. 이 처리가 없으면 첫
+                    # 실행에서 수백 건짜리 Issue 가 생기고, 상태 저장이 실패하면
+                    # 매일 같은 Issue 가 반복 생성된다.
+                    if not alerted:
+                        state["alerted"] = sorted(
+                            {f["accession"] for f in filings})
+                        save_state(state, args.dry_run)
+                        notice(f"콜드스타트 — 기존 공시 {len(filings)}건을 "
+                               f"기준선으로 적재했습니다(알림 없음). "
+                               f"다음 실행부터 신규만 알립니다.")
+                        set_output(status="seeded", new_filings=0,
+                                   strong_events=0, gate="skipped",
+                                   alert="false")
+                        return EXIT_OK
+
+                    # 최근성 창: 상태가 부분 유실돼도 오래된 공시가 대량으로
+                    # 재알림되는 것을 막는다. 창을 벗어난 건은 조용히 기준선에
+                    # 편입한다.
+                    if args.alert_window_days > 0:
+                        cutoff = (datetime.now(timezone.utc)
+                                  - timedelta(days=args.alert_window_days)
+                                  ).strftime("%Y-%m-%d")
+                        fresh = [f for f in new_filings
+                                 if str(f.get("filing_date") or "") >= cutoff]
+                        stale = len(new_filings) - len(fresh)
+                        if stale:
+                            log(f"  최근성 창({args.alert_window_days}일) 밖 "
+                                f"{stale}건은 알리지 않고 기준선에 편입합니다.")
+                        if not fresh:
+                            state["alerted"] = sorted(
+                                alerted | {f["accession"] for f in new_filings})
+                            save_state(state, args.dry_run)
+                            notice("창 안에 드는 신규 공시가 없습니다.")
+                            set_output(status="no_new", new_filings=0,
+                                       strong_events=0, gate="skipped",
+                                       alert="false")
+                            return EXIT_OK
+                        # 창 밖 건도 기준선에는 넣어 다음 실행에서 다시 뜨지 않게 한다.
+                        alerted = alerted | {
+                            f["accession"] for f in new_filings
+                            if f not in fresh}
+                        new_filings = fresh
                     tag = datetime.now(timezone.utc).strftime("%Y-%m-%d")
                     title = notify.filings_issue_title(len(new_filings), tag)
                     write_alert(args.alert_file, title,

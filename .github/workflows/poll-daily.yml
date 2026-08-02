@@ -18,6 +18,10 @@ on:
         description: "감지할 폼 타입 (쉼표 구분)"
         type: string
         default: "SC 13D,SC 13D/A,SC 13G,SC 13G/A,3,4"
+      alert_window_days:
+        description: "알림 최근성 창(일). 0 이면 창 없음"
+        type: string
+        default: "14"
 
 permissions:
   contents: write   # data/state/last_seen.json 커밋
@@ -57,6 +61,7 @@ jobs:
             --mode incremental \
             --detect-only \
             --forms "${{ inputs.forms || 'SC 13D,SC 13D/A,SC 13G,SC 13G/A,3,4' }}" \
+            --alert-window-days "${{ inputs.alert_window_days || '14' }}" \
             --alert-file "${{ runner.temp }}/alert.md"
 
       # 커밋보다 먼저 알린다. 상태(`alerted`)가 먼저 커밋되면 알림 실패 시
@@ -79,19 +84,12 @@ jobs:
             gh issue create --title "$T" --body-file "$BODY"
           fi
 
+      # fetch-13f 와 같은 상태 파일을 쓰므로 rebase 충돌이 발생한다.
+      # 합집합 병합으로 해소한다(scripts/push_data.sh 주석 참고).
       - name: 상태 변경분 커밋
         run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A data/state
-          if git diff --cached --quiet; then
-            echo "::notice::상태 변경 없음 — 빈 커밋을 만들지 않습니다."
-            exit 0
-          fi
-          git commit -m "state(poll): 신규 공시 알림 기록 (run ${GITHUB_RUN_ID})"
-          git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
-          git push origin "HEAD:${GITHUB_REF_NAME}"
+          scripts/push_data.sh \
+            "state(poll): 신규 공시 알림 기록 (run ${GITHUB_RUN_ID})" data/state
 
       - name: 실패 Issue 생성
         if: failure()
