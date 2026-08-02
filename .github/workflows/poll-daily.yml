@@ -123,12 +123,16 @@ jobs:
           # 2차 방어: 제목이 동일한 이슈가 이미 있으면 생성하지 않음
           while IFS=$'\t' read -r E T; do
             [ -n "${T:-}" ] || continue
-            NUM=$(gh issue list --state all --limit 200 --json number,title \
-                    --jq --arg t "$T" '.[] | select(.title == $t) | .number' | head -n1)
+            # gh 의 --jq 는 jq 의 --arg 를 받지 않는다. 제목은 환경변수로 넘겨
+            # env.T 로 참조한다(--arg 를 쓰면 gh 가 인자 파싱에서 바로 실패한다).
+            # gh 호출은 </dev/null 로 stdin 을 끊는다. 루프가 "$F" 를 stdin 으로
+            # 읽는 중이라 gh 가 남은 줄을 삼키면 두 번째 엔티티부터 알림이 사라진다.
+            NUM=$(T="$T" gh issue list --state all --limit 200 --json number,title \
+                    --jq '.[] | select(.title == env.T) | .number' </dev/null | head -n1)
             if [ -n "$NUM" ]; then
               echo "::notice::[$E] 이미 존재하는 이슈 #$NUM — 새로 만들지 않습니다."
             else
-              gh issue create --title "$T" --body-file "${RUNNER_TEMP}/alert-${E}.md"
+              gh issue create --title "$T" --body-file "${RUNNER_TEMP}/alert-${E}.md" </dev/null
             fi
           done < "$F"
 
