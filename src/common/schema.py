@@ -42,6 +42,11 @@ STRONG_DELTA_BP = 200        # 비중 변화 200bp 이상이면 STRONG_ADD / STR
 
 # 무결성 게이트 (docs/architecture.md §6.3)
 MAX_TOTAL_SWING_PCT = 80.0   # 전분기 대비 총액 변동이 이를 넘으면 파이프라인 실패
+# 엔티티가 근거와 함께 허용치를 올릴 수 있다(entities.Entity.max_total_swing_pct).
+# 게이트는 상수가 아니라 이 값을 봐야 한다 — 신생 펀드는 정상적으로 배로 큰다.
+ENTITY_MAX_TOTAL_SWING_PCT = (
+    ENTITY.max_total_swing_pct
+    if ENTITY.max_total_swing_pct is not None else MAX_TOTAL_SWING_PCT)
 
 EventType = Literal["NEW", "ADD", "TRIM", "EXIT", "HOLD"]
 Conviction = Literal["STRONG_NEW", "STRONG_ADD", "STRONG_TRIM", "FULL_EXIT", "ROUTINE"]

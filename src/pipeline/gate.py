@@ -8,7 +8,8 @@
 워크플로우 로그 grep 에서 안정적으로 쓸 수 있도록 고정한다.
 
     EMPTY_QUARTER  최신 분기 포지션 수 0
-    TOTAL_SWING    총액이 전분기 대비 ±MAX_TOTAL_SWING_PCT 초과 변동
+    TOTAL_SWING    총액이 전분기 대비 허용치 초과 변동 (엔티티별로 조정 가능 —
+                   신생 펀드는 정상적으로 배 이상 커진다. entities.Entity 참고)
     WEIGHT_SUM     weight_pct 합계가 기대치 ± 0.5 범위 밖
     DUP_POSITION   동일 report_date 에 (cusip, title_of_class, put_call) 중복
     DUP_EVENT_ID   event_id 중복
@@ -34,12 +35,14 @@ from collections import Counter, defaultdict
 from typing import Optional
 
 try:  # 패키지로 import 될 때
-    from src.common.schema import MAX_TOTAL_SWING_PCT, Paths, read_jsonl
+    from src.common.schema import (ENTITY_MAX_TOTAL_SWING_PCT as MAX_TOTAL_SWING_PCT,
+                                   Paths, read_jsonl)
 except ImportError:  # python src/pipeline/gate.py 처럼 직접 실행될 때
     sys.path.insert(
         0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
     )
-    from src.common.schema import MAX_TOTAL_SWING_PCT, Paths, read_jsonl
+    from src.common.schema import (ENTITY_MAX_TOTAL_SWING_PCT as MAX_TOTAL_SWING_PCT,
+                                   Paths, read_jsonl)
 
 # weight_pct 합계 허용 오차 (퍼센트 포인트)
 WEIGHT_SUM_TOLERANCE_PCT = 0.5
