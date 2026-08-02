@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ackman Tracker — Pershing Square 13F 포지션 추적</title>
+<title>13F Tracker — Pershing · Berkshire · Citadel 포지션 추적</title>
 <!--
   단일 파일 대시보드. 빌드 체인 없음.
   외부 의존성은 Chart.js 하나뿐이며 CDN 으로 로드한다.
-  데이터는 build.py 가 사전 집계한 dashboard_data.json 하나를 fetch 한다.
+  데이터는 build.py 가 사전 집계한 data/index.json -> data/{entity}.json 을 fetch 한다.
+  엔티티 전환은 사이드탭에서 이뤄지며, 전환 시 해당 엔티티 JSON 만 새로 받는다.
   ★ 브라우저 스토리지 API 를 일절 사용하지 않는다. 모든 상태는 아래 `state` 메모리 변수.
 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
@@ -140,6 +141,50 @@
   .tl .d{color:var(--mut);font-variant-numeric:tabular-nums}
   .tl .n{color:var(--mut)}
 
+  /* ---------- 좌측 엔티티 사이드탭 ---------- */
+  aside#sidebar{position:fixed;left:0;top:0;bottom:0;width:214px;z-index:70;
+    background:#0b0d11;border-right:1px solid var(--line);
+    display:flex;flex-direction:column;gap:7px;padding:14px 10px;overflow-y:auto}
+  aside#sidebar .sb-title{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--dim);padding:0 6px 2px}
+  aside#sidebar .sb-foot{margin-top:auto;font-size:10.5px;color:var(--dim);padding:8px 6px 0;
+    border-top:1px solid var(--line);line-height:1.45}
+  .ent-btn{display:block;width:100%;text-align:left;cursor:pointer;font:inherit;color:var(--fg);
+    background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:9px 10px}
+  .ent-btn:hover{background:var(--panel2)}
+  .ent-btn.on{border-color:var(--accent);background:#1b1f2b}
+  .ent-btn .nm{font-weight:700;font-size:13px;display:flex;align-items:center;gap:6px}
+  .ent-btn .dot{width:9px;height:9px;border-radius:50%;flex:none}
+  .ent-btn .mg{font-size:11px;color:var(--mut);margin-top:2px}
+  .ent-btn .st{font-size:11px;color:var(--dim);margin-top:5px;font-variant-numeric:tabular-nums}
+  .ent-btn .flag{font-size:10px;color:var(--warn);margin-top:4px}
+  .ent-btn.busy{opacity:.55}
+  body{padding-left:214px}
+  footer#disclaimer{left:214px}
+  @media(max-width:900px){
+    aside#sidebar{position:static;width:auto;flex-direction:row;flex-wrap:wrap;
+      border-right:none;border-bottom:1px solid var(--line)}
+    aside#sidebar .sb-title,aside#sidebar .sb-foot{display:none}
+    .ent-btn{width:auto;flex:1 1 150px}
+    .ent-btn .st,.ent-btn .flag{display:none}
+    body{padding-left:0}
+    footer#disclaimer{left:0}
+  }
+
+  /* ---------- 3사 비교 ---------- */
+  .cmp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin:12px 0}
+  .cmp-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:12px}
+  .cmp-card h4{margin:0 0 7px;font-size:13.5px;display:flex;align-items:center;gap:7px}
+  .cmp-card .r{display:flex;justify-content:space-between;gap:8px;font-size:12px;
+    color:var(--mut);margin-top:4px}
+  .cmp-card .r b{color:var(--fg);font-variant-numeric:tabular-nums}
+  .pill{display:inline-block;font-size:10.5px;border-radius:999px;padding:1px 7px;
+    border:1px solid var(--line);color:var(--mut)}
+  .pill.warn{color:var(--warn);border-color:#7c2d12}
+  .dirbadge{display:inline-block;font-size:11px;font-weight:700;border-radius:5px;padding:1px 6px}
+  .dirbadge.up{background:#052e16;color:#4ade80;border:1px solid #166534}
+  .dirbadge.dn{background:#2a0f0f;color:#fca5a5;border:1px solid #7f1d1d}
+
   .note{font-size:12px;color:var(--mut);background:#141821;border:1px solid var(--line);
     border-radius:8px;padding:9px 12px;margin:10px 0}
   .banner{font-size:12.5px;border-radius:8px;padding:9px 12px;margin:12px 0;
@@ -163,11 +208,18 @@
 </head>
 <body>
 
+<!-- 좌측 엔티티 사이드탭 — index.json 을 받아 런타임에 채운다 -->
+<aside id="sidebar">
+  <div class="sb-title">추적 대상</div>
+  <div id="entlist"></div>
+  <div class="sb-foot">13F는 45일 지연 스냅샷입니다.<br>모든 수치는 SEC EDGAR 원문 기준.</div>
+</aside>
+
 <header class="topbar">
   <div class="wrap">
     <div class="brand">
-      <h1>Ackman Tracker</h1>
-      <span class="ent" id="entname">Pershing Square Capital Management, L.P. · CIK 0001336528</span>
+      <h1 id="brandname">13F Tracker</h1>
+      <span class="ent" id="entname">데이터를 불러오는 중…</span>
     </div>
     <!-- 표시 원칙 1: report_date / filing_date / 경과일수를 전 화면에서 상시 노출 -->
     <div id="freshness"></div>
@@ -177,6 +229,7 @@
       <button data-view="series">3 · 포지션 시계열</button>
       <button data-view="concentration">4 · 집중도·회전율</button>
       <button data-view="filings">5 · 공시 원문 인덱스</button>
+      <button data-view="compare">6 · 3사 비교</button>
     </nav>
   </div>
 </header>
@@ -320,6 +373,39 @@
       </table>
     </div>
   </section>
+
+  <!-- ============ 화면 6 : 3사 비교 ============ -->
+  <section class="view" id="view-compare">
+    <h2 class="vt">3사 비교</h2>
+    <p class="vd">Pershing Square · Berkshire Hathaway · Citadel Advisors 의 13F 를 같은 축에 올립니다.
+       운용 철학이 다른 만큼 <b>절대 금액이 아니라 추세와 구조</b>를 보는 화면입니다.</p>
+    <div id="cmpNotes"></div>
+    <div class="cmp-grid" id="cmpCards"></div>
+    <div class="card"><h3 style="margin:0 0 8px;font-size:13px">보고 총액 추이 (13F 기준)</h3>
+      <div class="chartbox"><canvas id="cCmpValue"></canvas></div></div>
+    <div class="card"><h3 style="margin:0 0 8px;font-size:13px">집중도(HHI) 추이 — 1에 가까울수록 집중</h3>
+      <div class="chartbox sm"><canvas id="cCmpHHI"></canvas></div></div>
+    <h3 style="font-size:14px;margin:22px 0 4px">공통 보유 종목</h3>
+    <p class="vd" style="margin-top:0">최신 분기 기준 두 곳 이상이 동시에 보유한 종목.
+       비중은 각 운용사 포트폴리오 내 비중입니다.</p>
+    <div class="tablewrap">
+      <table id="cmpCommon">
+        <thead><tr><th class="l">종목</th><th class="l">티커</th><th>보유사</th>
+          <th class="l">보유 현황</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <h3 style="font-size:14px;margin:22px 0 4px">엇갈린 매매</h3>
+    <p class="vd" style="margin-top:0">같은 분기·같은 종목에서 한쪽은 늘리고 다른 쪽은 줄인 사례.
+       분기말 스냅샷 비교일 뿐 같은 날 반대 방향으로 거래했다는 뜻은 아닙니다.</p>
+    <div class="tablewrap">
+      <table id="cmpOpp">
+        <thead><tr><th class="l">분기</th><th class="l">종목</th><th class="l">티커</th>
+          <th class="l">움직임</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
 </main>
 
 <!-- 표시 원칙 4 : 하단 고정 면책 -->
@@ -338,14 +424,19 @@
    브라우저 스토리지 API(웹 스토리지 계열·인덱스드 DB·쿠키)는 일절 사용하지 않는다. (표시 원칙 5)
    ========================================================================= */
 const state = {
-  data: null,
+  index: null,          // data/index.json — 사이드탭 목록
+  entity: null,         // 현재 선택된 엔티티 key
+  data: null,           // data/{entity}.json
+  compare: null,        // data/compare.json (비교 탭 최초 진입 시 지연 로드)
+  cache: {},            // 엔티티별 페이로드 캐시 (재전환 시 네트워크 생략)
+  loading: false,
   view: "portfolio",
   sort: { col: "weight_pct", dir: "desc" },
   ev: { quarter: "ALL", type: "ALL", source: "ALL", hold: false, strongOnly: false },
   selectedKey: null,
   seriesUI: { top: 12, window: 0 },      // top: 개별 표시 종목 수(0=전체), window: 표시 분기 수(0=전체)
   filings: { form: "ALL", from: "", to: "", q: "" },
-  charts: { stack: null, drill: null, conc: null }
+  charts: { stack: null, drill: null, conc: null, cmpValue: null, cmpHHI: null }
 };
 
 /* ------------------------------ 포맷터 ------------------------------ */
@@ -401,29 +492,105 @@ function eventTint(e){
 }
 
 /* ------------------------------ 부트 ------------------------------ */
+async function getJSON(url){
+  const r = await fetch(url, { cache: "no-store" });
+  if(!r.ok) throw new Error(url + " → HTTP " + r.status);
+  return await r.json();
+}
+
+function fatalLoad(err){
+  document.getElementById("loadbox").style.display = "";
+  document.getElementById("loadbox").innerHTML =
+    '<div class="banner">데이터를 불러오지 못했습니다 (' + esc(err.message) + ').<br>' +
+    '<code>python3 dashboard/build.py</code> 로 생성한 뒤, ' +
+    '<code>python3 -m http.server</code> 같은 로컬 서버로 열어주세요 ' +
+    '(file:// 직접 열기는 브라우저 보안 정책상 fetch 가 차단됩니다).</div>';
+}
+
 async function boot(){
-  let d;
   try{
-    const r = await fetch("dashboard_data.json", { cache: "no-store" });
-    if(!r.ok) throw new Error("HTTP " + r.status);
-    d = await r.json();
+    state.index = await getJSON("data/index.json");
   }catch(err){
-    document.getElementById("loadbox").innerHTML =
-      '<div class="banner">dashboard_data.json 을 불러오지 못했습니다 (' + esc(err.message) + ').<br>' +
-      '<code>python3 dashboard/build.py</code> 로 생성한 뒤, ' +
-      '<code>python3 -m http.server</code> 같은 로컬 서버로 열어주세요 ' +
-      '(file:// 직접 열기는 브라우저 보안 정책상 fetch 가 차단됩니다).</div>';
-    return;
+    // 구 배포 호환 — index.json 이 아직 없으면 예전 단일 파일 모드로 내려앉는다.
+    try{
+      const d = await getJSON("dashboard_data.json");
+      state.index = { entities: [Object.assign({ key: d.meta.entity.key || "pershing",
+        data_url: "dashboard_data.json" }, d.meta.entity)],
+        default_entity: d.meta.entity.key || "pershing" };
+      state.cache[state.index.default_entity] = d;
+      document.getElementById("sidebar").style.display = "none";
+      document.body.style.paddingLeft = "0";
+      document.querySelector('#tabs button[data-view="compare"]').style.display = "none";
+    }catch(e2){ fatalLoad(e2); return; }
   }
-  state.data = d;
+  renderSidebar();
+  await selectEntity(state.index.default_entity || state.index.entities[0].key);
+}
+
+/* ---------- 사이드탭 ---------- */
+function renderSidebar(){
+  const ents = state.index.entities || [];
+  document.getElementById("entlist").innerHTML = ents.map(e => {
+    const cov = (e.coverage_pct === null || e.coverage_pct === undefined)
+      ? "" : '<div class="flag">표시 커버리지 ' + pct1(e.coverage_pct) + '</div>';
+    return '<button class="ent-btn" data-entity="' + esc(e.key) + '">' +
+      '<div class="nm"><i class="dot" style="background:' + esc(e.color || "#818cf8") + '"></i>' +
+        esc(e.display) + '</div>' +
+      '<div class="mg">' + esc(e.manager || "") + '</div>' +
+      '<div class="st">' + esc(e.label || "") + ' · ' + esc(String(e.position_count)) + '종목 · ' +
+        esc(abbrUSD(e.total_value_usd)) + '</div>' + cov + '</button>';
+  }).join("");
+  document.querySelectorAll("#entlist .ent-btn").forEach(b => {
+    b.onclick = () => selectEntity(b.getAttribute("data-entity"));
+  });
+}
+
+function markSidebar(){
+  document.querySelectorAll("#entlist .ent-btn").forEach(b => {
+    b.classList.toggle("on", b.getAttribute("data-entity") === state.entity);
+    b.classList.toggle("busy", state.loading);
+  });
+}
+
+async function selectEntity(key){
+  if(state.loading || key === state.entity) return;
+  const ent = (state.index.entities || []).find(e => e.key === key);
+  if(!ent) return;
+  state.loading = true; markSidebar();
+  try{
+    if(!state.cache[key]) state.cache[key] = await getJSON(ent.data_url || ("data/" + key + ".json"));
+  }catch(err){ state.loading = false; markSidebar(); fatalLoad(err); return; }
+
+  // 엔티티가 바뀌면 화면 상태를 초기화한다. 이전 운용사의 선택 종목·필터가
+  // 그대로 남으면 존재하지 않는 포지션을 가리키게 된다.
+  state.entity = key;
+  state.data = state.cache[key];
+  state.selectedKey = null;
+  state.sort = { col: "weight_pct", dir: "desc" };
+  state.ev = { quarter: "ALL", type: "ALL", source: "ALL", hold: false, strongOnly: false };
+  state.filings = { form: "ALL", from: "", to: "", q: "" };
+  state.loading = false;
+  markSidebar();
   document.getElementById("loadbox").style.display = "none";
+  document.getElementById("drill").style.display = "none";
   render();
 }
 
+function isTrunc(){
+  const e = (state.data && state.data.meta && state.data.meta.entity) || {};
+  return !!e.truncated;
+}
+function isMarketMaker(){
+  const e = (state.data && state.data.meta && state.data.meta.entity) || {};
+  return e.profile === "market_maker";
+}
+
 function render(){
-  const d = state.data;
+  const d = state.data, e = d.meta.entity || {};
+  document.getElementById("brandname").textContent = (e.display || "13F") + " Tracker";
   document.getElementById("entname").textContent =
-    d.meta.entity.name + " · CIK " + d.meta.entity.cik;
+    (e.manager ? e.manager + " · " : "") + (e.name || "") + " · CIK " + (e.cik || "");
+  document.title = (e.display || "13F") + " 13F Tracker";
   document.getElementById("disctext").textContent = d.disclaimer;
   document.getElementById("urlpat").textContent = d.meta.edgar_url_pattern;
   renderFreshness();
@@ -435,6 +602,7 @@ function render(){
   renderConcentration();
   initFilingFilters();
   renderFilings();
+  if(state.view === "compare") ensureCompare();
 }
 
 /* ---------- 표시 원칙 1 : 신선도 바 + 화면별 as-of 라인 ---------- */
@@ -471,6 +639,18 @@ function renderBanners(){
       '아래 수치는 계약 검증용 더미이며 실제 공시 수치가 아닙니다 ' +
       '(단, 2026Q1·2024Q4 총액/포지션 수는 실측 기준선과 일치시켜 두었습니다).</div>');
   }
+  if(isMarketMaker()){
+    out.push('<div class="banner"><b>마켓메이커·멀티전략 운용사입니다.</b> ' +
+      '개별 종목 편입을 확신이나 방향성 베팅으로 읽으면 안 됩니다 — 상당수는 헤지·차익거래·' +
+      '고객 유동성 공급의 잔여물입니다. 이 화면의 "고확신" 표기는 다른 운용사와 같은 의미를 갖지 않습니다.</div>');
+  }
+  if(isTrunc()){
+    const cov = m.coverage_latest_pct, mn = m.coverage_min_pct;
+    out.push('<div class="banner"><b>수집 정책상 일부만 표시합니다.</b> ' +
+      '보통주 상위 ' + esc(String((m.entity||{}).max_positions || "")) + '종목만 담았고 옵션(PUT/CALL)은 제외했습니다. ' +
+      '최신 분기 가치 커버리지 <b>' + pct1(cov) + '</b> (전 기간 최저 ' + pct1(mn) + '). ' +
+      '비중(%)은 <b>절삭 전 전체 포트폴리오</b> 기준이라 합이 100%에 미달합니다 — 의도된 표기입니다.</div>');
+  }
   (m.warnings||[]).forEach(w => out.push('<div class="banner">' + esc(w) + '</div>'));
   document.getElementById("banners").innerHTML = out.join("");
 }
@@ -479,8 +659,9 @@ function renderBanners(){
 function renderPortfolio(){
   const c = state.data.current;
   document.getElementById("kpis").innerHTML = [
-    kpi("총 포트폴리오 가치", abbrUSD(c.total_value_usd), fullUSD(c.total_value_usd), fullUSD(c.total_value_usd)),
-    kpi("포지션 수", String(c.position_count), "신규 " + (c.new_count||0) + " · 청산 " + (c.exit_count||0) +
+    kpi(isTrunc() ? "표시 종목 합계 (일부)" : "총 포트폴리오 가치",
+        abbrUSD(c.total_value_usd), fullUSD(c.total_value_usd), fullUSD(c.total_value_usd)),
+    kpi(isTrunc() ? "표시 포지션 수" : "포지션 수", String(c.position_count), "신규 " + (c.new_count||0) + " · 청산 " + (c.exit_count||0) +
         " · 증량 " + (c.add_count||0) + " · 감량 " + (c.trim_count||0)),
     kpi("HHI (집중도)", c.hhi === null || c.hhi === undefined ? "—" : Number(c.hhi).toFixed(3),
         "Σ(비중/100)² · 1에 가까울수록 집중"),
@@ -928,6 +1109,131 @@ function renderFilings(){
   }).join("") : '<tr><td class="l" colspan="8"><div class="empty">조건에 맞는 공시가 없습니다.</div></td></tr>';
 }
 
+/* ================= 화면 6 : 3사 비교 ================= */
+async function ensureCompare(){
+  if(state.compare || state.compareFailed) { renderCompare(); return; }
+  try{
+    state.compare = await getJSON("data/compare.json");
+  }catch(err){
+    state.compareFailed = true;
+    document.getElementById("cmpNotes").innerHTML =
+      '<div class="banner">compare.json 을 불러오지 못했습니다 (' + esc(err.message) + '). ' +
+      '<code>python3 dashboard/build.py</code> 를 다시 실행하세요.</div>';
+    return;
+  }
+  renderCompare();
+}
+
+function cmpColor(key){
+  const e = (state.compare.entities || []).find(x => x.key === key);
+  return (e && e.color) || "#818cf8";
+}
+function cmpName(key){
+  const e = (state.compare.entities || []).find(x => x.key === key);
+  return (e && e.display) || key;
+}
+
+function renderCompare(){
+  const C = state.compare;
+  if(!C) return;
+
+  document.getElementById("cmpNotes").innerHTML =
+    (C.notes || []).map(n => '<div class="note">' + esc(n) + '</div>').join("");
+
+  // --- 요약 카드 (사이드탭 index.json 의 요약을 그대로 재사용) ---
+  const byKey = {};
+  (state.index.entities || []).forEach(e => { byKey[e.key] = e; });
+  document.getElementById("cmpCards").innerHTML = (C.entities || []).map(e => {
+    const s = byKey[e.key] || {};
+    const rows = [
+      ["기준 분기", esc(s.label || "—")],
+      [(s.truncated ? "표시 합계" : "총액"), '<span title="' + esc(fullUSD(s.total_value_usd)) + '">' +
+        esc(abbrUSD(s.total_value_usd)) + "</span>"],
+      [(s.truncated ? "표시 종목" : "종목 수"), esc(String(s.position_count ?? "—"))],
+      ["HHI", s.hhi == null ? "—" : Number(s.hhi).toFixed(3)],
+      ["Top-5 비중", pct1(s.top5_pct)],
+      ["수집 분기", esc(String(s.quarters ?? "—")) + "분기 (" + esc(s.first_report_date || "") + "~)"]
+    ];
+    const flag = s.truncated
+      ? '<div class="r"><span class="pill warn">커버리지 ' + pct1(s.coverage_pct) + ' · 옵션 제외</span></div>'
+      : '<div class="r"><span class="pill">전량 수집</span></div>';
+    return '<div class="cmp-card"><h4><i class="dot" style="display:inline-block;width:10px;' +
+      'height:10px;border-radius:50%;background:' + esc(e.color) + '"></i>' + esc(e.display) + '</h4>' +
+      '<div class="r"><span>' + esc(e.manager || "") + '</span></div>' +
+      rows.map(r => '<div class="r"><span>' + r[0] + '</span><b>' + r[1] + '</b></div>').join("") +
+      flag + '</div>';
+  }).join("");
+
+  const keys = (C.entities || []).map(e => e.key);
+  const mkDatasets = (metric, scale) => keys.map(k => ({
+    label: cmpName(k) + ((byKey[k] || {}).truncated ? " (일부)" : ""),
+    data: (C.series[metric][k] || []).map(v => v === null || v === undefined ? null : v * (scale || 1)),
+    borderColor: cmpColor(k), backgroundColor: cmpColor(k),
+    borderWidth: 2, pointRadius: 2, tension: .25, spanGaps: true,
+    borderDash: (byKey[k] || {}).truncated ? [5, 3] : []
+  }));
+
+  const common = { responsive: true, maintainAspectRatio: false, interaction: { mode: "index", intersect: false },
+    scales: { x: { ticks: { color: "#9aa3b2", maxRotation: 0, autoSkipPadding: 14 }, grid: { color: "#1c2029" } } },
+    plugins: { legend: { labels: { color: "#9aa3b2", boxWidth: 10 } } } };
+
+  if(state.charts.cmpValue) state.charts.cmpValue.destroy();
+  state.charts.cmpValue = new Chart(document.getElementById("cCmpValue"), {
+    type: "line",
+    data: { labels: C.labels, datasets: mkDatasets("total_value_usd") },
+    options: Object.assign({}, common, {
+      scales: Object.assign({}, common.scales, {
+        y: { type: "logarithmic", ticks: { color: "#9aa3b2", callback: v => abbrUSD(v) },
+             grid: { color: "#232833" },
+             title: { display: true, text: "보고 총액 (로그 축)", color: "#9aa3b2" } } }),
+      plugins: Object.assign({}, common.plugins, {
+        tooltip: { callbacks: { label: ctx => ctx.dataset.label + ": " + fullUSD(ctx.raw) } } })
+    })
+  });
+
+  if(state.charts.cmpHHI) state.charts.cmpHHI.destroy();
+  state.charts.cmpHHI = new Chart(document.getElementById("cCmpHHI"), {
+    type: "line",
+    data: { labels: C.labels, datasets: mkDatasets("hhi") },
+    options: Object.assign({}, common, {
+      scales: Object.assign({}, common.scales, {
+        y: { ticks: { color: "#9aa3b2" }, grid: { color: "#232833" }, beginAtZero: true,
+             title: { display: true, text: "HHI", color: "#9aa3b2" } } }),
+      plugins: Object.assign({}, common.plugins, {
+        tooltip: { callbacks: { label: ctx => ctx.dataset.label + ": " +
+          (ctx.raw == null ? "데이터 없음" : Number(ctx.raw).toFixed(4)) } } })
+    })
+  });
+
+  // --- 공통 보유 ---
+  const ctb = document.querySelector("#cmpCommon tbody");
+  ctb.innerHTML = (C.common || []).map(c => {
+    const cells = (c.holders || []).map(h =>
+      '<span class="chip" style="cursor:default;border-color:' + esc(cmpColor(h.entity)) + '">' +
+      '<i style="background:' + esc(cmpColor(h.entity)) + '"></i>' + esc(cmpName(h.entity)) +
+      ' ' + pct1(h.weight_pct) + ' · <span title="' + esc(fullUSD(h.value_usd)) + '">' +
+      esc(abbrUSD(h.value_usd)) + '</span></span>').join(" ");
+    return "<tr><td class=\"l\">" + esc(c.name || "—") + "</td>" +
+      '<td class="l num">' + esc(c.ticker || "—") + "</td>" +
+      '<td class="num">' + c.holder_count + "</td>" +
+      '<td class="l">' + cells + "</td></tr>";
+  }).join("") || '<tr><td colspan="4" class="empty">공통 보유 종목이 없습니다.</td></tr>';
+
+  // --- 엇갈린 매매 ---
+  const otb = document.querySelector("#cmpOpp tbody");
+  otb.innerHTML = (C.opposing || []).map(o => {
+    const moves = (o.moves || []).map(m => {
+      const up = m.direction > 0;
+      return '<span class="dirbadge ' + (up ? "up" : "dn") + '" style="margin-right:6px">' +
+        esc(cmpName(m.entity)) + " " + esc(m.event_type) + " " + bpSigned(m.weight_delta_bp) + "</span>";
+    }).join(" ");
+    return '<tr><td class="l">' + esc(o.label || o.report_date) + "</td>" +
+      '<td class="l">' + esc(o.name || "—") + "</td>" +
+      '<td class="l num">' + esc(o.ticker || "—") + "</td>" +
+      '<td class="l">' + moves + "</td></tr>";
+  }).join("") || '<tr><td colspan="4" class="empty">엇갈린 매매 사례가 없습니다.</td></tr>';
+}
+
 /* ------------------------------ 이벤트 바인딩 ------------------------------ */
 document.getElementById("tabs").addEventListener("click", e => {
   const b = e.target.closest("button[data-view]");
@@ -938,6 +1244,7 @@ document.getElementById("tabs").addEventListener("click", e => {
     s.classList.toggle("on", s.id === "view-" + state.view));
   // 숨겨진 캔버스는 크기 계산이 어긋나므로 표시 후 리사이즈
   Object.values(state.charts).forEach(c => { if(c) c.resize(); });
+  if(state.view === "compare") ensureCompare();
 });
 
 document.getElementById("sTop").onchange = e => {

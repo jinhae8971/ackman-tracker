@@ -56,10 +56,19 @@ jobs:
             echo "::error::dashboard/index.html 이 없습니다 — 배포할 산출물이 없습니다."
             exit 1
           fi
+          # index.json 이 없으면 사이드탭이 통째로 죽는다. 조용히 배포하지 않는다.
+          if [ ! -f dashboard/data/index.json ]; then
+            echo "::error::dashboard/data/index.json 이 없습니다 — build.py 산출물을 확인하세요."
+            exit 1
+          fi
           # 배포 산출물만 _site 로 추린다. dashboard/ 를 통째로 올리면 build.py,
           # sample_data.py, sample/ 까지 공개 호스팅되므로 명시적으로 화이트리스트한다.
-          rm -rf _site && mkdir -p _site
-          cp dashboard/index.html dashboard/dashboard_data.json _site/
+          rm -rf _site && mkdir -p _site/data
+          cp dashboard/index.html _site/
+          cp dashboard/data/*.json _site/data/
+          # 구 배포 호환 (캐시된 예전 index.html 이 아직 남아 있을 수 있다)
+          [ -f dashboard/dashboard_data.json ] && cp dashboard/dashboard_data.json _site/ || true
+          echo "배포 산출물:"; ls -la _site _site/data
           touch _site/.nojekyll
           echo "ready=true" >> "$GITHUB_OUTPUT"
 

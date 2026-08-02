@@ -17,3 +17,7 @@ _analytics_verify/
 
 # 원본 공시 캐시는 용량이 커서 커밋하지 않는다 (재수집 가능)
 data/raw/
+
+# 대시보드 빌드 산출물 — CI 가 매 배포마다 생성한다 (커밋 대상 아님)
+dashboard/data/
+dashboard/dashboard_data.json
