@@ -633,6 +633,32 @@
     "ticker": "GOOGL",
     "unresolved": false
   },
+  "02079K404": {
+    "composite_figi": null,
+    "delisted": false,
+    "exch_code": "NASDAQ/NGS",
+    "figi": "BBG022S7H6X9",
+    "market_sector": "Pfd",
+    "name": "ALPHABET INC",
+    "security_type": "PUBLIC",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "GOOGL 6.25 05/15/29 A",
+    "unresolved": false
+  },
+  "02079K602": {
+    "composite_figi": null,
+    "delisted": false,
+    "exch_code": "NASDAQ/NGS",
+    "figi": "BBG022S7RTX8",
+    "market_sector": "Pfd",
+    "name": "ALPHABET INC",
+    "security_type": "PUBLIC",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "GOOGL 6.25 05/15/29 B",
+    "unresolved": false
+  },
   "02156B103": {
     "composite_figi": "BBG00GBG5G50",
     "delisted": false,
@@ -1135,6 +1161,19 @@
     "ticker": "APLD",
     "unresolved": false
   },
+  "038169AB4": {
+    "composite_figi": null,
+    "delisted": false,
+    "exch_code": "FRANKFURT",
+    "figi": "BBG01QLGYQ98",
+    "market_sector": "Corp",
+    "name": "APPLIED DIGITAL CORP",
+    "security_type": "US DOMESTIC",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "APLD 2.75 06/01/30",
+    "unresolved": false
+  },
   "038222105": {
     "composite_figi": "BBG000BBPFB9",
     "delisted": false,
@@ -1622,6 +1661,19 @@
     "share_class_figi": "BBG001S5N9P3",
     "source": "openfigi",
     "ticker": "ABX",
+    "unresolved": false
+  },
+  "06849F108": {
+    "composite_figi": "BBG000BB07P9",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BB07P9",
+    "market_sector": "Equity",
+    "name": "BARRICK MINING CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5N9P3",
+    "source": "openfigi",
+    "ticker": "B",
     "unresolved": false
   },
   "070830104": {
@@ -2337,6 +2389,19 @@
     "ticker": "BURL",
     "unresolved": false
   },
+  "12504L109": {
+    "composite_figi": "BBG000C04224",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000C04224",
+    "market_sector": "Equity",
+    "name": "CBRE GROUP INC - A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SC2D27",
+    "source": "openfigi",
+    "ticker": "CBRE",
+    "unresolved": false
+  },
   "12514G108": {
     "composite_figi": "BBG001P63B80",
     "delisted": false,
@@ -2631,6 +2696,19 @@
     "ticker": "CSL",
     "unresolved": false
   },
+  "14316J108": {
+    "composite_figi": "BBG000BH3F20",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BH3F20",
+    "market_sector": "Equity",
+    "name": "CARLYLE GROUP INC/THE",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S7JM84",
+    "source": "openfigi",
+    "ticker": "CG",
+    "unresolved": false
+  },
   "143658300": {
     "composite_figi": "BBG007255HW2",
     "delisted": false,
@@ -2863,6 +2941,19 @@
     "share_class_figi": "BBG01081FC68",
     "source": "openfigi",
     "ticker": "260",
+    "unresolved": false
+  },
+  "15675D103": {
+    "composite_figi": "BBG00FNFPQH4",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00FNFPQH4",
+    "market_sector": "Equity",
+    "name": "CEREBRAS SYSTEMS INC - A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00FNFPQJ2",
+    "source": "openfigi",
+    "ticker": "CBRS",
     "unresolved": false
   },
   "15677J108": {
@@ -3935,6 +4026,19 @@
     "ticker": "CMI",
     "unresolved": false
   },
+  "23248VAD7": {
+    "composite_figi": null,
+    "delisted": false,
+    "exch_code": "FRANKFURT",
+    "figi": "BBG01VF23BJ1",
+    "market_sector": "Corp",
+    "name": "CYBERARK SOFTWARE LTD",
+    "security_type": "US DOMESTIC",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "CYBR 0 06/15/30",
+    "unresolved": false
+  },
   "23257D103": {
     "composite_figi": "BBG01LR58M13",
     "delisted": false,
@@ -4844,6 +4948,19 @@
     "ticker": "EA",
     "unresolved": false
   },
+  "28618M106": {
+    "composite_figi": "BBG005C4XHR3",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG005C4XHR3",
+    "market_sector": "Equity",
+    "name": "ELEMENT SOLUTIONS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG004KDL523",
+    "source": "openfigi",
+    "ticker": "ESI",
+    "unresolved": false
+  },
   "29084Q100": {
     "composite_figi": "BBG000BBRPL4",
     "delisted": false,
@@ -5441,6 +5558,19 @@
     "ticker": "FDX",
     "unresolved": false
   },
+  "314352105": {
+    "composite_figi": "BBG01ZPB91C4",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG01ZPB91C4",
+    "market_sector": "Equity",
+    "name": "FEDEX FREIGHT HOLDING CO",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG01ZPB92B3",
+    "source": "openfigi",
+    "ticker": "FDXF",
+    "unresolved": false
+  },
   "31488V107": {
     "composite_figi": "BBG01NMRD768",
     "delisted": false,
@@ -5530,6 +5660,19 @@
     "share_class_figi": "BBG001S5R6S2",
     "source": "openfigi",
     "ticker": "FITB",
+    "unresolved": false
+  },
+  "316841105": {
+    "composite_figi": "BBG00BLZ2CD1",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00BLZ2CD1",
+    "market_sector": "Equity",
+    "name": "FIGMA INC-CL A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00BLZ2CF9",
+    "source": "openfigi",
+    "ticker": "FIG",
     "unresolved": false
   },
   "31946M103": {
@@ -5725,6 +5868,19 @@
     "share_class_figi": null,
     "source": "openfigi",
     "ticker": "F 0 03/15/26",
+    "unresolved": false
+  },
+  "34959E109": {
+    "composite_figi": "BBG000BCMBG4",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BCMBG4",
+    "market_sector": "Equity",
+    "name": "FORTINET INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S77BL6",
+    "source": "openfigi",
+    "ticker": "FTNT",
     "unresolved": false
   },
   "34959J108": {
@@ -6081,6 +6237,19 @@
     "share_class_figi": "BBG001S6Y1X7",
     "source": "openfigi",
     "ticker": "GILD",
+    "unresolved": false
+  },
+  "375916103": {
+    "composite_figi": "BBG000BH2CW5",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BH2CW5",
+    "market_sector": "Equity",
+    "name": "GILDAN ACTIVEWEAR INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S7JJL6",
+    "source": "openfigi",
+    "ticker": "GIL",
     "unresolved": false
   },
   "377322102": {
@@ -7359,6 +7528,19 @@
     "ticker": "IQV",
     "unresolved": false
   },
+  "46270CAB5": {
+    "composite_figi": null,
+    "delisted": false,
+    "exch_code": "TRACE",
+    "figi": "BBG01R3YBC20",
+    "market_sector": "Corp",
+    "name": "IREN LTD",
+    "security_type": "US DOMESTIC",
+    "share_class_figi": null,
+    "source": "openfigi",
+    "ticker": "IREN 3.25 06/15/30",
+    "unresolved": false
+  },
   "46284V101": {
     "composite_figi": "BBG000KCZPC3",
     "delisted": false,
@@ -7409,6 +7591,19 @@
     "share_class_figi": "BBG001SFN5N1",
     "source": "openfigi",
     "ticker": "EWZ",
+    "unresolved": false
+  },
+  "464286772": {
+    "composite_figi": "BBG000CDKWX8",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000CDKWX8",
+    "market_sector": "Equity",
+    "name": "ISHARES MSCI SOUTH KOREA ETF",
+    "security_type": "ETP",
+    "share_class_figi": "BBG001SF9FC7",
+    "source": "openfigi",
+    "ticker": "EWY",
     "unresolved": false
   },
   "464287184": {
@@ -7897,6 +8092,19 @@
     "ticker": null,
     "unresolved": true
   },
+  "486917107": {
+    "composite_figi": "BBG021DN5TF5",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG021DN5TF5",
+    "market_sector": "Equity",
+    "name": "KEEL INFRASTRUCTURE CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG021DN5TH3",
+    "source": "openfigi",
+    "ticker": "KEEL",
+    "unresolved": false
+  },
   "487836108": {
     "composite_figi": "BBG00JSKSG98",
     "delisted": false,
@@ -8281,6 +8489,19 @@
     "share_class_figi": "BBG001T60092",
     "source": "openfigi",
     "ticker": "LEA",
+    "unresolved": false
+  },
+  "52490G102": {
+    "composite_figi": "BBG00TTGH5W4",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00TTGH5W4",
+    "market_sector": "Equity",
+    "name": "LEGEND BIOTECH CORP-ADR",
+    "security_type": "ADR",
+    "share_class_figi": "BBG00TTGH6N2",
+    "source": "openfigi",
+    "ticker": "LEGN",
     "unresolved": false
   },
   "525327102": {
@@ -8826,6 +9047,19 @@
     "share_class_figi": "BBG001S6KRW6",
     "source": "openfigi",
     "ticker": "M",
+    "unresolved": false
+  },
+  "55658T105": {
+    "composite_figi": "BBG020W40ST0",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG020W40ST0",
+    "market_sector": "Equity",
+    "name": "MADISON AIR SOLUTIONS CORP-A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG020W40TR0",
+    "source": "openfigi",
+    "ticker": "MAIR",
     "unresolved": false
   },
   "558256103": {
@@ -11292,6 +11526,19 @@
     "ticker": "PRMB",
     "unresolved": false
   },
+  "74164F103": {
+    "composite_figi": "BBG000BBLPH5",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BBLPH5",
+    "market_sector": "Equity",
+    "name": "PRIMORIS SERVICES CORP",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S64801",
+    "source": "openfigi",
+    "ticker": "PRIM",
+    "unresolved": false
+  },
   "742718109": {
     "composite_figi": "BBG000BR2TH3",
     "exch_code": "US",
@@ -11515,6 +11762,19 @@
     "share_class_figi": "BBG00M9BHQ01",
     "source": "openfigi",
     "ticker": "XM1EUR",
+    "unresolved": false
+  },
+  "74762E102": {
+    "composite_figi": "BBG000BBL8V7",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BBL8V7",
+    "market_sector": "Equity",
+    "name": "QUANTA SERVICES INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5VH85",
+    "source": "openfigi",
+    "ticker": "PWR",
     "unresolved": false
   },
   "74834L100": {
@@ -12320,6 +12580,19 @@
     "share_class_figi": "BBG001SB12P9",
     "source": "openfigi",
     "ticker": "XOP",
+    "unresolved": false
+  },
+  "78473E103": {
+    "composite_figi": "BBG000BTGCV5",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BTGCV5",
+    "market_sector": "Equity",
+    "name": "SPX TECHNOLOGIES INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5W9N5",
+    "source": "openfigi",
+    "ticker": "SPXC",
     "unresolved": false
   },
   "78486Q101": {
@@ -13236,6 +13509,19 @@
     "ticker": "SW5",
     "unresolved": false
   },
+  "84615Q103": {
+    "composite_figi": "BBG000NQF3Z5",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000NQF3Z5",
+    "market_sector": "Equity",
+    "name": "SPACE EXPLORATION TECHN-CL A",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001SQPN65",
+    "source": "openfigi",
+    "ticker": "SPCX",
+    "unresolved": false
+  },
   "848574109": {
     "composite_figi": "BBG000C0J8Z9",
     "delisted": false,
@@ -13948,6 +14234,19 @@
     "share_class_figi": null,
     "source": "openfigi",
     "ticker": "TER 1.25 12/15/23",
+    "unresolved": false
+  },
+  "88080T104": {
+    "composite_figi": "BBG0122MC900",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG0122MC900",
+    "market_sector": "Equity",
+    "name": "TERAWULF INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG0122MC919",
+    "source": "openfigi",
+    "ticker": "WULF",
     "unresolved": false
   },
   "88087E100": {
@@ -14815,6 +15114,19 @@
     "ticker": "VB",
     "unresolved": false
   },
+  "922967104": {
+    "composite_figi": "BBG00Z1S1G39",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG00Z1S1G39",
+    "market_sector": "Equity",
+    "name": "VERADERMICS INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG00Z1S1G48",
+    "source": "openfigi",
+    "ticker": "MANE",
+    "unresolved": false
+  },
   "92332V107": {
     "composite_figi": "BBG01JPRPG61",
     "delisted": false,
@@ -15008,6 +15320,19 @@
     "share_class_figi": "BBG001SRCFY3",
     "source": "openfigi",
     "ticker": "V",
+    "unresolved": false
+  },
+  "928298108": {
+    "composite_figi": "BBG000BWKB81",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG000BWKB81",
+    "market_sector": "Equity",
+    "name": "VISHAY INTERTECHNOLOGY INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG001S5XB04",
+    "source": "openfigi",
+    "ticker": "VSH",
     "unresolved": false
   },
   "92840M102": {
@@ -15595,6 +15920,19 @@
     "ticker": "XPO",
     "unresolved": false
   },
+  "98386P102": {
+    "composite_figi": "BBG005DX1RC7",
+    "delisted": false,
+    "exch_code": "US",
+    "figi": "BBG005DX1RC7",
+    "market_sector": "Equity",
+    "name": "X-ENERGY INC",
+    "security_type": "Common Stock",
+    "share_class_figi": "BBG005DX1RD6",
+    "source": "openfigi",
+    "ticker": "XE",
+    "unresolved": false
+  },
   "98389B100": {
     "composite_figi": "BBG000BCTQ65",
     "delisted": false,
@@ -15990,6 +16328,15 @@
     "ticker": null,
     "unresolved": true
   },
+  "G2004J103": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
   "G25457105": {
     "figi": null,
     "name": null,
@@ -16305,6 +16652,15 @@
     "ticker": null,
     "unresolved": true
   },
+  "G76279101": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
   "G7709Q104": {
     "figi": null,
     "name": null,
@@ -16485,6 +16841,15 @@
     "ticker": null,
     "unresolved": true
   },
+  "H5919C104": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
   "H84989104": {
     "figi": null,
     "name": null,
@@ -16620,6 +16985,15 @@
     "ticker": null,
     "unresolved": true
   },
+  "N52A8C105": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
   "N53745100": {
     "figi": null,
     "name": null,
@@ -16657,6 +17031,15 @@
     "unresolved": true
   },
   "N90064101": {
+    "figi": null,
+    "name": null,
+    "reason": "No identifier found.",
+    "security_type": null,
+    "source": "openfigi",
+    "ticker": null,
+    "unresolved": true
+  },
+  "N97284108": {
     "figi": null,
     "name": null,
     "reason": "No identifier found.",
